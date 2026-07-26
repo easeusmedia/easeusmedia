@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easeus Media — Podcast Editing, Reels & Smart Distribution</title>
+  <meta name="description"
+    content="We handle everything after you hit record — high-quality post-production, management and distribution that grows your audience, strengthens your network, and keeps your podcast top of mind.">
+  <link rel="canonical" href="https://easeus.media/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Easeus Media">
+  <meta property="og:title" content="Easeus Media — Podcast Editing, Reels & Smart Distribution">
+  <meta property="og:description"
+    content="High-quality post-production, management and distribution that grows your podcast.">
+  <meta property="og:url" content="https://easeus.media/">
+  <meta property="og:image" content="https://easeus.media/assets/media/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/icons/favicon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+
+  <style>
+    /* ============================================================
+   Easeus Media — style.css
+   Palette, type and layout tokens first; sections in page order.
+   ============================================================ */
+
+    /* ---------- Fonts (self-hosted, variable) ---------- */
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      src: url('assets/fonts/font-01.woff2') format('woff2');
+      font-weight: 200 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      src: url('assets/fonts/font-02.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ---------- Tokens ---------- */
+    :root {
+      --bg: #0a0a0d;
+      --bg-2: #101014;
+      --card: #131318;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #f5f5f3;
+      --muted: #a1a1aa;
+      --accent: #2f7bff;
+      --accent-soft: rgba(47, 123, 255, 0.14);
+      --orange: #ff5c29;
+      --light: #edece8;
+      --light-card: #f6f5f2;
+      --light-text: #17171a;
+      --light-muted: #5b5b63;
+
+      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --radius: 20px;
+      --radius-lg: 28px;
+      --container: 1120px;
+      --nav-h: 72px;
+    }
+
+    /* ---------- Base ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 100;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: #0d0d10;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1;
+      padding: 13px 8px 13px 22px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-arrow {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      transition: transform 0.18s ease;
+    }
+
+    .btn:hover .btn-arrow {
+      transform: translateX(3px);
+    }
+
+    .btn-lg {
+      font-size: 16px;
+      padding: 15px 10px 15px 26px;
+    }
+
+    .btn-lg .btn-arrow {
+      width: 34px;
+      height: 34px;
+    }
+
+    .btn-dark {
+      background: #131318;
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line-strong);
+      padding: 13px 26px;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: none;
+    }
+
+    /* ============================================================
+   NAV
+   ============================================================ */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 13, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-color: var(--line);
+    }
+
+    .nav-inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+
+    .brand img {
+      width: 17px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links>a:not(.btn) {
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-links>a:not(.btn):hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-nav {
+      margin-left: 10px;
+      padding: 10px 6px 10px 18px;
+      font-size: 14px;
+    }
+
+    .btn-nav .btn-arrow {
+      width: 28px;
+      height: 28px;
+      background: #0d0d10;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    /* ============================================================
+   HERO
+   ============================================================ */
+    .hero {
+      padding-top: calc(var(--nav-h) + 84px);
+      padding-bottom: 48px;
+      background:
+        linear-gradient(180deg, rgba(13, 26, 66, 0.85) 0%, rgba(13, 26, 66, 0) 460px),
+        radial-gradient(900px 420px at 50% -80px, rgba(47, 123, 255, 0.18), transparent 70%),
+        radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: auto, auto, 34px 34px;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 26px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(19, 19, 24, 0.7);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 16px 7px 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .badge-avatars {
+      display: inline-flex;
+    }
+
+    .badge-avatars img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      object-fit: cover;
+    }
+
+    .badge-avatars img+img {
+      margin-left: -9px;
+    }
+
+    .hero h1 {
+      max-width: 880px;
+      font-size: clamp(2.1rem, 4.6vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.031em;
+      line-height: 1.2;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+    }
+
+    /* signature: audio waveform */
+    .wave {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 30px;
+    }
+
+    .wave i {
+      width: 3px;
+      border-radius: 2px;
+      background: linear-gradient(to top, var(--accent), rgba(255, 255, 255, 0.85));
+      height: calc(var(--h) * 1%);
+      opacity: 0.75;
+      animation: wave-bounce 1.6s ease-in-out infinite;
+      animation-delay: var(--d);
+      transform-origin: center;
+    }
+
+    @keyframes wave-bounce {
+
+      0%,
+      100% {
+        transform: scaleY(0.45);
+      }
+
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    .hero-sub {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 16.5px;
+    }
+
+    .cta-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    /* chips marquee */
+    .marquee {
+      margin-top: 64px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 34s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .chips {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0 6px;
+    }
+
+    .chips li {
+      white-space: nowrap;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+   SECTIONS (shared)
+   ============================================================ */
+    .section {
+      padding: 104px 0 0;
+    }
+
+    .section-tight {
+      padding-top: 88px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+
+    .section-head h2,
+    .faq-intro h2,
+    .cta h2 {
+      font-size: clamp(1.9rem, 4.2vw, 2.85rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 15.5px;
+    }
+
+    /* ============================================================
+   PAGE HERO (projects page)
+   ============================================================ */
+    .page-hero {
+      padding: calc(var(--nav-h) + 84px) 0 60px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(13, 26, 66, 0.85) 0%, rgba(13, 26, 66, 0) 460px),
+        radial-gradient(900px 420px at 50% -80px, rgba(47, 123, 255, 0.18), transparent 70%),
+        radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: auto, auto, 34px 34px;
+    }
+
+    .page-hero .eyebrow {
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.1rem, 4.6vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.031em;
+      line-height: 1.2;
+    }
+
+    /* ============================================================
+   PROJECT GRID — click a card to play its YouTube Short inline
+   ============================================================ */
+    .section-flush {
+      padding: 8px 0 0;
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px 24px;
+      max-width: 1008px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    .pcard {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .pcard img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .pcard:hover img {
+      transform: scale(1.03);
+    }
+
+    .pcard iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* ============================================================
+   TRAILERS — scroll-stacking deck
+   Cards pin near the top and scale down to 0.8 as the next
+   card slides over them (matches the Framer interaction).
+   ============================================================ */
+    .deck {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    .trailer {
+      position: sticky;
+      top: 100px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--card);
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    .trailer.has-video {
+      cursor: pointer;
+    }
+
+    .trailer img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .trailer .play,
+    .pcard .play {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 68px;
+      height: 68px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(10, 10, 13, 0.65);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 22px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .trailer .play::before,
+    .pcard .play::before {
+      content: '▶';
+      margin-left: 4px;
+    }
+
+    .trailer .play:hover,
+    .pcard .play:hover {
+      transform: scale(1.08);
+      background: var(--accent);
+    }
+
+    /* ============================================================
+   REELS — auto-scrolling ticker (~79px/s leftward, like live)
+   Track = two identical groups; -50% translate loops seamlessly.
+   ============================================================ */
+    .reels {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      margin-bottom: 36px;
+      padding: 6px 0;
+    }
+
+    .reels-track {
+      display: flex;
+      width: max-content;
+      animation: reels-marquee 19.5s linear infinite;
+    }
+
+    .reels-group {
+      display: flex;
+      gap: 24px;
+      padding-right: 24px;
+    }
+
+    @keyframes reels-marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .reel {
+      width: 196px;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    /* ============================================================
+   PRICING
+   ============================================================ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .plan {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan-top {
+      background: #0c0c0f;
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius-lg) - 8px);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .plan-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .plan-sub {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .tag {
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .plan-desc {
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .plan-price {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .plan-price span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--light-muted);
+      letter-spacing: 0;
+    }
+
+    .plan-feats {
+      padding: 24px 22px 18px;
+    }
+
+    .feats-label {
+      font-weight: 600;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+
+    .plan-feats ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .plan-feats li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .plan-feats li::before {
+      content: '✳';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    /* light custom plan spans full width */
+    .plan-light {
+      grid-column: 1 / -1;
+      background: var(--light);
+      border-color: transparent;
+      color: var(--light-text);
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .plan-light .plan-top {
+      background: var(--light-card);
+      border-color: rgba(0, 0, 0, 0.06);
+      flex: 0 0 46%;
+    }
+
+    .plan-light .plan-desc {
+      color: var(--light-muted);
+    }
+
+    .plan-light .plan-feats {
+      flex: 1;
+      align-self: center;
+    }
+
+    .plan-light .plan-feats li {
+      color: var(--light-muted);
+    }
+
+    .plan-light .feats-label {
+      color: var(--light-text);
+    }
+
+    /* ============================================================
+   PROCESS
+   ============================================================ */
+    /* Cards cascade-pin under each other with a 40px lip
+   (sticky top = 100 + 40 * index). Card anatomy matches live:
+   pure black, no border, 20px radius, 200px visual zone,
+   per-card media geometry, text block below. */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 948px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    .step {
+      position: sticky;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .step:nth-child(1) {
+      top: 100px;
+    }
+
+    .step:nth-child(2) {
+      top: 140px;
+    }
+
+    .step:nth-child(3) {
+      top: 180px;
+    }
+
+    .step:nth-child(4) {
+      top: 220px;
+    }
+
+    .step:nth-child(5) {
+      top: 260px;
+    }
+
+    .step-num {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      background: #0e0e12;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 3px 9px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* 200px visual zone at the top of every card */
+    .step-visual {
+      position: relative;
+      height: 200px;
+    }
+
+    /* step 01: near full-bleed, contained */
+    .sv-full {
+      position: absolute;
+      left: 2px;
+      top: 27px;
+      width: calc(100% - 4px);
+      height: 176px;
+      object-fit: contain;
+      border-radius: 7px;
+    }
+
+    /* steps 02 & 05: centered 556x131 strip, cover-cropped */
+    .sv-strip {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: min(556px, calc(100% - 48px));
+      height: 131px;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+
+    .step-body {
+      padding: 25px 25px 24px;
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 0 0 6px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    /* CSS-built scenes for steps 03 & 04 — elements float on a loop like live */
+    .pill {
+      position: absolute;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 15px;
+      border-radius: 15px;
+      white-space: nowrap;
+    }
+
+    .pill-dark {
+      top: 56px;
+      left: 50%;
+      background: #0a0a0d;
+      border: 1px dashed rgba(255, 255, 255, 0.5);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      animation: float-a 3.4s ease-in-out infinite;
+    }
+
+    @keyframes float-a {
+
+      0%,
+      100% {
+        transform: translateX(-82%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-82%) translateY(-4px);
+      }
+    }
+
+    .pill-avatar {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+    }
+
+    .pill-blue {
+      top: 96px;
+      left: 50%;
+      background: #37a3e6;
+      color: #fff;
+      padding: 10px 20px 12px;
+      box-shadow: -20px -3px 54px rgba(255, 81, 0, 0.4);
+      animation: float-b 2.6s ease-in-out infinite;
+    }
+
+    @keyframes float-b {
+
+      0%,
+      100% {
+        transform: translateX(-10%) rotate(-14deg) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-10%) rotate(-14deg) translateY(-5px);
+      }
+    }
+
+    .pill-blue::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: -8px;
+      width: 16px;
+      height: 20px;
+      background: #ff5100;
+      clip-path: polygon(0 0, 100% 52%, 52% 62%, 66% 100%, 52% 100%, 40% 66%, 0 92%);
+      transform: rotate(-10deg);
+      border: 0;
+    }
+
+    .pill-file {
+      top: 48px;
+      left: 22%;
+      background: #dedede;
+      color: #141416;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      animation: float-c 3.1s ease-in-out infinite;
+    }
+
+    @keyframes float-c {
+
+      0%,
+      100% {
+        transform: rotate(-3deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(-3deg) translateY(-4px);
+      }
+    }
+
+    .chip-ic {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .pill-file-2 {
+      top: 92px;
+      left: 28%;
+      animation: float-d 2.8s ease-in-out 0.4s infinite;
+    }
+
+    @keyframes float-d {
+
+      0%,
+      100% {
+        transform: rotate(5deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(5deg) translateY(-4px);
+      }
+    }
+
+    .pill-publish {
+      top: 64px;
+      right: 13%;
+      background: #ff5100;
+      color: #fff;
+      font-size: 14px;
+      padding: 11px 24px 13px;
+      border-radius: 13px;
+      box-shadow: -26px -4px 54px rgba(255, 81, 0, 0.45);
+      animation: float-e 2s ease-in-out infinite;
+    }
+
+    @keyframes float-e {
+
+      0%,
+      100% {
+        transform: rotate(-14deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(-14deg) translateY(-5px);
+      }
+    }
+
+    /* ============================================================
+   FAQ
+   ============================================================ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .faq-intro {
+      position: sticky;
+      top: calc(var(--nav-h) + 32px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .faq-intro p {
+      color: var(--muted);
+      font-size: 15.5px;
+      max-width: 360px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item.open {
+      border-color: var(--line-strong);
+      background: var(--bg-2);
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      background: none;
+      border: 0;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15.5px;
+      padding: 18px 20px;
+      cursor: pointer;
+    }
+
+    .faq-icon {
+      position: relative;
+      flex: 0 0 auto;
+      width: 14px;
+      height: 14px;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      background: var(--muted);
+      transition: transform 0.25s ease;
+    }
+
+    .faq-icon::before {
+      width: 14px;
+      height: 2px;
+    }
+
+    .faq-icon::after {
+      width: 2px;
+      height: 14px;
+    }
+
+    .faq-item.open .faq-icon::after {
+      transform: rotate(90deg);
+    }
+
+    .faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+
+    .faq-item.open .faq-a {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-a-inner {
+      overflow: hidden;
+      padding: 0 20px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .faq-item.open .faq-a-inner {
+      padding-bottom: 20px;
+    }
+
+    /* ============================================================
+   CTA
+   ============================================================ */
+    .cta {
+      position: relative;
+      background: var(--light);
+      color: var(--light-text);
+      border-radius: var(--radius-lg);
+      padding: 76px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      overflow: hidden;
+    }
+
+    .cta p {
+      max-width: 460px;
+      color: var(--light-muted);
+      font-size: 15.5px;
+    }
+
+    .cta .btn {
+      margin-top: 8px;
+    }
+
+    .sticker {
+      position: absolute;
+      background: #fff;
+      color: var(--light-text);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+    }
+
+    .sticker-blue {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .s1 {
+      top: 58%;
+      left: 4%;
+      transform: rotate(-8deg);
+    }
+
+    .s2 {
+      bottom: 14%;
+      left: 12%;
+      transform: rotate(4deg);
+    }
+
+    .s3 {
+      top: 56%;
+      right: 13%;
+      transform: rotate(7deg);
+    }
+
+    .s4 {
+      top: 30%;
+      right: 4%;
+      transform: rotate(-5deg);
+    }
+
+    .s5 {
+      bottom: 12%;
+      right: 8%;
+      transform: rotate(-3deg);
+    }
+
+    /* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+    .tsm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .tsm {
+      position: relative;
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 30px 28px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tsm::before {
+      content: '“';
+      position: absolute;
+      top: 6px;
+      right: 24px;
+      font-family: var(--font-display);
+      font-size: 88px;
+      line-height: 1;
+      color: rgba(47, 123, 255, 0.25);
+      pointer-events: none;
+    }
+
+    .tsm-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tsm-pill {
+      background: var(--accent-soft);
+      border: 1px solid rgba(47, 123, 255, 0.4);
+      color: #8ab4ff;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .tsm blockquote {
+      margin: 0;
+      color: var(--text);
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+
+    .tsm figcaption {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tsm-avatar {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #6ea0ff);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .tsm figcaption strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .tsm figcaption span:not(.tsm-avatar) {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ============================================================
+   GUARANTEES
+   ============================================================ */
+    .gnt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .gnt {
+      position: relative;
+      background: linear-gradient(180deg, rgba(47, 123, 255, 0.10), rgba(47, 123, 255, 0.02)), var(--card);
+      border: 1px solid rgba(47, 123, 255, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gnt-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      background: #0c0c0f;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+    }
+
+    .gnt h3 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .gnt p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .gnt-why {
+      margin-top: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta-promise {
+      color: var(--light-text);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15.5px;
+      max-width: 480px;
+    }
+
+    .cta-scarcity {
+      margin-top: 10px;
+      color: var(--light-muted);
+      font-size: 13px;
+    }
+
+    /* ============================================================
+   FOOTER
+   ============================================================ */
+    .footer {
+      margin-top: 104px;
+      border-top: 1px solid var(--line);
+      background: #070709;
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px;
+    }
+
+    .footer-brand p {
+      margin-top: 18px;
+      max-width: 340px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .footer-col a {
+      font-size: 14.5px;
+      color: var(--text);
+      width: fit-content;
+      transition: color 0.15s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      margin-top: 56px;
+      padding: 22px 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    /* ============================================================
+   LIGHTBOX
+   ============================================================ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+    }
+
+    .lightbox[hidden] {
+      display: none;
+    }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 5, 8, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox-body {
+      position: relative;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .lightbox-frame {
+      width: min(960px, 100%);
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox-frame video,
+    .lightbox-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: rgba(20, 20, 25, 0.8);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      background: var(--accent);
+    }
+
+    /* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal.d1 {
+      transition-delay: 0.08s;
+    }
+
+    .reveal.d2 {
+      transition-delay: 0.16s;
+    }
+
+    .reveal.d3 {
+      transition-delay: 0.24s;
+    }
+
+    /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+    @media (max-width: 920px) {
+      .pgrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 20px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tsm-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gnt-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-light {
+        flex-direction: column;
+      }
+
+      .plan-light .plan-top {
+        flex: none;
+      }
+
+      .plan-light .plan-feats {
+        align-self: stretch;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .faq-intro {
+        position: static;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .br-d {
+        display: none;
+      }
+
+      .page-hero {
+        padding: calc(var(--nav-h) + 56px) 0 44px;
+      }
+
+      .steps {
+        padding-inline: 16px;
+      }
+
+      .step:nth-child(1) {
+        top: 76px;
+      }
+
+      .step:nth-child(2) {
+        top: 108px;
+      }
+
+      .step:nth-child(3) {
+        top: 140px;
+      }
+
+      .step:nth-child(4) {
+        top: 172px;
+      }
+
+      .step:nth-child(5) {
+        top: 204px;
+      }
+
+      .step-visual {
+        height: 170px;
+      }
+
+      .sv-full {
+        top: 16px;
+        height: 150px;
+      }
+
+      .sv-strip {
+        top: 30px;
+        width: calc(100% - 32px);
+        height: auto;
+        aspect-ratio: 556 / 131;
+      }
+
+      .deck {
+        gap: 16px;
+        padding-inline: 16px;
+      }
+
+      .trailer {
+        top: 84px;
+      }
+
+      .section {
+        padding-top: 80px;
+      }
+
+      .marquee {
+        margin-top: 48px;
+      }
+
+      .hero-cta {
+        margin-top: 40px;
+      }
+
+      .hero {
+        padding-top: calc(var(--nav-h) + 56px);
+      }
+
+      .sticker {
+        display: none;
+      }
+
+      .cta {
+        padding: 56px 24px;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 16px 24px 24px;
+        background: rgba(10, 10, 13, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+
+      .nav-links>a:not(.btn) {
+        padding: 13px 10px;
+        font-size: 16px;
+      }
+
+      .btn-nav {
+        margin: 10px 0 0;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pgrid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+      }
+    }
+
+    /* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .marquee-track {
+        animation: none;
+        flex-wrap: wrap;
+        width: auto;
+        justify-content: center;
+        row-gap: 12px;
+      }
+
+      .marquee {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+
+      .reels-track {
+        animation: none;
+      }
+
+      .reels {
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .trailer {
+        position: static;
+      }
+
+      .step {
+        position: static;
+      }
+
+      .pill {
+        animation: none !important;
+      }
+
+      .wave i {
+        animation: none;
+      }
+
+      .pcard:hover img {
+        transform: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Easeus Media",
+    "url": "https://easeus.media/",
+    "logo": "https://easeus.media/assets/media/icon-512.png",
+    "description": "Podcast post-production, short-form content and smart distribution.",
+    "sameAs": [
+      "https://www.instagram.com/easeus.media/",
+      "https://www.facebook.com/Easeus.India/"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ======================= NAV ======================= -->
+  <header class="nav" id="top">
+    <div class="nav-inner container">
+      <a class="brand" href="#top" aria-label="Easeus Media — home">
+        <img
+          src="assets/images/logo/brand-logo.png"
+          alt="" width="17" height="30">
+        <span>Easeus&nbsp;Media</span>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#process">Process</a>
+        <a href="projects.html">Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-nav" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">
+          Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ======================= HERO ======================= -->
+    <section class="hero">
+      <div class="container hero-inner">
+
+        <div class="badge reveal">
+          <span class="badge-avatars">
+            <img
+              src="assets/images/avatars/avatar-01.jpg"
+              alt="" width="28" height="28" loading="eager">
+            <img
+              src="assets/images/misc/misc-01.jpg"
+              alt="" width="28" height="28" loading="eager">
+            <img
+              src="assets/images/misc/misc-02.jpg"
+              alt="" width="28" height="28" loading="eager">
+          </span>
+          4.5M+ Views Generated
+        </div>
+
+        <h1 class="reveal d1">Helping Podcasts Grow <br class="br-d">Through World&#8209;Class Editing <br
+            class="br-d">and Smart Distribution.</h1>
+
+        <div class="wave reveal d2" aria-hidden="true"></div>
+
+        <p class="hero-sub reveal d2">We handle everything after you hit record. World class post production and smart
+          distribution that turn views into inbound leads, booked calls, and real authority for business owners, VC
+          firms, and startups.</p>
+      </div>
+
+      <!-- chips marquee -->
+      <div class="marquee reveal d3" aria-hidden="true">
+        <div class="marquee-track">
+          <ul class="chips">
+            <li>2+ Years in Podcast Industry</li>
+            <li>Global Client Base</li>
+            <li>Fast Turnaround Time</li>
+            <li>24/7 Support Team</li>
+            <li>Done-for-You System</li>
+            <li>4.9⭐ Client Satisfaction</li>
+            <li>1000+ Clips Edited</li>
+            <li>Podcast Strategy</li>
+            <li>Smart Distribution Systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container center hero-cta reveal d3">
+        <a class="btn btn-lg" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">
+          Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="cta-note">Free content audit on the call. You leave with a plan either way.</p>
+      </div>
+    </section>
+
+    <!-- ======================= TRAILERS ======================= -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ World Class Trailers</span>
+          <h2>Cinematic Podcast Trailers</h2>
+          <p>From cold opens to punchy highlights — here's how we turn your episode moments into attention-grabbing
+            promos.</p>
+        </div>
+      </div>
+
+      <!--
+    HOW TO ADD A VIDEO TO A TRAILER CARD:
+    Put a link in data-video. Two options:
+      1) YouTube:  data-video="https://www.youtube.com/watch?v=XXXXXXXX"
+      2) MP4 file: data-video="trailer-1.mp4"  (upload the MP4 next to this HTML file when hosting)
+    A play button appears automatically and the video opens in a player.
+    Leave data-video="" to show just the image.
+
+    The cards pin and stack as you scroll (like the Framer site).
+  -->
+      <div class="deck">
+        <article class="trailer" data-video="https://youtu.be/rO9Czkvlazc">
+          <img
+            src="assets/images/trailers/trailer-01.jpg"
+            alt="Trailer — Why great leaders break the rules, with Rory Sutherland" width="1120" height="630"
+            loading="lazy">
+        </article>
+        <article class="trailer" data-video="https://youtu.be/tvFazuOglJk">
+          <img
+            src="assets/images/trailers/trailer-02.jpg"
+            alt="Trailer — I built Sports Bra company" width="1120" height="630" loading="lazy">
+        </article>
+        <article class="trailer" data-video="https://youtu.be/jSNkSvZQNec">
+          <img
+            src="assets/images/trailers/trailer-03.jpg"
+            alt="Trailer — All men will be infertile by 2046, with a fertility expert" width="1120" height="630"
+            loading="lazy">
+        </article>
+        <article class="trailer" data-video="https://youtu.be/NZG8ETG5wA8">
+          <img
+            src="assets/images/trailers/trailer-04.jpg"
+            alt="Trailer — Stop setting goals like this" width="1120" height="630" loading="lazy">
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================= REELS ======================= -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ High Quality Reels</span>
+          <h2>Reels Designed to Amplify Discoverability</h2>
+          <p>A quick look at how our clip edits help your podcast get seen by the right people.</p>
+        </div>
+      </div>
+
+      <div class="reels reveal" aria-label="Reel examples">
+        <div class="reels-track">
+          <div class="reels-group">
+            <video class="reel"
+              poster="assets/images/reels/reel-01.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-01.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-02.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-02.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-03.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-03.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-04.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-04.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-05.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-05.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-06.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-06.mp4"
+                type="video/mp4">
+            </video>
+            <video class="reel"
+              poster="assets/images/reels/reel-07.jpg"
+              muted playsinline loop preload="metadata" width="252" height="448">
+              <source
+                src="assets/videos/video-07.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <div class="container center reveal">
+        <a class="btn btn-ghost" href="projects.html">View All</a>
+      </div>
+    </section>
+
+    <!-- ======================= TESTIMONIALS ======================= -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Client Love</span>
+          <h2>What Clients Say</h2>
+          <p>Real words from the people behind the shows we run.</p>
+        </div>
+
+        <div class="tsm-grid">
+          <figure class="tsm reveal">
+            <div class="tsm-badges" aria-hidden="true">
+              <span class="tsm-pill">Apple Top 100</span>
+              <span class="tsm-pill">200 episodes</span>
+            </div>
+            <blockquote>"We're back in Apple's Top 100 podcasts 🥳 ... And to the team who work tirelessly behind the
+              scenes, thank you for continuing to raise the bar. Next week we release our 200th episode. I can't quite
+              believe how far we've come."</blockquote>
+            <figcaption>
+              <span class="tsm-avatar" aria-hidden="true">JH</span>
+              <div><strong>Joanna Howes</strong><span>Host, Courageous Leaders Podcast</span></div>
+            </figcaption>
+          </figure>
+
+          <figure class="tsm reveal d1">
+            <blockquote>"He's sharp, he's smart, he understands the world of YouTube, podcasting, editing, hooks, reels,
+              socials and scaling a business. He works hard. He's organised and he's tenacious."</blockquote>
+            <figcaption>
+              <span class="tsm-avatar" aria-hidden="true">EC</span>
+              <div><strong>Elissa Corrigan</strong><span>Founder, Elle Sera</span></div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= PRICING ======================= -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Pricing</span>
+          <h2>Simple Plans</h2>
+          <p>Whether you're uploading weekly or scaling fast, we've got a plan tailored to your content flow.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <article class="plan reveal">
+            <div class="plan-top">
+              <div class="plan-name">Amplify <span class="plan-sub">(End to End)</span> <span class="tag">Popular</span>
+              </div>
+              <p class="plan-desc">Your all-in-one podcast growth system.</p>
+              <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a
+                Call <span class="btn-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="plan-feats">
+              <p class="feats-label">Features included:</p>
+              <ul>
+                <li>Content audit + strategy call to find your fastest wins</li>
+                <li>A cinematic trailer that positions your show like a top tier production</li>
+                <li>Visual identity that makes every episode instantly recognisable</li>
+                <li>Reels engineered to put your face in front of new buyers weekly</li>
+                <li>Publishing and distribution handled across every platform</li>
+                <li>Audio platforms managed end to end: Spotify, Apple, and more</li>
+                <li>Publish-ready episodes without you opening a timeline</li>
+                <li>Studio-grade audio that keeps listeners till the end</li>
+                <li>Organic growth plus paid distribution when it makes sense</li>
+                <li>Monthly reporting so you know exactly what is growing and why</li>
+                <li>24/7 support from a team that actually answers</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="plan reveal d1">
+            <div class="plan-top">
+              <div class="plan-name">Spark <span class="plan-sub">(Reels/Trailers)</span></div>
+              <p class="plan-desc">If you're looking to start with either Reel Edits or Trailer Edits.</p>
+              <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a
+                Call <span class="btn-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="plan-feats">
+              <p class="feats-label">Features included:</p>
+              <ul>
+                <li>Reel edits: viral-style clips that put you in front of new audiences</li>
+                <li>Trailer edits: cinematic intros and promos for your episodes</li>
+                <li>A/B reel variations to find what your audience actually clicks</li>
+                <li>24/7 support from a team that actually answers</li>
+                <li>Full length episode editing included</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="plan plan-light reveal">
+            <div class="plan-top">
+              <div class="plan-name">Custom Plan</div>
+              <p class="plan-price">Custom <span>/month</span></p>
+              <p class="plan-desc">Your all-in-one podcast growth system.</p>
+              <a class="btn btn-dark" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank"
+                rel="noopener">Book a Call <span class="btn-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="plan-feats">
+              <p class="feats-label">Features included:</p>
+              <ul>
+                <li>Choose from 10 to 40+ video edits every month</li>
+                <li>24h / 48h / 72h delivery, you pick the speed</li>
+                <li>Titles, thumbnails, and retention tips on every video</li>
+                <li>Shorts, Reels, long form, and full podcasts</li>
+                <li>One edit becomes assets for every channel</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= GUARANTEES ======================= -->
+    <section class="section" id="guarantees">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Zero Risk</span>
+          <h2>Two Guarantees. Zero Gamble.</h2>
+          <p>Hiring an agency should not feel like a bet. So we took the risk onto our side of the table.</p>
+        </div>
+
+        <div class="gnt-grid">
+          <article class="gnt reveal">
+            <span class="gnt-icon" aria-hidden="true">⚡</span>
+            <h3>The 5 Day Delivery Guarantee</h3>
+            <p>Every episode delivered within 5 business days, or that episode is free. No fine print, no excuses.</p>
+          </article>
+          <article class="gnt reveal d1">
+            <span class="gnt-icon" aria-hidden="true">📈</span>
+            <h3>The Growth Guarantee</h3>
+            <p>If your first 30 days of content do not outperform your previous 30 days, we keep working for free until
+              they do.</p>
+          </article>
+        </div>
+
+        <p class="gnt-why reveal">We can only put this in writing because our system is built to hit it. That is the
+          point.</p>
+      </div>
+    </section>
+
+    <!-- ======================= PROCESS ======================= -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Process</span>
+          <h2>How It Works?</h2>
+          <p>A quick overview of how we work together to make your edit best in class!</p>
+        </div>
+
+        <div class="steps">
+
+          <article class="step reveal">
+            <span class="step-num">01</span>
+            <div class="step-visual"><img class="sv-full"
+                src="assets/images/showcase/showcase-01.png"
+                alt="Raw files flow in from Dropbox, Google Drive and more" loading="lazy" width="1000" height="568">
+            </div>
+            <div class="step-body">
+              <h3>You Record. We Take Over.</h3>
+              <p>You focus on conversations — we handle everything after. Upload your raw files, and our team gets to
+                work.</p>
+            </div>
+          </article>
+
+          <article class="step reveal">
+            <span class="step-num">02</span>
+            <div class="step-visual"><img class="sv-strip"
+                src="assets/images/showcase/showcase-02.png"
+                alt="Edited with CapCut, DaVinci Resolve, Final Cut Pro and Premiere Pro" loading="lazy" width="1200"
+                height="538"></div>
+            <div class="step-body">
+              <h3>Post-Production That Pops</h3>
+              <p>We edit every episode with studio precision — audio, visuals, hooks, and pacing designed to keep
+                listeners hooked till the end.</p>
+            </div>
+          </article>
+
+          <article class="step reveal">
+            <span class="step-num">03</span>
+            <div class="step-visual step-scene">
+              <span class="pill pill-dark"><img class="pill-avatar"
+                  src="assets/images/avatars/avatar-02.jpg"
+                  alt="" width="23" height="23">Requested a Revision</span>
+              <span class="pill pill-blue">Revision is in progress!</span>
+            </div>
+            <div class="step-body">
+              <h3>Reels That Reach</h3>
+              <p>We craft short-form clips and trailers optimised for social media to grow your reach and attract new
+                audiences every week.</p>
+            </div>
+          </article>
+
+          <article class="step reveal">
+            <span class="step-num">04</span>
+            <div class="step-visual step-scene">
+              <span class="pill pill-file"><img class="chip-ic"
+                  src="assets/images/icons/chip-01.png"
+                  alt="" width="20" height="20">Final_Cut_v2.mp4</span>
+              <span class="pill pill-file pill-file-2"><img class="chip-ic"
+                  src="assets/images/icons/chip-02.png"
+                  alt="" width="20" height="20">Thumbnail.png</span>
+              <span class="pill pill-publish">Publish</span>
+            </div>
+            <div class="step-body">
+              <h3>Smart Distribution &amp; Management</h3>
+              <p>We handle uploads, thumbnails, scheduling, and social media distribution — so your podcast shows up
+                everywhere, consistently.</p>
+            </div>
+          </article>
+
+          <article class="step reveal">
+            <span class="step-num">05</span>
+            <div class="step-visual"><img class="sv-strip"
+                src="assets/images/showcase/showcase-03.png"
+                alt="Seedlings growing taller in a row — steady growth" loading="lazy" width="1400" height="612"></div>
+            <div class="step-body">
+              <h3>Growth, Week After Week.</h3>
+              <p>From analytics to retention tracking, we refine your content every cycle — making each episode perform
+                better than the last.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= FAQ ======================= -->
+    <section class="section" id="faq">
+      <div class="container faq-grid">
+        <div class="faq-intro reveal">
+          <span class="eyebrow">✦ FAQ</span>
+          <h2>Got Questions?</h2>
+          <p>Straightforward, no-fluff answers to help you feel confident about working with us.</p>
+        </div>
+
+        <div class="faq-list reveal d1">
+          <div class="faq-item open">
+            <button class="faq-q" aria-expanded="true">
+              Can I choose only one service instead of the full Amplify package?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Absolutely. Our SPARK package lets you pick between Reel Edits or Trailer Edits —
+                or both — depending on what your podcast needs most.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              How long does it take to deliver an episode?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">On average, your full episode (with reels and clips) is ready within 3–5 business
+                days — depending on the complexity and length.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              How much does it cost?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Every show is scoped to its goals, so we quote on the call rather than a one size
+                fits all rate card. Plans are monthly retainers, and you will know your exact number, and exactly what
+                it buys, before the call ends.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Do you handle uploads and distribution too?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. If you're on our AMPLIFY plan, we take care of uploads, scheduling, and
+                social media distribution — you just record and relax.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Can you help us grow on YouTube too?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Definitely. We specialize in YouTube management — from titles and thumbnails to
+                retention analysis and channel optimization.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              How do I get started?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Simple — click Book a Call, tell us about your podcast, and we'll build a growth
+                plan tailored to your goals.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CTA ======================= -->
+    <section class="section section-tight">
+      <div class="container">
+        <div class="cta reveal">
+          <span class="sticker s1">From meh to wow!</span>
+          <span class="sticker s2 sticker-blue">✦ No Editor? No Problem</span>
+          <span class="sticker s3">Watch Time Wins</span>
+          <span class="sticker s4">Low Views? Fixed</span>
+          <span class="sticker s5 sticker-blue">Conversion Boost</span>
+
+          <h2>Ready to Grow Your Podcast?</h2>
+          <p>Whether you need full management or just killer reels, we'll build a plan that actually moves your show
+            forward.</p>
+          <p class="cta-promise">You leave the call with a 90 day growth plan for your show, whether we work together or
+            not.</p>
+          <a class="btn btn-dark btn-lg" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank"
+            rel="noopener">
+            Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="cta-scarcity">We onboard a limited number of new shows each month to protect delivery speed.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <img
+            src="assets/images/logo/brand-logo.png"
+            alt="" width="17" height="30">
+          <span>Easeus&nbsp;Media</span>
+        </a>
+        <p>We handle everything after you hit record — High-quality post-production, management and distribution that
+          grows your audience, strengthens your network, and keeps your podcast top of mind.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Company">
+        <p class="footer-label">Company</p>
+        <a href="#top">Home</a>
+        <a href="#services">Services</a>
+        <a href="#work">Works</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Socials">
+        <p class="footer-label">Socials</p>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/easeus.media/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/Easeus.India/" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> Easeus Media. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ======================= VIDEO LIGHTBOX ======================= -->
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox-backdrop" data-close></div>
+    <div class="lightbox-body" role="dialog" aria-modal="true" aria-label="Video player">
+      <button class="lightbox-close" data-close aria-label="Close video">✕</button>
+      <div class="lightbox-frame" id="lightbox-frame"></div>
+    </div>
+  </div>
+
+  <script>
+    /* Easeus Media — main.js */
+    (function () {
+      'use strict';
+
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Footer year ---------- */
+      var yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      /* ---------- Nav: scrolled state ---------- */
+      var nav = document.querySelector('.nav');
+      function onScroll() {
+        nav.classList.toggle('scrolled', window.scrollY > 8);
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ---------- Nav: mobile menu ---------- */
+      var toggle = document.getElementById('nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (toggle && links) {
+        toggle.addEventListener('click', function () {
+          var open = links.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        links.addEventListener('click', function (e) {
+          if (e.target.tagName === 'A') {
+            links.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      /* ---------- Marquee: duplicate chips for seamless loop ---------- */
+      var marqueeTrack = document.querySelector('.marquee-track');
+      if (marqueeTrack && !reducedMotion) {
+        marqueeTrack.appendChild(marqueeTrack.firstElementChild.cloneNode(true));
+      }
+
+      /* ---------- Reels ticker: duplicate group for seamless loop ---------- */
+      var reelsTrack = document.querySelector('.reels-track');
+      if (reelsTrack && !reducedMotion) {
+        reelsTrack.appendChild(reelsTrack.firstElementChild.cloneNode(true));
+      }
+
+      /* ---------- Trailer deck: scale pinned cards as the next one covers them ---------- */
+      var deckCards = Array.prototype.slice.call(document.querySelectorAll('.deck .trailer'));
+      if (deckCards.length > 1 && !reducedMotion) {
+        var deckTicking = false;
+        function deckUpdate() {
+          var vh = window.innerHeight;
+          var stickyTop = parseFloat(getComputedStyle(deckCards[0]).top) || 100;
+          var arriveAt = stickyTop + 64; /* incoming card's visual resting top (scaled cards sit lower) */
+          for (var i = 0; i < deckCards.length - 1; i++) {
+            var next = deckCards[i + 1].getBoundingClientRect();
+            var p = (vh - next.top) / (vh - arriveAt);
+            p = Math.max(0, Math.min(1, p));
+            deckCards[i].style.transform = 'scale(' + (1 - 0.2 * p).toFixed(4) + ')';
+          }
+          deckTicking = false;
+        }
+        window.addEventListener('scroll', function () {
+          if (!deckTicking) { deckTicking = true; requestAnimationFrame(deckUpdate); }
+        }, { passive: true });
+        window.addEventListener('resize', deckUpdate);
+        deckUpdate();
+      }
+
+      /* ---------- Hero waveform ---------- */
+      var wave = document.querySelector('.wave');
+      if (wave) {
+        var BARS = 46;
+        var frag = document.createDocumentFragment();
+        for (var i = 0; i < BARS; i++) {
+          var bar = document.createElement('i');
+          // smooth pseudo-random heights that read like audio
+          var h = 30 + Math.round(60 * Math.abs(Math.sin(i * 0.55) * Math.cos(i * 0.21)));
+          bar.style.setProperty('--h', h);
+          bar.style.setProperty('--d', (i * 0.045).toFixed(2) + 's');
+          frag.appendChild(bar);
+        }
+        wave.appendChild(frag);
+      }
+
+      /* ---------- Reveal on scroll ---------- */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        var ro = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              ro.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(function (el) { ro.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* ---------- Reels: play all while the ticker is on screen ---------- */
+      var reelsWrap = document.querySelector('.reels');
+      function allReels() { return document.querySelectorAll('.reel'); }
+      if (reducedMotion) {
+        allReels().forEach(function (v) { v.setAttribute('controls', ''); });
+      } else if (reelsWrap && 'IntersectionObserver' in window) {
+        var vo = new IntersectionObserver(function (entries) {
+          var onScreen = entries[0].isIntersecting;
+          allReels().forEach(function (v) {
+            if (onScreen) { v.play().catch(function () { }); } else { v.pause(); }
+          });
+        }, { threshold: 0.1 });
+        vo.observe(reelsWrap);
+      }
+
+      /* ---------- FAQ accordion ---------- */
+      var faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function (item) {
+        var btn = item.querySelector('.faq-q');
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
+          faqItems.forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      /* ---------- Projects grid: click to play YouTube inline ---------- */
+      document.querySelectorAll('.pcard[data-yt]').forEach(function (card) {
+        var id = (card.getAttribute('data-yt') || '').trim();
+        if (!id) return;
+        var btn = document.createElement('button');
+        btn.className = 'play';
+        btn.setAttribute('aria-label', 'Play video');
+        card.appendChild(btn);
+        card.addEventListener('click', function () {
+          if (card.classList.contains('playing')) return;
+          card.classList.add('playing');
+          card.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+            '?autoplay=1&rel=0&playsinline=1" title="Project video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+        });
+      });
+
+      /* ---------- Trailer lightbox ---------- */
+      var lightbox = document.getElementById('lightbox');
+      var frame = document.getElementById('lightbox-frame');
+
+      function youtubeId(url) {
+        var m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/);
+        return m ? m[1] : null;
+      }
+
+      function openLightbox(src) {
+        var yt = youtubeId(src);
+        if (yt) {
+          frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + yt +
+            '?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+        } else {
+          frame.innerHTML = '<video src="' + src + '" controls autoplay playsinline></video>';
+        }
+        lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        lightbox.querySelector('.lightbox-close').focus();
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        frame.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.trailer').forEach(function (card) {
+        var src = (card.getAttribute('data-video') || '').trim();
+        if (!src) return;
+        card.classList.add('has-video');
+        var btn = document.createElement('button');
+        btn.className = 'play';
+        btn.setAttribute('aria-label', 'Play trailer');
+        card.appendChild(btn);
+        btn.addEventListener('click', function (ev) { ev.stopPropagation(); openLightbox(src); });
+        card.addEventListener('click', function () { openLightbox(src); });
+      });
+
+      lightbox.addEventListener('click', function (e) {
+        if (e.target.hasAttribute('data-close')) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+      });
+    })();
+
+
+    // 1) Same-page section links: scroll smoothly WITHOUT putting # in the URL
+    document.querySelectorAll('a[href*="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const id = link.getAttribute('href').split('#')[1];
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (target) {                       // section is on THIS page
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+        // if not on this page, let the browser navigate to /#id normally →
+        // the loader below cleans it up on arrival
+      });
+    });
+
+    // 2) On load: if the URL arrived with a #section, scroll there then strip it
+    window.addEventListener('load', () => {
+      if (location.hash) {
+        const target = document.getElementById(location.hash.slice(1));
+        if (target) {
+          target.scrollIntoView();
+          history.replaceState(null, '', location.pathname); // /#process → /
+        }
+      }
+    });
+
+
+  </script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('a[href*="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id=(link.getAttribute('href')||'').split('#')[1];
+      if(!id) return;
+      var t=document.getElementById(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior: reduce?'auto':'smooth'}); }
+    });
+  });
+  window.addEventListener('load', function(){
+    if(location.hash){
+      var t=document.getElementById(location.hash.slice(1));
+      if(t){ t.scrollIntoView(); try{ history.replaceState(null,'',location.pathname); }catch(e){} }
+    }
+  });
+})();
+</script>
+</body>
+
+</html>
