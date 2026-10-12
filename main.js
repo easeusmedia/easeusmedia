@@ -45,17 +45,38 @@
   }
 
   /* ---------- marquees: duplicate once for a seamless loop ---------- */
-  ['.chips-track', '.reel-strip-track', '.mq-track'].forEach(function (sel) {
+  ['.chips-track', '.reels-track', '.mq-track'].forEach(function (sel) {
     var track = document.querySelector(sel);
-    if (track && !reduced) {
-      var copies = sel === '.reel-strip-track' ? 2 : 1;
-      var original = track.innerHTML;
-      for (var i = 0; i < copies; i++) track.insertAdjacentHTML('beforeend', original);
-    }
+    if (track && !reduced) track.insertAdjacentHTML('beforeend', track.innerHTML);
   });
 
+  /* trailer deck: pinned cards scale down as the next one covers them */
+  var deck = Array.prototype.slice.call(document.querySelectorAll('.deck .trailer'));
+  if (deck.length > 1 && !reduced) {
+    var deckTicking = false, vh = window.innerHeight;
+    var arriveAt = (parseFloat(getComputedStyle(deck[0]).top) || 100) + 64;
+    function deckMeasure() {
+      vh = window.innerHeight;
+      arriveAt = (parseFloat(getComputedStyle(deck[0]).top) || 100) + 64;
+    }
+    function deckUpdate() {
+      deckTicking = false;
+      var tops = [];
+      for (var i = 1; i < deck.length; i++) tops.push(deck[i].getBoundingClientRect().top);
+      for (var j = 0; j < tops.length; j++) {
+        var p = Math.max(0, Math.min(1, (vh - tops[j]) / (vh - arriveAt)));
+        deck[j].style.transform = 'scale(' + (1 - 0.2 * p).toFixed(4) + ')';
+      }
+    }
+    window.addEventListener('scroll', function () {
+      if (!deckTicking) { deckTicking = true; requestAnimationFrame(deckUpdate); }
+    }, { passive: true });
+    window.addEventListener('resize', function () { deckMeasure(); deckUpdate(); });
+    deckUpdate();
+  }
+
   /* ---------- reels: load and play only while the strip is in view ---------- */
-  var strip = document.querySelector('.reel-strip');
+  var strip = document.querySelector('.reels');
   function reels() { return document.querySelectorAll('.reel'); }
   if (reduced) {
     reels().forEach(function (v) { v.setAttribute('controls', ''); });
@@ -168,6 +189,7 @@
   document.querySelectorAll('[data-video]').forEach(function (card) {
     var url = (card.getAttribute('data-video') || '').trim();
     if (!url) return;
+    if (card.classList.contains('trailer')) card.classList.add('has-video');
     var play = document.createElement('span');
     play.className = 'reel-play';
     play.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="8,5 19,12 8,19"/></svg>';

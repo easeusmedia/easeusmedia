@@ -1265,3 +1265,32 @@ html.lenis,html.lenis body{height:auto;}
 .split .panel{background:#fff;border:1px solid var(--line);box-shadow:0 30px 60px -44px rgba(10,37,64,.45);padding:40px 40px 18px;}
 .split .bars{height:320px;gap:16px;}
 .split .bar{gap:6px;}
+
+/* ============================================================
+   Video cards: original sizing and behaviour
+   ============================================================ */
+.deck{display:flex;flex-direction:column;gap:24px;max-width:1160px;margin-inline:auto;padding-inline:24px;}
+.trailer{position:sticky;top:100px;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--card);
+  will-change:transform;transform-origin:center center;box-shadow:0 30px 60px -40px rgba(10,37,64,.45);}
+.trailer.has-video{cursor:pointer;}
+.trailer img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+
+.reels{overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);margin:36px 0;padding:6px 0;}
+.reels-track{display:flex;width:max-content;animation:reels-marquee 19.5s linear infinite;}
+.reels:hover .reels-track{animation-play-state:paused;}
+.reels-group{display:flex;gap:24px;padding-right:24px;}
+@keyframes reels-marquee{to{transform:translateX(-50%);}}
+.reel{width:196px;aspect-ratio:9/16;object-fit:cover;border-radius:14px;border:1px solid var(--line);background:var(--card);}
+
+@media(max-width:760px){
+  .deck{gap:16px;padding-inline:20px;}
+  .trailer{top:84px;}
+  .reel{width:150px;}
+  .reels-group{gap:10px;padding-right:10px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .trailer{position:static;}
+  .reels-track{animation:none;}
+  .reels{overflow-x:auto;}
+}
