@@ -24,7 +24,18 @@
       var isShown = y > heroCut;
       if (isShown !== shown) { mbar.classList.toggle('on', isShown); shown = isShown; }
     }
+    if (!reduced) spinMic(y);
   }
+  /* microphone: turns and drifts with the scroll, on the same frame as everything else */
+  var mic = document.getElementById('mic');
+  function spinMic(y) {
+    if (!mic) return;
+    var t = Math.min(y / 1400, 1);                 /* settles over the first screenful or so */
+    mic.style.setProperty('--my', (-18 + t * 54).toFixed(2) + 'deg');
+    mic.style.setProperty('--mx', (8 - t * 16).toFixed(2) + 'deg');
+    mic.style.setProperty('--mt', (y * 0.12).toFixed(1) + 'px');
+  }
+
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
   measure(); paint();
   window.addEventListener('scroll', onScroll, { passive: true });
