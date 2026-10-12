@@ -1466,3 +1466,7 @@ h1{font-size:clamp(2.4rem,4.4vw,3.5rem);line-height:1.06;letter-spacing:-.03em;}
 h1 em,.h2 em,.hero h1 em,.on-dark .h2 em,.on-dark h1 em,.block .h2 em,.whero h1 em{
   background-image:none;color:var(--accent);}
 .hero h1 em,.on-dark .h2 em,.on-dark h1 em,.block .h2 em,.whero h1 em{color:#5FC0FF;}
+
+/* no drafting guides, no dot texture */
+.page::before,.page::after{display:none;}
+body::after{display:none;}
