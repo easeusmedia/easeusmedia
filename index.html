@@ -2177,6 +2177,33 @@ body{
 /* text */
 .hero-sub,.section-head p,.stage p,.cap-list li,.route-list li,.plan-feats li,.gnt p,.faq-a p,.proof-note,.cta-note{color:#AEB6C2;}
 .lad-table td,.lad-foot,.pricing-note,.gnt-why,.ladder-note{color:#AEB6C2;}
+
+/* ---- hero background: podcast stills, degraded and blended into the black ---- */
+.hero{position:relative;isolation:isolate;}
+.hero > .container,.hero > .marquee,.hero > .hero-cta{position:relative;z-index:2;}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:radial-gradient(120% 95% at 50% 40%, #000 32%, rgba(0,0,0,.45) 62%, transparent 86%);
+  mask-image:radial-gradient(120% 95% at 50% 40%, #000 32%, rgba(0,0,0,.45) 62%, transparent 86%);}
+.hero-clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  filter:grayscale(1) brightness(.62) contrast(1.25) blur(.6px);
+  mix-blend-mode:luminosity;transition:opacity .14s linear,transform .14s linear;will-change:opacity;}
+.hero-clip.on{opacity:.38;}
+.hero-clip.cut{transform:translate3d(6px,0,0) scale(1.012);}
+
+/* damaged: grain, scanlines, a blue wash over the top */
+.hero-grain{position:absolute;inset:-50%;opacity:.3;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  animation:grain 1.1s steps(3) infinite;}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}100%{transform:translate(0,0)}}
+.hero-lines{position:absolute;inset:0;opacity:.3;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.55) 0 1px,transparent 1px 3px);}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(1000px 560px at 50% 44%, rgba(10,10,12,.34), rgba(10,10,12,.80) 72%),
+    linear-gradient(180deg, rgba(10,10,12,.86) 0%, rgba(10,10,12,.36) 42%, rgba(10,10,12,.96) 100%),
+    linear-gradient(180deg, rgba(0,115,230,.20), rgba(0,115,230,.05) 55%, transparent);}
+@media(max-width:900px){ .hero-bg,.hero-veil{display:none;} }
+@media(prefers-reduced-motion:reduce){ .hero-grain{animation:none;} .hero-clip.cut{transform:none;} }
 </style>
 
   <script type="application/ld+json">
@@ -2230,6 +2257,15 @@ body{
 
 <!-- ======================= HERO ======================= -->
 <section class="hero">
+  <div class="hero-bg" id="hero-bg" aria-hidden="true">
+    <img class="hero-clip" src="assets/images/reels/reel-04.jpg" alt="" loading="eager" decoding="async">
+    <img class="hero-clip" src="assets/images/reels/reel-13.jpg" alt="" loading="lazy" decoding="async">
+    <img class="hero-clip" src="assets/images/reels/reel-10.jpg" alt="" loading="lazy" decoding="async">
+    <img class="hero-clip" src="assets/images/reels/reel-14.jpg" alt="" loading="lazy" decoding="async">
+    <div class="hero-grain"></div>
+    <div class="hero-lines"></div>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
   <div class="container hero-inner">
 
     <div class="badge reveal">
@@ -3163,6 +3199,35 @@ body{
   draw();
   window.addEventListener('resize', draw);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+
+/* ---- hero background: fast cuts between the podcast stills ---- */
+(function(){
+  var stage = document.getElementById('hero-bg');
+  if (!stage || window.innerWidth < 901) return;
+  var clips = Array.prototype.slice.call(stage.querySelectorAll('.hero-clip'));
+  if (!clips.length) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, timer = null;
+  clips[0].classList.add('on');
+  if (reduced) return;
+
+  function cut(){
+    if (document.hidden) return;
+    clips[i].classList.remove('on');
+    i = (i + 1) % clips.length;
+    var next = clips[i];
+    next.classList.add('on', 'cut');
+    setTimeout(function(){ next.classList.remove('cut'); }, 140);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && !timer) timer = setInterval(cut, 1500);
+        else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+      });
+    }, {threshold:0}).observe(document.querySelector('.hero'));
+  } else { timer = setInterval(cut, 1500); }
 })();
 </script>
 </body>
