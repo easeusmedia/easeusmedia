@@ -2919,15 +2919,16 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   if (reducedMotion) {
     allReels().forEach(function (v) { v.setAttribute('controls', ''); });
   } else if (reelsWrap && 'IntersectionObserver' in window) {
-    /* per-reel: only the tiles actually on screen decode and play */
+    /* watch the strip, not each tile: the tiles slide past constantly,
+       and a pause() landing on a pending play() aborts playback */
     var vo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var v = e.target;
-        if (e.isIntersecting) { v.play().catch(function () {}); }
-        else { v.pause(); }
+      var onScreen = entries[0].isIntersecting;
+      allReels().forEach(function (v) {
+        if (onScreen) { v.play().catch(function () {}); }
+        else if (!v.paused) { v.pause(); }
       });
-    }, { threshold: 0.05, rootMargin: '200px 0px' });
-    allReels().forEach(function (v) { vo.observe(v); });
+    }, { threshold: 0, rootMargin: '300px 0px' });
+    vo.observe(reelsWrap);
   }
 
   /* ---------- FAQ: native <details>, only one open at a time ---------- */
