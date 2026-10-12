@@ -1980,6 +1980,57 @@ h1,h2,h3,.hero-sub,.section-head p,.cta p,.method-line span{text-wrap:balance}
 p,li,blockquote{text-wrap:pretty}
 .pstat b.pnum-long{font-size:25px;letter-spacing:-.01em;padding-top:5px}
 @media(max-width:760px){.pstat b.pnum-long{font-size:22px}}
+
+/* ============================================================
+   POLISH PASS — appearance only, no layout or copy changes
+   ============================================================ */
+
+/* Figures line up and stop jittering while the counters run */
+.wstat b, .pstat b, .lnum, .ltotal-num, .lad-table, .stat b, .fan-item b {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Buttons: a touch of lift at rest, real feedback on press */
+.btn { box-shadow: 0 10px 24px -16px rgba(0,0,0,.8); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn-ghost, .btn-ghost-line { box-shadow: none; }
+
+/* Clickable cards warm up on hover (no transform: the deck script owns that) */
+.trailer, .pcard { transition: border-color .22s ease, box-shadow .28s ease; }
+.trailer:hover, .pcard:hover {
+  border-color: rgba(0,170,255,.42);
+  box-shadow: 0 22px 48px -26px rgba(0,0,0,.75);
+}
+
+/* FAQ answers ease open instead of snapping */
+.faq-item[open] .faq-a { animation: faq-in .22s cubic-bezier(.22,1,.36,1) both; }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* Links say so on hover */
+.footer-col a:hover, .proof-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* Jump links clear the fixed nav */
+section[id], header[id] { scroll-margin-top: 88px; }
+
+/* Comfortable measure on the longest paragraphs */
+.gnt p, .faq-a p, .plan-desc, .gnt-terms { max-width: 62ch; }
+
+/* Scrollbar in the site's own palette */
+html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #001A33; }
+::-webkit-scrollbar-thumb { background: #0A3760; border-radius: 8px; border: 2px solid #001A33; }
+::-webkit-scrollbar-thumb:hover { background: #14558A; }
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item[open] .faq-a { animation: none; }
+  .btn:active { transform: none; }
+}
 </style>
 
   <script type="application/ld+json">
@@ -2174,7 +2225,7 @@ p,li,blockquote{text-wrap:pretty}
         <div class="fan-row missing">
           <span class="fan-tag orange">What never gets made</span>
           <div class="fan-items">
-            <span class="fan-item"><b>5</b> reels</span>
+            <span class="fan-item"><b>4</b> reels</span>
             <span class="fan-item"><b>2</b> mid-length cuts</span>
             <span class="fan-item"><b>2</b> carousels</span>
             <span class="fan-item"><b>2</b> LinkedIn posts</span>
