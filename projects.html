@@ -1463,6 +1463,69 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
 
 /* Work page: subtitles were too dim against the navy */
 .wsec p { color: var(--muted); }
+
+/* ============================================================
+   DESIGN PASS — depth, type scale, legibility
+   Appearance only: no copy, no layout, no structure changes.
+   ============================================================ */
+
+/* ---- Surfaces: cards now sit above the page, not in it ---- */
+.fanout, .wstat, .stage, .cap, .plan, .route, .gnt, .faq-item, .tsm, .trailer, .step {
+  background: #0B3A5C !important;
+  border-color: rgba(139, 190, 255, .22) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055), 0 22px 46px -30px rgba(0, 6, 16, .95);
+}
+.faq-item[open] { background: #0B3E63 !important; border-color: rgba(0, 170, 255, .38) !important; }
+.wstat.hl {
+  background: #0A4075 !important; border-color: rgba(0, 170, 255, .5) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 26px 54px -28px rgba(0, 70, 150, .6);
+}
+.plan-hero {
+  background: #0A3E72 !important; border-color: rgba(0, 170, 255, .45) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 32px 66px -32px rgba(0, 60, 140, .7);
+}
+.stage-key { background: #0A4075 !important; }
+.gnt { background: #06355F !important; }
+.gnt-ice { background: #EAFAFF !important; box-shadow: 0 22px 46px -30px rgba(0, 20, 50, .8); }
+.cta { box-shadow: 0 34px 72px -36px rgba(0, 0, 0, .85); }
+.section-light .tsm, .section-light .pstat { box-shadow: 0 20px 44px -26px rgba(0, 51, 102, .3) !important; }
+
+/* ---- Eyebrows read as labels, not grey dust ---- */
+.eyebrow {
+  color: #9FD4FF; background: rgba(0, 170, 255, .10) !important;
+  border-color: rgba(0, 170, 255, .28); letter-spacing: .13em; text-transform: uppercase;
+}
+.eyebrow-dark { color: var(--bright) !important; }
+
+/* ---- Body copy: one step brighter against the navy ---- */
+.hero-sub, .section-head p, .faq-intro p, .stage p, .cap-list li,
+.route-list li, .plan-feats li, .gnt p, .faq-a p { color: #A5C3DF; }
+
+/* ---- Primary button carries the accent ---- */
+.btn { box-shadow: 0 12px 28px -16px rgba(0, 0, 0, .85); }
+.btn:hover { box-shadow: 0 16px 34px -14px rgba(0, 0, 0, .6); }
+.btn-arrow { box-shadow: 0 2px 10px -2px rgba(0, 115, 230, .7); }
+
+@media (min-width: 761px) {
+  /* ---- Type: more authority at the top of each block ---- */
+  .hero h1 { font-size: clamp(2.5rem, 5.2vw, 3.9rem); line-height: 1.05; letter-spacing: -.034em; }
+  .hero-sub { font-size: 17px; line-height: 1.62; max-width: 660px; }
+  .section-head h2, .faq-intro h2, .cta h2 { font-size: clamp(1.9rem, 3.5vw, 2.75rem); line-height: 1.09; letter-spacing: -.031em; }
+  .section-head p { font-size: 16.5px; max-width: 560px; }
+  .cap-copy h2 { letter-spacing: -.028em; }
+
+  /* ---- Rhythm: let each section breathe ---- */
+  .section { padding-top: 124px; }
+  .section-head { margin-bottom: 60px; }
+  .plan-feats { padding: 26px 24px 22px; }
+  .gnt { padding: 34px 30px; }
+}
+
+/* keep light-surface copy dark: the brighter blue above is for navy only */
+.gnt-ice p, .gnt-ice h3, .fstep.you p, .plan-light .plan-feats li, .section-light .section-head p {
+  color: var(--light-muted);
+}
+.gnt-ice h3, .fstep.you h4 { color: var(--light-text); }
 </style>
 </head>
 <body>
