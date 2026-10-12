@@ -2319,6 +2319,13 @@ body{
   .nav-links > .btn-nav{margin-left:4px;}
   .nav-links > .btn-nav::before{display:none;}
 }
+
+/* only the pill is glass: .nav still carried a full-width blur, which drew a
+   hard band across the top of the page wherever content scrolled under it */
+.nav,.nav.stuck,.nav.scrolled{
+  backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+  transform:none !important;will-change:auto !important;
+}
 </style>
 
   <script type="application/ld+json">
