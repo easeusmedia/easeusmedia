@@ -2294,6 +2294,31 @@ body{
 
 /* nav links: the hover pill took its height from the inherited line-height */
 .nav-links > a:not(.btn){display:inline-flex;align-items:center;height:32px;padding:0 14px;line-height:1;}
+
+/* ---- nav: one highlight that slides, and it knows where you are ---- */
+.nav-links{position:relative;}
+.nav-ind{
+  position:absolute;left:0;top:50%;height:32px;width:0;border-radius:100px;
+  background:rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  transform:translate(0,-50%) scaleX(.6);transform-origin:left center;opacity:0;pointer-events:none;
+  transition:transform .34s cubic-bezier(.22,1,.36,1),width .34s cubic-bezier(.22,1,.36,1),opacity .22s ease;
+}
+.nav-ind.on{opacity:1;}
+.nav-links > a:not(.btn){position:relative;z-index:1;}
+.nav-links > a:not(.btn):hover{background:transparent;}
+.nav-links > a.here{color:#fff;}
+/* hairline between the links and the call button */
+.nav-links > .btn-nav{margin-left:12px;position:relative;}
+.nav-links > .btn-nav::before{content:"";position:absolute;left:-7px;top:50%;transform:translateY(-50%);
+  width:1px;height:20px;background:rgba(255,255,255,.16);}
+.brand{transition:opacity .2s ease;}
+.brand:hover{opacity:.78;}
+@media(max-width:760px){
+  .nav-ind{display:none;}
+  .nav-links > a:not(.btn):hover{background:rgba(255,255,255,.1);}
+  .nav-links > .btn-nav{margin-left:4px;}
+  .nav-links > .btn-nav::before{display:none;}
+}
 </style>
 
   <script type="application/ld+json">
@@ -3316,6 +3341,66 @@ body{
   document.addEventListener('visibilitychange', function(){
     if (!document.hidden && v.paused) v.play().catch(function(){});
   });
+})();
+</script>
+<script>
+/* Nav: a single highlight that follows the cursor and rests on the current section */
+(function(){
+  var wrap = document.getElementById('nav-links');
+  if (!wrap) return;
+  var items = [].slice.call(wrap.querySelectorAll('a:not(.btn)'));
+  if (!items.length) return;
+
+  var ind = document.createElement('span');
+  ind.className = 'nav-ind';
+  ind.setAttribute('aria-hidden', 'true');
+  wrap.insertBefore(ind, wrap.firstChild);
+
+  var pinned = wrap.querySelector('a[aria-current="page"]');   /* Work, on the work page */
+  var here = pinned || null;
+  if (here) here.classList.add('here');
+
+  function moveTo(a){
+    if (!a || window.innerWidth < 761) { ind.classList.remove('on'); return; }
+    ind.style.width = a.offsetWidth + 'px';
+    ind.style.transform = 'translate(' + a.offsetLeft + 'px,-50%) scaleX(1)';
+    ind.classList.add('on');
+  }
+  function rest(){ here ? moveTo(here) : ind.classList.remove('on'); }
+
+  items.forEach(function(a){
+    a.addEventListener('mouseenter', function(){ moveTo(a); });
+    a.addEventListener('focus', function(){ moveTo(a); });
+  });
+  wrap.addEventListener('mouseleave', rest);
+  wrap.addEventListener('focusout', rest);
+  window.addEventListener('resize', rest, { passive: true });
+
+  /* rest on whichever section is under the middle of the screen */
+  if (!pinned && 'IntersectionObserver' in window) {
+    var map = {}, ids = [];
+    items.forEach(function(a){
+      var h = a.getAttribute('href') || '', i = h.indexOf('#');
+      if (i < 0) return;
+      var el = document.getElementById(h.slice(i + 1));
+      if (el) { map[el.id] = { el: el, link: a, seen: false }; ids.push(el.id); }
+    });
+    if (ids.length) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ map[e.target.id].seen = e.isIntersecting; });
+        var current = null;
+        ids.forEach(function(id){ if (map[id].seen) current = id; });
+        items.forEach(function(a){ a.classList.remove('here'); });
+        here = current ? map[current].link : null;
+        if (here) here.classList.add('here');
+        rest();
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      ids.forEach(function(id){ io.observe(map[id].el); });
+    }
+  }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(rest);
+  rest();
 })();
 </script>
 </body>
