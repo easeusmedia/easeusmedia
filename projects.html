@@ -1624,6 +1624,24 @@ body{
     border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 60px -24px rgba(0,0,0,.9);}
 }
 
+
+/* ============================================================
+   Section blend + button proportions
+   ============================================================ */
+
+
+/* buttons: the arrow was setting the height, so every pill came out thick */
+.btn{height:46px;padding:0 9px 0 22px;font-size:15px;}
+.btn .btn-arrow{width:28px;height:28px;font-size:13px;}
+.btn-lg{height:52px;padding:0 10px 0 26px;font-size:15.5px;}
+.btn-lg .btn-arrow{width:32px;height:32px;font-size:14px;}
+.btn-nav{height:40px;padding:0 7px 0 18px;font-size:14px;}
+.btn-nav .btn-arrow{width:26px;height:26px;font-size:12.5px;}
+.btn-ghost,.btn-ghost-line{height:46px;padding:0 16px 0 22px;}
+.route-btn{height:46px;}
+@media(max-width:760px){
+  .btn,.btn-lg,.btn-ghost,.btn-ghost-line,.route-btn{min-height:46px;}
+}
 </style>
 </head>
 <body>
