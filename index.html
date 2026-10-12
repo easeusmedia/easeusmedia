@@ -1,144 +1,2296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Easeus Media</title>
-<meta name="description" content="12 to 17 pieces of content from every episode, edited like a flagship show and published everywhere your buyers already are. Plus a capture system, so your audience accumulates instead of resetting every month.">
-<link rel="canonical" href="https://easeus.media/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easeus Media</title>
+  <meta name="description" content="12 to 17 pieces of content from every episode, edited like a flagship show and published everywhere your buyers already are. Plus a capture system, so your audience accumulates instead of resetting every month.">
+  <link rel="canonical" href="https://easeus.media/">
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Easeus Media">
-<meta property="og:title" content="Easeus Media">
-<meta property="og:description" content="12 to 17 pieces from every episode, edited like a flagship show, plus a capture system so your audience accumulates.">
-<meta property="og:url" content="https://easeus.media/">
-<meta property="og:image" content="https://easeus.media/assets/media/og-image.jpg">
-<meta name="twitter:card" content="summary_large_image">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Easeus Media">
+  <meta property="og:title" content="Easeus Media | You record the podcast. We do everything else">
+  <meta property="og:description" content="12 to 17 pieces from every episode, edited like a flagship show, plus a capture system so your audience accumulates.">
+  <meta property="og:url" content="https://easeus.media/">
+  <meta property="og:image" content="https://easeus.media/assets/media/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" type="image/png" href="assets/media/33f0466b8663.png">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/font-01.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/font-02.woff2">
-<link rel="preconnect" href="https://api.fontshare.com">
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="assets/media/33f0466b8663.png">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Easeus Media",
-  "url": "https://easeus.media/",
-  "logo": "https://easeus.media/assets/media/icon-512.png",
-  "description": "Podcast post-production, short-form content and smart distribution.",
-  "sameAs": [
-    "https://www.instagram.com/easeus.media/",
-    "https://www.facebook.com/Easeus.India/"
-  ]
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/font-01.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/font-02.woff2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* ============================================================
+   Easeus Media — style.css
+   Palette, type and layout tokens first; sections in page order.
+   ============================================================ */
+
+/* ---------- Fonts (self-hosted, variable) ---------- */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('assets/fonts/font-01.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
 }
-</script>
+@font-face {
+  font-family: 'Inter';
+  src: url('assets/fonts/font-02.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Blue Identity — Ashmit Shahi Brand Manual v2.0 */
+  --navy: #003366;
+  --blue: #00509D;
+  --bright: #0073E6;
+  --accent-glow: #00AAFF;
+  --deep: #001A33;
+  --card-dark: #062A4D;
+  --ice: #EAFAFF;
+  --light-blue: #E8F1FB;
+  --muted-blue: #8FB3D6;
+  --ink: #13263B;
+
+  --bg: #001A33;
+  --bg-2: #002A4D;
+  --card: #062A4D;
+  --line: rgba(0, 170, 255, 0.14);
+  --line-strong: rgba(0, 170, 255, 0.28);
+  --text: #ffffff;
+  --muted: #8FB3D6;
+  --accent: #0073E6;
+  --accent-soft: rgba(0, 115, 230, 0.16);
+  --orange: #FF6B35;
+  --light: #EAFAFF;
+  --light-card: #ffffff;
+  --light-text: #13263B;
+  --light-muted: #5C748A;
+
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius: 20px;
+  --radius-lg: 28px;
+  --container: 1120px;
+  --nav-h: 72px;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(1200px 600px at 78% -8%, rgba(0,170,255,0.16), transparent 62%),
+                    linear-gradient(160deg, #001A33 0%, #00305C 55%, #00509D 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.center { text-align: center; }
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #0d0d10;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  padding: 13px 8px 13px 22px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+.btn:active { transform: translateY(0); }
+
+.btn-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  transition: transform 0.18s ease;
+}
+.btn:hover .btn-arrow { transform: translateX(3px); }
+
+.btn-lg { font-size: 16px; padding: 15px 10px 15px 26px; }
+.btn-lg .btn-arrow { width: 34px; height: 34px; }
+
+.btn-dark { background: #131318; color: #fff; }
+.btn-dark:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  padding: 13px 26px;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.06); box-shadow: none; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(10, 10, 13, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: var(--line);
+}
+
+.nav-inner {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.brand img { width: 17px; height: auto; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-links > a:not(.btn) {
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.nav-links > a:not(.btn):hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+.btn-nav { margin-left: 10px; padding: 10px 6px 10px 18px; font-size: 14px; }
+.btn-nav .btn-arrow { width: 28px; height: 28px; background: #0d0d10; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  padding-top: calc(var(--nav-h) + 84px);
+  padding-bottom: 48px;
+  background:
+    linear-gradient(180deg, rgba(13, 26, 66, 0.85) 0%, rgba(13, 26, 66, 0) 460px),
+    radial-gradient(900px 420px at 50% -80px, rgba(47, 123, 255, 0.18), transparent 70%),
+    radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: auto, auto, 34px 34px;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(19, 19, 24, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 16px 7px 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.badge-avatars { display: inline-flex; }
+.badge-avatars img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  object-fit: cover;
+}
+.badge-avatars img + img { margin-left: -9px; }
+
+.hero h1 {
+  max-width: 880px;
+  font-size: clamp(2.2rem, 4.9vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.031em;
+  line-height: 1.2;
+}
+
+.hero-cta { margin-top: 48px; }
+
+/* signature: audio waveform */
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+}
+.wave i {
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--accent), rgba(255,255,255,0.85));
+  height: calc(var(--h) * 1%);
+  opacity: 0.75;
+  animation: wave-bounce 1.6s ease-in-out infinite;
+  animation-delay: var(--d);
+  transform-origin: center;
+}
+@keyframes wave-bounce {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+
+.hero-sub {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 16.5px;
+}
+
+.cta-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+/* chips marquee */
+.marquee {
+  margin-top: 64px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+.chips {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0 6px;
+}
+.chips li {
+  white-space: nowrap;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* ============================================================
+   SECTIONS (shared)
+   ============================================================ */
+.section { padding: 104px 0 0; }
+.section-tight { padding-top: 88px; }
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.section-head h2, .faq-intro h2, .cta h2 {
+  font-size: clamp(1.6rem, 3.1vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.section-head p {
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+/* ============================================================
+   PAGE HERO (projects page)
+   ============================================================ */
+.page-hero {
+  padding: calc(var(--nav-h) + 84px) 0 60px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(13, 26, 66, 0.85) 0%, rgba(13, 26, 66, 0) 460px),
+    radial-gradient(900px 420px at 50% -80px, rgba(47, 123, 255, 0.18), transparent 70%),
+    radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: auto, auto, 34px 34px;
+}
+.page-hero .eyebrow { margin-bottom: 20px; }
+.page-hero h1 {
+  font-size: clamp(2.2rem, 4.9vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.031em;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   PROJECT GRID — click a card to play its YouTube Short inline
+   ============================================================ */
+.section-flush { padding: 8px 0 0; }
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px 24px;
+  max-width: 1008px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.pcard {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--card);
+  cursor: pointer;
+}
+.pcard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.pcard:hover img { transform: scale(1.03); }
+.pcard iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ============================================================
+   TRAILERS — scroll-stacking deck
+   Cards pin near the top and scale down to 0.8 as the next
+   card slides over them (matches the Framer interaction).
+   ============================================================ */
+.deck {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.trailer {
+  position: sticky;
+  top: 100px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--card);
+  will-change: transform;
+  transform-origin: center center;
+}
+.trailer.has-video { cursor: pointer; }
+.trailer img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.trailer .play, .pcard .play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 68px;
+  height: 68px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(10, 10, 13, 0.65);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 22px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.trailer .play::before, .pcard .play::before { content: '▶'; margin-left: 4px; }
+.trailer .play:hover, .pcard .play:hover { transform: scale(1.08); background: var(--accent); }
+
+/* ============================================================
+   REELS — auto-scrolling ticker (~79px/s leftward, like live)
+   Track = two identical groups; -50% translate loops seamlessly.
+   ============================================================ */
+.reels {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  margin-bottom: 36px;
+  padding: 6px 0;
+}
+
+.reels-track {
+  display: flex;
+  width: max-content;
+  animation: reels-marquee 19.5s linear infinite;
+}
+
+.reels-group {
+  display: flex;
+  gap: 24px;
+  padding-right: 24px;
+}
+
+@keyframes reels-marquee {
+  to { transform: translateX(-50%); }
+}
+
+.reel {
+  width: 196px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.plan {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-top {
+  background: #0c0c0f;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-lg) - 8px);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.plan-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.plan-sub { color: var(--muted); font-weight: 500; }
+
+.tag {
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.plan-desc { color: var(--muted); font-size: 14.5px; }
+
+.plan-price {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.plan-price span { font-size: 15px; font-weight: 500; color: var(--light-muted); letter-spacing: 0; }
+
+.plan-feats { padding: 24px 22px 18px; }
+.feats-label { font-weight: 600; font-size: 14.5px; margin-bottom: 14px; }
+.plan-feats ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.plan-feats li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+.plan-feats li::before {
+  content: '✳';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+/* light custom plan spans full width */
+.plan-light {
+  grid-column: 1 / -1;
+  background: var(--light);
+  border-color: transparent;
+  color: var(--light-text);
+  flex-direction: row;
+  align-items: stretch;
+}
+.plan-light .plan-top {
+  background: var(--light-card);
+  border-color: rgba(0,0,0,0.06);
+  flex: 0 0 46%;
+}
+.plan-light .plan-desc { color: var(--light-muted); }
+.plan-light .plan-feats { flex: 1; align-self: center; }
+.plan-light .plan-feats li { color: var(--light-muted); }
+.plan-light .feats-label { color: var(--light-text); }
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+/* Cards cascade-pin under each other with a 40px lip
+   (sticky top = 100 + 40 * index). Card anatomy matches live:
+   pure black, no border, 20px radius, 200px visual zone,
+   per-card media geometry, text block below. */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 948px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.step {
+  position: sticky;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.step:nth-child(1) { top: 100px; }
+.step:nth-child(2) { top: 140px; }
+.step:nth-child(3) { top: 180px; }
+.step:nth-child(4) { top: 220px; }
+.step:nth-child(5) { top: 260px; }
+
+.step-num {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: #0e0e12;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  padding: 3px 9px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* 200px visual zone at the top of every card */
+.step-visual { position: relative; height: 200px; }
+
+/* step 01: near full-bleed, contained */
+.sv-full {
+  position: absolute;
+  left: 2px;
+  top: 27px;
+  width: calc(100% - 4px);
+  height: 176px;
+  object-fit: contain;
+  border-radius: 7px;
+}
+
+/* steps 02 & 05: centered 556x131 strip, cover-cropped */
+.sv-strip {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translateX(-50%);
+  width: min(556px, calc(100% - 48px));
+  height: 131px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.step-body { padding: 25px 25px 24px; }
+.step h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+}
+.step p { color: var(--muted); font-size: 14.5px; }
+
+/* CSS-built scenes for steps 03 & 04 — elements float on a loop like live */
+.pill {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 15px;
+  border-radius: 15px;
+  white-space: nowrap;
+}
+.pill-dark {
+  top: 56px;
+  left: 50%;
+  background: #0a0a0d;
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: float-a 3.4s ease-in-out infinite;
+}
+@keyframes float-a {
+  0%, 100% { transform: translateX(-82%) translateY(0); }
+  50% { transform: translateX(-82%) translateY(-4px); }
+}
+.pill-avatar { width: 23px; height: 23px; border-radius: 50%; }
+.pill-blue {
+  top: 96px;
+  left: 50%;
+  background: #37a3e6;
+  color: #fff;
+  padding: 10px 20px 12px;
+  box-shadow: -20px -3px 54px rgba(255, 81, 0, 0.4);
+  animation: float-b 2.6s ease-in-out infinite;
+}
+@keyframes float-b {
+  0%, 100% { transform: translateX(-10%) rotate(-14deg) translateY(0); }
+  50% { transform: translateX(-10%) rotate(-14deg) translateY(-5px); }
+}
+.pill-blue::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: -8px;
+  width: 16px;
+  height: 20px;
+  background: #ff5100;
+  clip-path: polygon(0 0, 100% 52%, 52% 62%, 66% 100%, 52% 100%, 40% 66%, 0 92%);
+  transform: rotate(-10deg);
+  border: 0;
+}
+.pill-file {
+  top: 48px;
+  left: 22%;
+  background: #dedede;
+  color: #141416;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  animation: float-c 3.1s ease-in-out infinite;
+}
+@keyframes float-c {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-4px); }
+}
+.chip-ic { width: 20px; height: 20px; object-fit: contain; }
+.pill-file-2 {
+  top: 92px;
+  left: 28%;
+  animation: float-d 2.8s ease-in-out 0.4s infinite;
+}
+@keyframes float-d {
+  0%, 100% { transform: rotate(5deg) translateY(0); }
+  50% { transform: rotate(5deg) translateY(-4px); }
+}
+.pill-publish {
+  top: 64px;
+  right: 13%;
+  background: #ff5100;
+  color: #fff;
+  font-size: 14px;
+  padding: 11px 24px 13px;
+  border-radius: 13px;
+  box-shadow: -26px -4px 54px rgba(255, 81, 0, 0.45);
+  animation: float-e 2s ease-in-out infinite;
+}
+@keyframes float-e {
+  0%, 100% { transform: rotate(-14deg) translateY(0); }
+  50% { transform: rotate(-14deg) translateY(-5px); }
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.faq-intro {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.faq-intro p { color: var(--muted); font-size: 15.5px; max-width: 360px; }
+
+.faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.faq-item.open { border-color: var(--line-strong); background: var(--bg-2); }
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  padding: 18px 20px;
+  cursor: pointer;
+}
+
+.faq-icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+.faq-icon::before, .faq-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--muted);
+  transition: transform 0.25s ease;
+}
+.faq-icon::before { width: 14px; height: 2px; }
+.faq-icon::after { width: 2px; height: 14px; }
+.faq-item.open .faq-icon::after { transform: rotate(90deg); }
+
+.faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.faq-item.open .faq-a { grid-template-rows: 1fr; }
+.faq-a-inner {
+  overflow: hidden;
+  padding: 0 20px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+.faq-item.open .faq-a-inner { padding-bottom: 20px; }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta {
+  position: relative;
+  background: var(--light);
+  color: var(--light-text);
+  border-radius: var(--radius-lg);
+  padding: 76px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  overflow: hidden;
+}
+.cta p { max-width: 460px; color: var(--light-muted); font-size: 15.5px; }
+.cta .btn { margin-top: 8px; }
+
+.sticker {
+  position: absolute;
+  background: #fff;
+  color: var(--light-text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+.sticker-blue { background: var(--accent); color: #fff; }
+.s1 { top: 58%; left: 4%; transform: rotate(-8deg); }
+.s2 { bottom: 14%; left: 12%; transform: rotate(4deg); }
+.s3 { top: 56%; right: 13%; transform: rotate(7deg); }
+.s4 { top: 30%; right: 4%; transform: rotate(-5deg); }
+.s5 { bottom: 12%; right: 8%; transform: rotate(-3deg); }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.tsm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.tsm {
+  position: relative;
+  margin: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tsm::before {
+  content: '“';
+  position: absolute;
+  top: 6px;
+  right: 24px;
+  font-family: var(--font-display);
+  font-size: 88px;
+  line-height: 1;
+  color: rgba(47, 123, 255, 0.25);
+  pointer-events: none;
+}
+
+.tsm-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.tsm-pill {
+  background: var(--accent-soft);
+  border: 1px solid rgba(47, 123, 255, 0.4);
+  color: #8ab4ff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.tsm blockquote {
+  margin: 0;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+.tsm figcaption {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tsm-avatar {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), #6ea0ff);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+.tsm figcaption strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.tsm figcaption span:not(.tsm-avatar) {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ============================================================
+   GUARANTEES
+   ============================================================ */
+.gnt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.gnt {
+  position: relative;
+  background: linear-gradient(180deg, rgba(47, 123, 255, 0.10), rgba(47, 123, 255, 0.02)), var(--card);
+  border: 1px solid rgba(47, 123, 255, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gnt-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: #0c0c0f;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+}
+.gnt h3 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.gnt p { color: var(--muted); font-size: 15px; }
+
+.gnt-why {
+  margin-top: 26px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.cta-promise {
+  color: var(--light-text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  max-width: 480px;
+}
+.cta-scarcity {
+  margin-top: 10px;
+  color: var(--light-muted);
+  font-size: 13px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  margin-top: 104px;
+  border-top: 1px solid var(--line);
+  background: #070709;
+  padding: 64px 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-brand p {
+  margin-top: 18px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-label { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+.footer-col a {
+  font-size: 14.5px;
+  color: var(--text);
+  width: fit-content;
+  transition: color 0.15s ease;
+}
+.footer-col a:hover { color: var(--accent); }
+
+.footer-bottom {
+  margin-top: 56px;
+  padding: 22px 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox { position: fixed; inset: 0; z-index: 90; }
+.lightbox[hidden] { display: none; }
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(8px);
+}
+.lightbox-body {
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.lightbox-frame {
+  width: min(960px, 100%);
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.lightbox-frame video, .lightbox-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(20,20,25,0.8);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: var(--accent); }
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: 0.08s; }
+.reveal.d2 { transition-delay: 0.16s; }
+.reveal.d3 { transition-delay: 0.24s; }
+
+
+/* ============================================================
+   BLUE IDENTITY — NEW SECTIONS
+   ============================================================ */
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-glow);
+  box-shadow:0 0 0 4px rgba(0,170,255,.18);display:inline-block;margin-right:9px}
+
+/* ---- Fan-out ---- */
+.fanout{display:grid;grid-template-columns:auto 120px 1fr;align-items:center;gap:0;
+  background:linear-gradient(150deg,rgba(6,42,77,.85),rgba(0,42,77,.5));
+  border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 30px;overflow:hidden}
+.fan-input{text-align:center;padding-right:6px}
+.fan-chip{font-family:var(--font-display);font-weight:700;font-size:17px;color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--bright));padding:16px 20px;border-radius:14px;white-space:nowrap}
+.fan-meta{margin-top:10px;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.fan-arms{height:320px}
+.fan-arms svg{width:100%;height:100%}
+.arm{fill:none;stroke:rgba(143,179,214,.32);stroke-width:1.4;stroke-dasharray:4 5}
+.arm.on{stroke:var(--accent-glow);stroke-dasharray:none;stroke-width:1.8}
+.fan-row{margin-bottom:16px}
+.fan-row:last-child{margin-bottom:0}
+.fan-tag{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--muted);margin-bottom:9px}
+.fan-tag.orange{color:var(--orange)}
+.fan-items{display:flex;flex-wrap:wrap;gap:7px}
+.fan-item{font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px dashed rgba(143,179,214,.42);
+  color:var(--muted);background:rgba(255,255,255,.03)}
+.fan-item.on{border:1px solid transparent;background:linear-gradient(135deg,var(--bright),var(--accent-glow));color:#fff;font-weight:600}
+.fan-item b{font-family:var(--font-display);font-weight:700;font-size:15px;margin-right:5px;
+  color:var(--orange);letter-spacing:-.01em}
+.fan-item.on b{color:#fff}
+.fan-row.missing .fan-item{padding:9px 14px;font-size:13px}
+
+.waste-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.wstat{background:rgba(6,42,77,.6);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.wstat.hl{border-color:rgba(0,170,255,.42);background:linear-gradient(150deg,rgba(0,80,157,.55),rgba(6,42,77,.55))}
+.wstat b{display:block;font-family:var(--font-display);font-weight:700;font-size:42px;line-height:1;color:#fff}
+.wstat.hl b{color:var(--accent-glow)}
+.wstat i{display:block;font-style:normal;margin-top:9px;font-size:13px;color:var(--muted);line-height:1.45}
+
+/* ---- Ladder ---- */
+.ladder{background:rgba(6,42,77,.6);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;overflow:hidden}
+.ladder-tabs{display:flex;gap:8px;background:rgba(0,26,51,.55);padding:6px;border-radius:14px;width:fit-content;margin:0 auto 26px}
+.ltab{font-family:var(--font-body);font-size:13.5px;font-weight:600;color:var(--muted);
+  background:none;border:0;padding:11px 20px;border-radius:10px;cursor:pointer;transition:.18s}
+.ltab:hover{color:#fff}
+.ltab.is-on{background:var(--bright);color:#fff}
+.lgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lcell{background:rgba(0,26,51,.5);border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center}
+.lnum{display:block;font-family:var(--font-display);font-weight:700;font-size:32px;color:var(--accent-glow);line-height:1}
+.lcell span{display:block;margin-top:7px;font-size:12.5px;color:var(--muted)}
+.ltotal{margin-top:20px;display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,var(--navy),var(--bright));border-radius:16px;padding:20px 26px}
+.ltotal span{font-size:13.5px;letter-spacing:.05em;color:#CFE8FF}
+.ltotal-num{font-family:var(--font-display);font-weight:700;font-size:36px;color:#fff;line-height:1}
+.ladder-note{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.6;text-align:center}
+
+/* ---- Stages ---- */
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stage{position:relative;background:rgba(6,42,77,.62);border:1px solid var(--line);
+  border-radius:18px;padding:26px 22px 22px;display:flex;flex-direction:column;gap:10px}
+.stage-key{background:linear-gradient(160deg,rgba(0,80,157,.7),rgba(6,42,77,.7));border-color:rgba(0,170,255,.4)}
+.stage-n{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.16em;color:var(--accent-glow)}
+.stage h3{font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em}
+.stage p{font-size:14px;color:var(--muted);line-height:1.6;flex:1}
+.stage-break{margin-top:6px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:#BDD6EC;line-height:1.55}
+.stage-break b{color:var(--orange);font-weight:600}
+.method-line{margin-top:26px;text-align:center}
+.method-line span{display:inline-block;font-family:var(--font-display);font-weight:600;font-size:17px;color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--bright));padding:16px 30px;border-radius:100px}
+
+/* ---- Process flow ---- */
+.legend{display:flex;gap:22px;justify-content:center;margin-bottom:26px}
+.lg{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+.sw{width:14px;height:14px;border-radius:5px;display:inline-block}
+.sw-you{background:var(--ice)}
+.sw-us{background:linear-gradient(135deg,var(--navy),var(--bright))}
+.sw-views{background:rgba(143,179,214,.55)}
+.sw-own{background:linear-gradient(135deg,var(--bright),var(--accent-glow))}
+.flow{list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:f;max-width:820px;margin:0 auto}
+.fstep{position:relative;border-radius:16px;padding:20px 24px 20px 26px;counter-increment:f}
+.fstep::before{content:counter(f,decimal-leading-zero);position:absolute;left:-46px;top:22px;
+  font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.1em}
+.fstep h4{font-family:var(--font-display);font-size:16.5px;font-weight:600;margin-bottom:5px}
+.fstep p{font-size:13.5px;line-height:1.6}
+.fstep-tag{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;padding:4px 9px;border-radius:6px;margin-bottom:9px}
+.fstep.you{background:var(--ice);color:var(--light-text);margin-right:22%}
+.fstep.you p{color:var(--light-muted)}
+.fstep.you .fstep-tag{background:var(--navy);color:#fff}
+.fstep.us{background:linear-gradient(135deg,rgba(0,51,102,.92),rgba(0,80,157,.75));
+  border:1px solid rgba(0,170,255,.22);color:#fff;margin-left:22%}
+.fstep.us p{color:#C4DBEF}
+.fstep.us .fstep-tag{background:var(--accent-glow);color:var(--deep)}
+.fstep-big{padding:26px 24px;border-color:rgba(0,170,255,.5);
+  background:linear-gradient(135deg,var(--navy),var(--bright))}
+
+/* ---- Capture ---- */
+.cap{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;
+  background:linear-gradient(150deg,rgba(6,42,77,.8),rgba(0,42,77,.45));
+  border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px 40px}
+.cap-copy h2{font-family:var(--font-display);font-size:clamp(26px,3.2vw,38px);line-height:1.12;
+  letter-spacing:-.02em;margin:12px 0 14px}
+.cap-copy>p{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:20px}
+.cap-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.cap-list li{font-size:13.5px;color:var(--muted);line-height:1.6;padding-left:18px;position:relative}
+.cap-list li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:2px;
+  background:var(--accent-glow)}
+.cap-list b{color:#fff;font-weight:600}
+.cap-months{display:flex;gap:10px;align-items:flex-end;height:230px}
+.cm{flex:1;display:flex;align-items:flex-end;gap:4px;height:100%;position:relative}
+.cm i{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-style:normal;font-size:11px;color:var(--muted)}
+.cm-bar{flex:1;height:var(--h);border-radius:5px 5px 0 0;background:rgba(143,179,214,.4)}
+.cm-bar.own{background:linear-gradient(180deg,var(--accent-glow),var(--bright))}
+.cap-key{display:flex;gap:18px;margin-top:34px;flex-wrap:wrap}
+.cap-key span{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+
+/* ---- Pricing tweaks ---- */
+.pricing-two{grid-template-columns:1.35fr 1fr!important}
+.plan-hero{border-color:rgba(0,170,255,.38);
+  background:linear-gradient(160deg,rgba(0,80,157,.42),rgba(6,42,77,.72))}
+.plan-alt{background:rgba(6,42,77,.5)}
+.btn-ghost-line{background:transparent;border:1px solid var(--line-strong);color:#fff}
+.btn-ghost-line:hover{background:rgba(0,170,255,.12)}
+.pricing-note{margin-top:26px;text-align:center;color:var(--muted);font-size:13.5px;
+  max-width:720px;margin-inline:auto;line-height:1.6}
+
+/* ---- Guarantees tweaks ---- */
+.gnt-when{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--accent-glow)}
+.gnt-ice{background:var(--ice);border-color:#CBE6F5}
+.gnt-ice h3{color:var(--light-text)}
+.gnt-ice p{color:var(--light-muted)}
+.gnt-ice .gnt-when{color:var(--bright)}
+.gnt-ice .gnt-icon{background:#fff;border-color:#D5E9F5}
+.gnt-terms{margin-top:22px;border-left:4px solid var(--accent-glow);border-radius:0 14px 14px 0;
+  background:rgba(255,255,255,.05);padding:20px 24px;font-size:13.5px;color:#D6E9F8;line-height:1.65}
+.gnt-terms b{color:#fff}
+
+/* ---- FAQ ---- */
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{background:rgba(6,42,77,.55);border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;transition:border-color .18s ease,background .18s ease}
+.faq-item:hover{border-color:rgba(0,170,255,.3)}
+.faq-item[open]{background:rgba(6,42,77,.8);border-color:rgba(0,170,255,.32)}
+.faq-item summary{cursor:pointer;list-style:none;padding:20px 24px;font-family:var(--font-display);
+  font-size:15.5px;font-weight:600;line-height:1.4;display:flex;justify-content:space-between;
+  gap:24px;align-items:flex-start}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;
+  border-radius:8px;background:rgba(0,170,255,.12);font-size:18px;line-height:1;
+  color:var(--accent-glow);font-weight:400;transition:.2s}
+.faq-item[open] summary::after{transform:rotate(45deg);background:var(--accent-glow);color:var(--deep)}
+.faq-a{padding:0 24px 22px}
+.faq-a p{color:var(--muted);font-size:14.5px;line-height:1.7;max-width:640px}
+
+@media (max-width:920px){
+  .fanout{grid-template-columns:1fr;gap:22px;padding:26px 22px}
+  .fan-arms{display:none}
+  .waste-stats{grid-template-columns:1fr}
+  .lgrid{grid-template-columns:repeat(2,1fr)}
+  .stages{grid-template-columns:1fr 1fr}
+  .cap{grid-template-columns:1fr;padding:32px 24px;gap:32px}
+  .pricing-two{grid-template-columns:1fr!important}
+  .fstep.you,.fstep.us{margin-inline:0}
+  .fstep::before{display:none}
+}
+@media (max-width:640px){
+  .stages{grid-template-columns:1fr}
+  .lgrid{grid-template-columns:1fr 1fr}
+  .ladder-tabs{width:100%}
+  .ltab{flex:1;padding:11px 8px;font-size:12px}
+}
+
+
+/* ---- Proof band (reels under hero) ---- */
+.proofband{padding:14px 0 0;margin-top:-6px}
+.proof-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.proof-label{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.proof-link{font-size:13px;font-weight:600;color:var(--accent-glow);white-space:nowrap}
+.proof-link span{margin-left:5px;display:inline-block}
+.proof-link:hover{color:#fff}
+
+/* ---- Proof notes ---- */
+.proof-note{font-size:13px;color:var(--muted);line-height:1.6;max-width:640px;margin-bottom:16px}
+.proof-note-2{margin-top:34px}
+
+/* ---- Trailer deck: cards collect and stack on scroll ---- */
+.deck-grid{gap:24px}
+
+/* ---- Mid-page CTAs ---- */
+.mid-cta{margin-top:34px;text-align:center}
+.mid-cta .cta-note{margin-top:12px;font-size:12.5px;color:var(--muted)}
+
+/* ---- Router: Growth Engine vs Amplifier ---- */
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.route{border-radius:20px;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.route-a{background:linear-gradient(160deg,rgba(0,80,157,.6),rgba(6,42,77,.78));
+  border:1px solid rgba(0,170,255,.38)}
+.route-b{background:rgba(6,42,77,.5);border:1px solid var(--line)}
+.route-head{padding:26px 28px 20px;border-bottom:1px solid var(--line)}
+.route-a .route-head{background:linear-gradient(135deg,rgba(0,51,102,.7),rgba(0,115,230,.28));
+  border-bottom-color:rgba(0,170,255,.24)}
+.route-eyebrow{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:var(--accent-glow);margin-bottom:10px}
+.route-b .route-eyebrow{color:var(--muted)}
+.route-head h3{font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:-.02em}
+.route-sub{margin-top:6px;font-size:13px;color:var(--muted)}
+.route-list{list-style:none;display:flex;flex-direction:column;gap:14px;
+  padding:24px 28px;flex:1}
+.route-list li{font-size:14.5px;line-height:1.55;color:#C8DEF2;padding-left:24px;position:relative}
+.route-b .route-list li{color:var(--muted)}
+.route-list li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;
+  border-radius:3px;background:var(--accent-glow)}
+.route-b .route-list li::before{background:rgba(143,179,214,.55)}
+.route-btn{margin:0 28px 28px;width:calc(100% - 56px);justify-content:center}
+.route-note{margin-top:26px;text-align:center;color:var(--muted);font-size:13.5px;
+  line-height:1.65;max-width:720px;margin-inline:auto}
+
+/* ---- Ladder folded into pricing ---- */
+.ladder-inline{margin-bottom:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ladder-inline summary{cursor:pointer;list-style:none;padding:13px 16px;font-size:13px;
+  font-weight:600;color:var(--accent-glow);background:rgba(0,26,51,.4);
+  display:flex;justify-content:space-between;align-items:center}
+.ladder-inline summary::-webkit-details-marker{display:none}
+.ladder-inline summary::after{content:"+";font-size:17px;font-weight:400}
+.ladder-inline[open] summary::after{content:"−"}
+.lad-table{width:100%;border-collapse:collapse;font-size:12px}
+.lad-table th{background:rgba(0,51,102,.6);color:#CFE8FF;font-weight:600;
+  padding:9px 8px;text-align:left;font-size:10.5px;letter-spacing:.05em}
+.lad-table td{padding:9px 8px;color:var(--muted);border-top:1px solid var(--line)}
+.lad-table tr.lad-on td{color:#fff;background:rgba(0,115,230,.14)}
+.lad-table b{color:var(--accent-glow)}
+.lad-foot{padding:12px 16px;font-size:11.5px;color:var(--muted);line-height:1.55;
+  border-top:1px solid var(--line)}
+
+@media (max-width:920px){
+  .deck-grid{grid-template-columns:1fr;padding-inline:16px}
+  .route-grid{grid-template-columns:1fr}
+  .lad-table{font-size:11px}
+  .lad-table th,.lad-table td{padding:7px 5px}
+}
+
+
+/* ---- Light breather section ---- */
+.section-light{background:linear-gradient(170deg,#FFFFFF 0%,#EAF4FD 100%);
+  color:var(--light-text);margin-block:24px;padding-block:96px;position:relative}
+.section-light::before,.section-light::after{content:"";position:absolute;left:0;right:0;height:60px;pointer-events:none}
+.section-light::before{top:-1px;background:linear-gradient(180deg,rgba(0,26,51,.32),transparent)}
+.section-light::after{bottom:-1px;background:linear-gradient(0deg,rgba(0,26,51,.32),transparent)}
+.section-light h2{color:var(--navy)}
+.section-light .section-head p{color:var(--light-muted)}
+.eyebrow-dark{background:rgba(0,115,230,.10)!important;border-color:rgba(0,115,230,.22)!important;color:var(--bright)!important}
+.section-light .tsm{background:#fff;border:1px solid #DCEAF6;box-shadow:0 18px 44px rgba(0,51,102,.09)}
+.section-light .tsm blockquote{color:var(--ink);font-family:var(--font-display);
+  font-weight:500;font-size:18.5px;line-height:1.55;letter-spacing:-.01em}
+.section-light .tsm figcaption strong{color:var(--navy)}
+.section-light .tsm figcaption span{color:var(--light-muted)}
+.section-light .tsm-avatar{background:linear-gradient(135deg,var(--navy),var(--bright));color:#fff}
+.section-light .tsm-pill{background:rgba(0,115,230,.10);color:var(--bright);border:1px solid rgba(0,115,230,.2)}
+
+.proof-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.pstat{background:#fff;border:1px solid #DCEAF6;border-radius:16px;padding:24px 22px;text-align:center}
+.pstat b{display:block;font-family:var(--font-display);font-weight:700;font-size:34px;
+  line-height:1;color:var(--bright)}
+.pstat i{display:block;font-style:normal;margin-top:9px;font-size:12.5px;color:var(--light-muted);line-height:1.45}
+
+@media (max-width:920px){
+  .proof-stats{grid-template-columns:1fr}
+  .section-light{padding-block:70px}
+}
+
+
+/* ---- Scroll progress ---- */
+.scrollbar-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:120;background:transparent;pointer-events:none}
+.scrollbar-progress span{display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--bright),var(--accent-glow));
+  box-shadow:0 0 12px rgba(0,170,255,.6);transition:width .08s linear}
+
+/* ---- Sticky mobile CTA ---- */
+.mobile-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,rgba(0,26,51,.98),rgba(0,26,51,.86));
+  border-top:1px solid var(--line);backdrop-filter:blur(10px);
+  transform:translateY(110%);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.mobile-cta.show{transform:none}
+.mobile-cta .btn{width:100%;justify-content:center}
+@media (max-width:760px){ .mobile-cta{display:block} }
+
+/* ---- Section-level depth ---- */
+.section{position:relative}
+#waste::before,#method::before,#capture::before,#pricing::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(900px,90%);height:340px;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 0%,rgba(0,170,255,.12),transparent 70%)}
+
+/* ---- Compound Method: make Capture the hero stage ---- */
+.stage-key{position:relative;box-shadow:0 20px 50px rgba(0,115,230,.22)}
+.stage-key::after{content:"The differentiator";position:absolute;top:-11px;left:22px;
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  background:var(--accent-glow);color:var(--deep);padding:4px 10px;border-radius:6px}
+
+/* ---- Nav polish: solidify on scroll ---- */
+.nav{transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease}
+.nav.stuck{background:rgba(0,26,51,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+
+/* ---- Focus visibility ---- */
+a:focus-visible,button:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent-glow);outline-offset:3px;border-radius:8px}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .marquee-track,.reels-track{animation:none!important}
+  .mobile-cta{transition:none}
+}
+
+
+/* ---- Mobile media sizing ---- */
+@media (max-width:760px){
+  .reel{width:150px!important;height:266px!important;flex:0 0 150px!important}
+  .reels-group{gap:10px}
+  .deck-grid{gap:12px}
+  .proof-note{font-size:12.5px}
+  .fanout{padding:22px 18px}
+  .fan-item{font-size:11.5px;padding:6px 10px}
+  .wstat b{font-size:34px}
+  .flow{gap:8px}
+  .fstep{padding:16px 18px}
+  .fstep h4{font-size:15px}
+  .fstep p{font-size:12.5px}
+  .method-line span{font-size:14.5px;padding:14px 22px}
+  .route-head h3{font-size:20px}
+  .route-list{padding:20px 22px;gap:12px}
+  .route-list li{font-size:13.5px}
+  .route-btn{margin:0 22px 22px;width:calc(100% - 44px)}
+  .faq-item summary{padding:16px 18px;font-size:14.5px;gap:14px}
+  .faq-a{padding:0 18px 18px}
+  .section-light .tsm blockquote{font-size:16px}
+  .pstat b{font-size:28px}
+  .cap-months{height:170px}
+  main{padding-bottom:78px}
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 920px) {
+  .pgrid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .tsm-grid { grid-template-columns: 1fr; }
+  .gnt-grid { grid-template-columns: 1fr; }
+  .plan-light { flex-direction: column; }
+  .plan-light .plan-top { flex: none; }
+  .plan-light .plan-feats { align-self: stretch; }
+  .faq-grid { grid-template-columns: 1fr; gap: 36px; }
+  .faq-intro { position: static; align-items: center; text-align: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+@media (max-width: 760px) {
+  .br-d { display: none; }
+  .page-hero { padding: calc(var(--nav-h) + 56px) 0 44px; }
+  .steps { padding-inline: 16px; }
+  .step:nth-child(1) { top: 76px; }
+  .step:nth-child(2) { top: 108px; }
+  .step:nth-child(3) { top: 140px; }
+  .step:nth-child(4) { top: 172px; }
+  .step:nth-child(5) { top: 204px; }
+  .step-visual { height: 170px; }
+  .sv-full { top: 16px; height: 150px; }
+  .sv-strip { top: 30px; width: calc(100% - 32px); height: auto; aspect-ratio: 556 / 131; }
+  .deck { gap: 16px; padding-inline: 16px; }
+  .trailer { top: 84px; }
+  .section { padding-top: 80px; }
+  .marquee { margin-top: 48px; }
+  .hero-cta { margin-top: 40px; }
+  .hero { padding-top: calc(var(--nav-h) + 56px); }
+  .sticker { display: none; }
+  .cta { padding: 56px 24px; }
+
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 16px 24px 24px;
+    background: rgba(10, 10, 13, 0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .nav-links.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .nav-links > a:not(.btn) { padding: 13px 10px; font-size: 16px; }
+  .btn-nav { margin: 10px 0 0; justify-content: center; }
+}
+
+@media (max-width: 560px) {
+  .pgrid { grid-template-columns: 1fr; max-width: 420px; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 12px; }
+  .marquee { mask-image: none; -webkit-mask-image: none; }
+  .reels-track { animation: none; }
+  .reels { overflow-x: auto; scrollbar-width: none; }
+  .trailer { position: static; }
+  .step { position: static; }
+  .pill { animation: none !important; }
+  .wave i { animation: none; }
+  .pcard:hover img { transform: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+
+
+/* ============================================================
+   FLAT SURFACE — one background throughout, no gradations
+   ============================================================ */
+body{
+  background: #001A33 !important;
+  background-image: none !important;
+  background-attachment: scroll !important;
+}
+body::before,
+.hero::before, .hero::after,
+.page-hero::before, .page-hero::after,
+.cta::before, .cta::after,
+.section-light::before, .section-light::after { display: none !important; }
+.hero, .page-hero { background: transparent !important; background-image: none !important; }
+
+/* --- flat card surfaces --- */
+.fanout, .stage, .cap, .plan, .route, .gnt, .faq-item, .tsm, .wstat,
+.mrow, .lcell, .fstep, .fan-chip, .fan-item.on, .ltotal, .method-line span,
+.plan-hero, .plan-alt, .route-a, .route-b, .stage-key, .wstat.hl, .fstep-big,
+.cm-bar.own, .sw-us, .sw-own, .route-a .route-head, .cta, .gnt-terms {
+  background-image: none !important;
+}
+
+.fanout        { background: #062A4D !important; }
+.fan-chip      { background: #0073E6 !important; }
+.fan-item.on   { background: #0073E6 !important; }
+.wstat         { background: #062A4D !important; }
+.wstat.hl      { background: #00417E !important; border-color: rgba(0,170,255,.45) !important; }
+
+.stage         { background: #062A4D !important; }
+.stage-key     { background: #00417E !important; border-color: rgba(0,170,255,.5) !important; }
+.method-line span { background: #0073E6 !important; }
+
+.fstep.you     { background: #EAFAFF !important; }
+.fstep.you p   { color: #405A73 !important; }
+.fstep.you h4  { color: #003366 !important; }
+.fstep.us      { background: #013E77 !important; }
+.fstep-big     { background: #0073E6 !important; }
+.sw-us         { background: #0073E6 !important; }
+.sw-own        { background: #00AAFF !important; }
+.sw-views      { background: #6E93B8 !important; }
+
+.cap           { background: #062A4D !important; }
+.cm-bar        { background: #486B8C !important; }
+.cm-bar.own    { background: #0090F0 !important; }
+
+.tsm           { background: #062A4D !important; }
+.section-light .tsm { background: #FFFFFF !important; }
+.section-light .pstat { background: #FFFFFF !important; background-image: none !important; }
+
+.plan          { background: #062A4D !important; }
+.plan-top      { background: transparent !important; background-image: none !important; }
+.plan-feats    { background: transparent !important; background-image: none !important; }
+.plan-hero     { background: #00417E !important; border-color: rgba(0,170,255,.4) !important; }
+.plan-when{display:block;font-size:11.5px;letter-spacing:.06em;line-height:1.5;
+  color:var(--accent-glow);font-weight:600;margin-bottom:12px;text-transform:none}
+.plan-alt .plan-when{color:var(--muted)}
+.plan-alt      { background: #062A4D !important; }
+
+.gnt           { background: #003366 !important; }
+.gnt-ice       { background: #EAFAFF !important; }
+.gnt-terms     { background: rgba(255,255,255,.06) !important; }
+
+.faq-item      { background: #062A4D !important; }
+.faq-item[open]{ background: #0A3760 !important; }
+
+.cta           { background: #EAFAFF !important; }
+.cta h2        { color: #003366 !important; }
+.cta p         { color: #5C748A !important; }
+.cta .btn      { background: #001A33 !important; color: #fff !important; }
+.sticker       { background: #FFFFFF !important; background-image: none !important; color: #13263B !important; }
+.section-light { background: #FFFFFF !important; }
+
+.btn           { background-image: none !important; }
+.trailer       { background: #062A4D !important; }
+
+/* remaining decorative washes */
+.proofband::before, .proofband::after,
+.section::before, .section::after,
+.deck::before, .deck::after,
+.footer::before, .footer::after { display: none !important; }
+.nav { background: rgba(0,26,51,.92) !important; background-image: none !important; }
+
+.wave   { background: transparent !important; background-image: none !important; }
+.wave i { background: #2E9BFF !important; background-image: none !important; }
+.btn-arrow { background: #0073E6 !important; }
+.tsm-avatar { display: none !important; }
+
+/* ---- Tap targets on tablet + desktop ---- */
+@media (min-width: 761px) {
+  .nav-links a { min-height: 44px; display: inline-flex; align-items: center; }
+  .proof-link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* ============================================================
+   MOBILE OPTIMISATION — phone first
+   Brand manual mins: body >=14px, tap targets >=44px
+   ============================================================ */
+@media (max-width: 760px) {
+
+  /* ---------- CONTAINER + RHYTHM ---------- */
+  .container { padding-inline: 20px; }
+  .section { padding-top: 58px; }
+  .section-tight { padding-top: 46px; }
+  .section-head { margin-bottom: 26px; }
+  .section-head p { margin-top: 10px; }
+
+  /* ---------- TYPE SCALE ----------
+     H1 36 / H2 26 / H3 18 / body 14.5
+     H1:H2 = 1.38x   H1:sub = 2.4x   */
+  h1 {
+    font-size: 34px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03em !important;
+    text-wrap: balance;
+  }
+  .section-head h2,
+  .cap-copy h2,
+  .faq-intro h2 {
+    font-size: 25px !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.022em !important;
+    text-wrap: balance;
+  }
+  .hero-sub {
+    font-size: 15px !important;
+    line-height: 1.58 !important;
+    max-width: 33ch !important;
+    margin-inline: auto;
+    text-wrap: pretty;
+  }
+  .section-head p,
+  .faq-intro p {
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+    max-width: 38ch !important;
+    margin-inline: auto;
+    text-wrap: pretty;
+  }
+  .eyebrow { font-size: 12px !important; letter-spacing: .16em; }
+
+  h3, .stage h3, .route-head h3, .plan-name, .gnt h3 {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* every body-copy surface to the 14.5 floor */
+  .stage p, .fstep p, .plan-feats li, .route-list li,
+  .faq-a p, .cap-list li, .cap-copy > p, .gnt p,
+  .pricing-note, .route-note, .ladder-note, .gnt-terms {
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+  }
+  .proof-note { font-size: 13.5px !important; line-height: 1.55 !important; }
+  .fan-item { font-size: 13.5px !important; }
+  .cta-note { font-size: 13.5px !important; line-height: 1.55 !important; }
+
+  /* ---------- TAP TARGETS ---------- */
+  .btn, .btn-lg, .route-btn, .proof-link {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-lg { font-size: 15px; padding-inline: 26px; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding-top: calc(var(--nav-h) + 42px); }
+  .badge { font-size: 12.5px; padding: 9px 16px; }
+  .wave { transform: scale(.82); }
+  .hero-cta { margin-top: 32px; }
+  .marquee { margin-top: 34px; }
+  .chips li { font-size: 13.5px; padding: 10px 16px; }
+
+  /* ---------- PROOF BLOCK ---------- */
+  .proofband { padding-top: 34px; }
+  .proof-top { margin-bottom: 14px; }
+  .proof-label { font-size: 10px; }
+  .proof-link { font-size: 13.5px; }
+  .proof-note-2 { margin-top: 30px; }
+  .deck-grid { gap: 16px; padding-inline: 20px; }
+
+  /* ---------- FAN-OUT ---------- */
+  .fanout { padding: 24px 20px; gap: 20px; border-radius: 20px; }
+  .fan-chip { font-size: 16px; padding: 15px 18px; width: 100%; }
+  .fan-meta { font-size: 12px; }
+  .fan-tag { font-size: 10px; margin-bottom: 10px; }
+  .fan-items { gap: 8px; }
+  .fan-item { padding: 9px 13px; }
+  .waste-stats { gap: 12px; margin-top: 20px; }
+  .wstat { padding: 20px 18px; border-radius: 14px; }
+  .wstat b { font-size: 36px; }
+  .wstat i { font-size: 13.5px; margin-top: 7px; }
+
+  /* ---------- STAGES ---------- */
+  .stages { grid-template-columns: 1fr; gap: 12px; }
+  .stage { padding: 22px 20px 20px; border-radius: 16px; gap: 8px; }
+  .stage-n { font-size: 11px; }
+  .stage-break { font-size: 13px !important; padding-top: 12px; margin-top: 4px; }
+  .method-line { margin-top: 22px; }
+  .method-line span { font-size: 15px; padding: 14px 22px; line-height: 1.4; }
+  .mid-cta { margin-top: 26px; }
+
+  /* ---------- PROCESS FLOW: cards collect and stack ---------- */
+  .legend { gap: 18px; margin-bottom: 20px; }
+  .lg { font-size: 12.5px; }
+  .flow { gap: 14px; padding-bottom: 30px; }
+  .fstep {
+    position: sticky;
+    top: calc(var(--nav-h) + 14px);
+    box-shadow: 0 -1px 0 rgba(0,0,0,.18), 0 16px 34px rgba(0,10,22,.42);
+  }
+  .fstep:nth-child(1){ top: calc(var(--nav-h) + 14px); }
+  .fstep:nth-child(2){ top: calc(var(--nav-h) + 22px); }
+  .fstep:nth-child(3){ top: calc(var(--nav-h) + 30px); }
+  .fstep:nth-child(4){ top: calc(var(--nav-h) + 38px); }
+  .fstep:nth-child(5){ top: calc(var(--nav-h) + 46px); }
+  .fstep:nth-child(6){ top: calc(var(--nav-h) + 54px); }
+  .fstep:nth-child(7){ top: calc(var(--nav-h) + 62px); }
+  .fstep:nth-child(8){ top: calc(var(--nav-h) + 70px); }
+  .fstep:nth-child(9){ top: calc(var(--nav-h) + 78px); }
+  .fstep { padding: 18px 20px !important; border-radius: 14px; }
+  .fstep-big { padding: 20px !important; }
+  .fstep h4 { font-size: 16px !important; margin-bottom: 6px; }
+  .fstep-tag { font-size: 9.5px; padding: 4px 8px; margin-bottom: 8px; }
+
+  /* ---------- CAPTURE ---------- */
+  .cap { padding: 26px 20px; gap: 26px; border-radius: 20px; }
+  .cap-copy h2 { margin: 12px 0 12px; }
+  .cap-copy .eyebrow { font-size: 12px !important; }
+  .cap-list { gap: 12px; }
+  .cap-months { height: 170px; gap: 7px; }
+  .cm i { font-size: 10.5px; bottom: -20px; }
+  .cap-key { margin-top: 30px; gap: 14px; }
+  .cap-key span { font-size: 12px; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .tsm { padding: 24px 20px; }
+  .tsm blockquote { font-size: 15px; line-height: 1.6; }
+  .tsm figcaption span { font-size: 13.5px !important; }
+  .tsm figcaption strong { font-size: 15px; }
+
+  /* ---------- ROUTER ---------- */
+  .route-grid { gap: 14px; }
+  .route { border-radius: 16px; }
+  .route-head { padding: 22px 20px 18px; }
+  .route-eyebrow { font-size: 10px; margin-bottom: 8px; }
+  .route-sub { font-size: 13.5px; }
+  .route-list { padding: 20px; gap: 12px; }
+  .route-btn { margin: 0 20px 20px; width: calc(100% - 40px); }
+  .route-note { margin-top: 20px; }
+
+  /* ---------- PRICING ---------- */
+  .plan { border-radius: 18px; }
+  .plan-top { padding: 24px 20px; }
+  .plan-feats { padding: 20px; }
+  .plan-desc { font-size: 14.5px; line-height: 1.55; }
+  .feats-label { font-size: 12.5px; }
+  .tag { font-size: 10.5px; }
+  .ladder-inline summary { font-size: 13.5px; padding: 14px 16px; min-height: 48px; }
+  .lad-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .lad-table { min-width: 430px; }
+  .lad-foot { font-size: 13.5px; }
+  .pricing-note { margin-top: 22px; }
+
+  /* ---------- GUARANTEES ---------- */
+  .gnt { padding: 24px 20px; border-radius: 18px; }
+  .gnt-icon { width: 42px; height: 42px; font-size: 18px; }
+  .gnt-when { font-size: 10px; }
+  .gnt-terms { padding: 18px 18px; margin-top: 18px; }
+  .gnt-why { font-size: 13.5px; margin-top: 20px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid { gap: 30px; }
+  .faq-list { gap: 9px; }
+  .faq-item summary {
+    font-size: 15px !important;
+    line-height: 1.4;
+    padding: 17px 18px;
+    gap: 14px;
+    min-height: 56px;
+  }
+  .faq-item summary::after { width: 28px; height: 28px; font-size: 17px; }
+  .faq-a { padding: 0 18px 18px; }
+
+  /* ---------- CTA + FOOTER ---------- */
+  .cta { padding: 40px 22px; border-radius: 22px; }
+  .cta-promise { font-size: 14.5px; }
+  .footer { margin-top: 60px; padding-top: 44px; }
+}
+
+/* ---------- Small phones (SE / 360 Android) ---------- */
+@media (max-width: 374px) {
+  .container { padding-inline: 17px; }
+  h1 { font-size: 30px !important; letter-spacing: -0.026em !important; }
+  .section-head h2, .cap-copy h2, .faq-intro h2 { font-size: 23px !important; }
+  .hero-sub { font-size: 14.5px !important; }
+  .wstat b { font-size: 32px; }
+  .fan-item { font-size: 13px !important; padding: 8px 11px; }
+  .deck-grid { padding-inline: 17px; }
+}
+
+@media(max-width:920px){.proof-stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- Compound Method flywheel ---- */
+.fly{position:relative;max-width:960px;margin:8px auto 0}
+@media(min-width:981px){
+  .fly{height:640px}
+  .fly-svg{position:absolute;inset:0;width:100%;height:100%}
+  .fly-stage{position:absolute;width:312px;margin:0}
+  .fs1{left:0;top:0}.fs2{right:0;top:0}.fs3{right:0;bottom:0}.fs4{left:0;bottom:0}
+  .fly-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:196px;height:196px;border-radius:50%;
+    border:1px dashed var(--line);display:grid;place-items:center;text-align:center;padding:26px;
+    background:radial-gradient(circle at 50% 42%, rgba(0,115,230,.18), rgba(0,115,230,0) 72%)}
+  .fly-hub span{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:#fff;line-height:1.42;text-wrap:balance}
+  .fly-lab{position:absolute;font-family:var(--font-display);font-weight:600;font-size:12.5px;
+    background:rgba(6,42,77,.94);border:1px solid var(--line);color:#CFE4F6;padding:7px 13px;border-radius:100px;white-space:nowrap}
+  .fl-top{left:50%;top:128px;transform:translate(-50%,-50%)}
+  .fl-right{left:calc(50% + 324px);top:330px;transform:translate(-50%,-50%)}
+  .fl-bottom{left:50%;top:505px;transform:translate(-50%,-50%)}
+  .fl-left{left:156px;top:328px;transform:translate(-50%,-50%);background:var(--accent-glow);border-color:var(--accent-glow);color:var(--deep)}
+}
+.fly-arc{fill:none;stroke:#6E9CC8;stroke-width:2;stroke-dasharray:6 7;animation:flyflow 26s linear infinite}
+.fly-arc-key{stroke:var(--accent-glow);stroke-width:2.5}
+@keyframes flyflow{to{stroke-dashoffset:-560}}
+@media(max-width:980px){
+  .fly{display:flex;flex-direction:column}
+  .fly-svg,.fly-hub{display:none}
+  .fly-stage{position:relative;width:auto}
+  .fly-lab{align-self:center;display:inline-flex;align-items:center;gap:8px;margin:12px 0;
+    font-family:var(--font-display);font-weight:600;font-size:12.5px;background:rgba(6,42,77,.94);
+    border:1px solid var(--line);color:#CFE4F6;padding:7px 14px;border-radius:100px}
+  .fly-lab::before{content:"\2193";font-size:13px}
+  .fs1{order:1}.fl-top{order:2}.fs2{order:3}.fl-right{order:4}.fs3{order:5}.fl-bottom{order:6}.fs4{order:7}.fl-left{order:8}
+  .fl-left{background:var(--accent-glow);border-color:var(--accent-glow);color:var(--deep)}
+  .fl-left::before{content:"\21BA"}
+}
+@media(prefers-reduced-motion:reduce){.fly-arc{animation:none}}
+/* ---- global line-break hygiene ---- */
+h1,h2,h3,.hero-sub,.section-head p,.cta p,.method-line span{text-wrap:balance}
+p,li,blockquote{text-wrap:pretty}
+.pstat b.pnum-long{font-size:25px;letter-spacing:-.01em;padding-top:5px}
+@media(max-width:760px){.pstat b.pnum-long{font-size:22px}}
+
+/* ============================================================
+   POLISH PASS — appearance only, no layout or copy changes
+   ============================================================ */
+
+/* Figures line up and stop jittering while the counters run */
+.wstat b, .pstat b, .lnum, .ltotal-num, .lad-table, .stat b, .fan-item b {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Buttons: a touch of lift at rest, real feedback on press */
+.btn { box-shadow: 0 10px 24px -16px rgba(0,0,0,.8); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn-ghost, .btn-ghost-line { box-shadow: none; }
+
+/* Clickable cards warm up on hover (no transform: the deck script owns that) */
+.trailer, .pcard { transition: border-color .22s ease, box-shadow .28s ease; }
+.trailer:hover, .pcard:hover { border-color: rgba(0,170,255,.42); }
+
+/* FAQ answers ease open instead of snapping */
+.faq-item[open] .faq-a { animation: faq-in .22s cubic-bezier(.22,1,.36,1) both; }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* Links say so on hover */
+.footer-col a:hover, .proof-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* Jump links clear the fixed nav */
+section[id], header[id] { scroll-margin-top: 88px; }
+
+/* Comfortable measure on the longest paragraphs */
+.gnt p, .faq-a p, .plan-desc, .gnt-terms { max-width: 62ch; }
+
+/* Scrollbar in the site's own palette */
+html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #001A33; }
+::-webkit-scrollbar-thumb { background: #0A3760; border-radius: 8px; border: 2px solid #001A33; }
+::-webkit-scrollbar-thumb:hover { background: #14558A; }
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item[open] .faq-a { animation: none; }
+  .btn:active { transform: none; }
+}
+
+/* ============================================================
+   DESIGN PASS — depth, type scale, legibility
+   Appearance only: no copy, no layout, no structure changes.
+   ============================================================ */
+
+/* ---- Surfaces: cards now sit above the page, not in it ---- */
+.fanout, .wstat, .stage, .cap, .plan, .route, .gnt, .faq-item, .tsm, .trailer, .step {
+  background: #0B3A5C !important;
+  border-color: rgba(139, 190, 255, .22) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055), 0 22px 46px -30px rgba(0, 6, 16, .95);
+}
+/* these two pin and scale as you scroll: a blurred shadow would repaint every frame */
+.trailer, .step { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055); }
+.faq-item[open] { background: #0B3E63 !important; border-color: rgba(0, 170, 255, .38) !important; }
+.wstat.hl {
+  background: #0A4075 !important; border-color: rgba(0, 170, 255, .5) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 26px 54px -28px rgba(0, 70, 150, .6);
+}
+.plan-hero {
+  background: #0A3E72 !important; border-color: rgba(0, 170, 255, .45) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 32px 66px -32px rgba(0, 60, 140, .7);
+}
+.stage-key { background: #0A4075 !important; }
+.gnt { background: #06355F !important; }
+.gnt-ice { background: #EAFAFF !important; box-shadow: 0 22px 46px -30px rgba(0, 20, 50, .8); }
+.cta { box-shadow: 0 34px 72px -36px rgba(0, 0, 0, .85); }
+.section-light .tsm, .section-light .pstat { box-shadow: 0 20px 44px -26px rgba(0, 51, 102, .3) !important; }
+
+/* ---- Eyebrows read as labels, not grey dust ---- */
+.eyebrow {
+  color: #9FD4FF; background: rgba(0, 170, 255, .10) !important;
+  border-color: rgba(0, 170, 255, .28); letter-spacing: .13em; text-transform: uppercase;
+}
+.eyebrow-dark { color: var(--bright) !important; }
+
+/* ---- Body copy: one step brighter against the navy ---- */
+.hero-sub, .section-head p, .faq-intro p, .stage p, .cap-list li,
+.route-list li, .plan-feats li, .gnt p, .faq-a p { color: #A5C3DF; }
+
+/* ---- Primary button carries the accent ---- */
+.btn { box-shadow: 0 12px 28px -16px rgba(0, 0, 0, .85); }
+.btn:hover { box-shadow: 0 16px 34px -14px rgba(0, 0, 0, .6); }
+.btn-arrow { box-shadow: 0 2px 10px -2px rgba(0, 115, 230, .7); }
+
+@media (min-width: 761px) {
+  /* ---- Type: more authority at the top of each block ---- */
+  .hero h1 { font-size: clamp(2.5rem, 5.2vw, 3.9rem); line-height: 1.05; letter-spacing: -.034em; }
+  .hero-sub { font-size: 17px; line-height: 1.62; max-width: 660px; }
+  .section-head h2, .faq-intro h2, .cta h2 { font-size: clamp(1.9rem, 3.5vw, 2.75rem); line-height: 1.09; letter-spacing: -.031em; }
+  .section-head p { font-size: 16.5px; max-width: 560px; }
+  .cap-copy h2 { letter-spacing: -.028em; }
+
+  /* ---- Rhythm: let each section breathe ---- */
+  .section { padding-top: 124px; }
+  .section-head { margin-bottom: 60px; }
+  .plan-feats { padding: 26px 24px 22px; }
+  .gnt { padding: 34px 30px; }
+}
+
+/* keep light-surface copy dark: the brighter blue above is for navy only */
+.gnt-ice p, .gnt-ice h3, .fstep.you p, .plan-light .plan-feats li, .section-light .section-head p {
+  color: var(--light-muted);
+}
+.gnt-ice h3, .fstep.you h4 { color: var(--light-text); }
+
+/* ---- Fan-out diagram: strands land on the rows, panel hugs its content ---- */
+.fan-arms { height: auto !important; align-self: stretch; min-height: 120px; }
+.fan-arms svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.arm { stroke: rgba(255, 107, 53, .34); stroke-width: 1.3; stroke-dasharray: 4 5; }
+.arm.on { stroke: var(--accent-glow); stroke-dasharray: none; stroke-width: 1.7; opacity: .9; }
+.fan-dot { fill: var(--accent-glow); }
+
+/* ---- Fan-out: room for the curves to read as a fan ---- */
+@media (min-width: 921px) {
+  .fanout { grid-template-columns: auto 150px 1fr; padding: 38px 34px; }
+  .fan-row { margin-bottom: 26px; }
+  .fan-input { padding-right: 10px; }
+  .fan-tag { margin-bottom: 11px; }
+  .fan-row.missing .fan-item { padding: 8px 11px; }
+  .fan-items { gap: 7px; }
+}
+
+.strip-vid, .reel { will-change: auto; }
+
+/* ---- Scrolling: keep the blurred nav and the pinned cards on their own layers ---- */
+.nav { transform: translateZ(0); will-change: background-color; }
+.trailer, .step { will-change: transform; }
+@supports (animation-timeline: scroll()) {
+  .scrollbar-progress span { width: 100%; transform-origin: 0 50%; animation: sp-grow linear both; animation-timeline: scroll(root block); }
+  @keyframes sp-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+</style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Easeus Media",
+    "url": "https://easeus.media/",
+    "logo": "https://easeus.media/assets/media/icon-512.png",
+    "description": "Podcast post-production, short-form content and smart distribution.",
+    "sameAs": [
+      "https://www.instagram.com/easeus.media/",
+      "https://www.facebook.com/Easeus.India/"
+    ]
+  }
+  </script>
 </head>
-<body class="page">
+<body>
+
+<div class="scrollbar-progress" aria-hidden="true"><span id="sp"></span></div>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<nav class="nav" id="nav"><div class="nav-in">
-  <a class="brand" href="#top" aria-label="Easeus Media — home">Easeus <em>Media</em></a>
-  <div class="nav-r">
-    <a class="nav-link" href="#waste">Why</a>
-    <a class="nav-link" href="#method">Method</a>
-    <a class="nav-link" href="#process">Process</a>
-    <a class="nav-link" href="projects.html">Work</a>
-    <a class="nav-link" href="#pricing">Pricing</a>
-    <a class="nav-link" href="#faq">FAQ</a>
-    <a class="btn btn-s chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call</a>
+<!-- ======================= NAV ======================= -->
+<header class="nav" id="top">
+  <div class="nav-inner container">
+    <a class="brand" href="#top" aria-label="Easeus Media — home">
+      <img src="assets/media/f9352ee67827.webp" alt="" width="17" height="30">
+      <span>Easeus&nbsp;Media</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#waste">Why</a>
+      <a href="#method">Method</a>
+      <a href="#process">Process</a>
+      <a href="projects.html">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-nav" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">
+        Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <span></span><span></span>
+    </button>
   </div>
-</div></nav>
+</header>
 
 <main id="main">
 
 <!-- ======================= HERO ======================= -->
-<header class="hero hero-c" id="top">
-  <div class="wrap">
-    <span class="hero-for">Two of eight client slots open</span>
-    <h1>You record the podcast. <em>We do everything else.</em></h1>
-    <p class="hero-sub">12 to 17 pieces of content from every episode, edited like a flagship show and published everywhere your buyers already are. Plus a capture system, so your audience accumulates instead of resetting every month.</p>
-    <div class="hero-cta">
-      <a class="btn btn-l chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call</a>
-      <p class="gp-d">You leave with a 90-day plan either way.</p>
-    </div>
-  </div>
-  <div class="chips-mq" aria-hidden="true">
-    <div class="chips-track">
-      <span class="chip">6 business days per episode</span>
-      <span class="chip">Delivered on the date or the month is free</span>
-      <span class="chip">90-day baseline guarantee</span>
-      <span class="chip">Full YouTube management</span>
-      <span class="chip">Audience capture built in</span>
-      <span class="chip">You record, nothing else</span>
-      <span class="chip">Monthly report you can forward</span>
-    </div>
-  </div>
-</header>
+<section class="hero">
+  <div class="container hero-inner">
 
-<!-- ======================= RECENT WORK ======================= -->
-<section class="sec on-light" id="work">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <p class="kicker"><b>01</b> / Recent work</p>
-        <h2 class="h2">Trailers and short-form <em>built to travel.</em></h2>
-      </div>
-      <a class="pill chev" href="projects.html">See all work</a>
-    </div>
-    <p class="notes">Trailers. Most shows do not have one, and on the channels that grow fastest it is often the highest-reach asset they own.</p>
-
-    <div class="deck deck-grid">
-      <article class="trailer" data-video="https://youtu.be/DSHxRXxYBKo"><img src="assets/media/04b150b276e5.webp" alt="Trailer — Why great leaders break the rules, with Rory Sutherland" width="1120" height="630" loading="lazy"></article>
-      <article class="trailer" data-video="https://youtu.be/tvFazuOglJk"><img src="assets/media/074e389e4bd9.webp" alt="Trailer — I built Sports Bra company" width="1120" height="630" loading="lazy"></article>
-      <article class="trailer" data-video="https://youtu.be/jSNkSvZQNec"><img src="assets/media/732b0e60ca8d.webp" alt="Trailer — All men will be infertile by 2046, with a fertility expert" width="1120" height="630" loading="lazy"></article>
-      <article class="trailer" data-video="https://youtu.be/NZG8ETG5wA8"><img src="assets/media/a0fa50aa55c8.webp" alt="Trailer — Stop setting goals like this" width="1120" height="630" loading="lazy"></article>
+    <div class="badge reveal">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Two of eight client slots open
     </div>
 
-    <p class="notes">Short-form. Five of these come out of every episode, selected for what will travel rather than clipped by keyword.</p>
+    <h1 class="reveal d1">You record the podcast. <br class="br-d">We do everything else.</h1>
+
+    <div class="wave reveal d2" aria-hidden="true"></div>
+
+    <p class="hero-sub reveal d2">12 to 17 pieces of content from every episode, edited like a flagship show and published everywhere your buyers already are. Plus a capture system, so your audience accumulates instead of resetting every month.</p>
   </div>
 
-  <div class="reels" aria-label="Reel examples">
-    <div class="reels-track">
-      <div class="reels-group">
-        <video class="reel" poster="assets/media/2bee08bf96a0.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-01.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/b9a1a7e5e6bb.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-02.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/c36fe9dcad24.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-03.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/1624ff7e82f6.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-04.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/07219e400130.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-05.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/18aa351dc2c1.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-06.mp4" type="video/mp4"></video>
-        <video class="reel" poster="assets/media/c500fb8be453.webp" muted playsinline loop preload="none" width="252" height="448"><source src="assets/videos/video-07.mp4" type="video/mp4"></video>
-      </div>
+  <!-- chips marquee -->
+  <div class="marquee reveal d3" aria-hidden="true">
+    <div class="marquee-track">
+      <ul class="chips">
+        <li>6 business days per episode</li>
+        <li>Delivered on the date or the month is free</li>
+        <li>90-day baseline guarantee</li>
+        <li>Full YouTube management</li>
+        <li>Audience capture built in</li>
+        <li>You record, nothing else</li>
+        <li>Monthly report you can forward</li>
+      </ul>
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="more-c"><a class="pill chev" href="projects.html">See the full portfolio</a></div>
+  <div class="container center hero-cta reveal d3">
+    <a class="btn btn-lg" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">
+      Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+    <p class="cta-note">You leave with a 90-day plan either way.</p>
   </div>
 </section>
 
-<!-- ======================= THE ARITHMETIC ======================= -->
-<section class="sec block on-dark" id="waste">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>02</b> / The arithmetic</p>
-      <h2 class="h2">You recorded 50 minutes. <em>You published three.</em></h2>
-      <p class="lede">Everything inside one recording that most shows never make. Same guest, same studio time, same money you already spent.</p>
+
+<!-- ======================= PROOF ======================= -->
+<section class="proofband" id="work">
+  <div class="container proof-top">
+    <span class="proof-label">Recent work</span>
+    <a class="proof-link" href="projects.html">See all work <span aria-hidden="true">&#8594;</span></a>
+  </div>
+
+  <div class="container">
+    <p class="proof-note">Trailers. Most shows do not have one, and on the channels that grow fastest it is often the highest-reach asset they own.</p>
+  </div>
+
+<div class="deck deck-grid">
+    <article class="trailer" data-video="https://youtu.be/DSHxRXxYBKo">
+      <img src="assets/media/04b150b276e5.webp" alt="Trailer — Why great leaders break the rules, with Rory Sutherland" width="1120" height="630" loading="lazy">
+    </article>
+    <article class="trailer" data-video="https://youtu.be/tvFazuOglJk">
+      <img src="assets/media/074e389e4bd9.webp" alt="Trailer — I built Sports Bra company" width="1120" height="630" loading="lazy">
+    </article>
+    <article class="trailer" data-video="https://youtu.be/jSNkSvZQNec">
+      <img src="assets/media/732b0e60ca8d.webp" alt="Trailer — All men will be infertile by 2046, with a fertility expert" width="1120" height="630" loading="lazy">
+    </article>
+    <article class="trailer" data-video="https://youtu.be/NZG8ETG5wA8">
+      <img src="assets/media/a0fa50aa55c8.webp" alt="Trailer — Stop setting goals like this" width="1120" height="630" loading="lazy">
+    </article>
+  </div>
+
+  <div class="container">
+    <p class="proof-note proof-note-2">Short-form. Five of these come out of every episode, selected for what will travel rather than clipped by keyword.</p>
+  </div>
+
+<div class="reels reveal" aria-label="Reel examples">
+    <div class="reels-track">
+      <div class="reels-group">
+        <video class="reel" poster="assets/media/2bee08bf96a0.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-01.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/b9a1a7e5e6bb.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-02.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/c36fe9dcad24.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-03.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/1624ff7e82f6.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-04.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/07219e400130.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-05.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/18aa351dc2c1.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-06.mp4" type="video/mp4">
+        </video>
+        <video class="reel" poster="assets/media/c500fb8be453.webp" muted playsinline loop preload="none" width="252" height="448">
+          <source src="assets/videos/video-07.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="container center" style="margin-top:30px">
+    <a class="btn btn-ghost" href="projects.html">See the full portfolio <span class="btn-arrow" aria-hidden="true">&#8594;</span></a>
+  </div>
+</section>
+
+<!-- ======================= THE WASTE ======================= -->
+<section class="section" id="waste">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ The arithmetic</span>
+      <h2>You recorded 50 minutes. You published three.</h2>
+      <p>Everything inside one recording that most shows never make. Same guest, same studio time, same money you already spent.</p>
     </div>
 
-    <div class="fan rv" aria-label="One recording produces fifteen assets">
-      <div>
+    <div class="fanout reveal" aria-label="One recording produces fifteen assets">
+      <div class="fan-input">
         <div class="fan-chip">1 recording</div>
         <div class="fan-meta">50 minutes · already paid for</div>
       </div>
+
       <div class="fan-arms" aria-hidden="true">
         <svg class="fan-svg" preserveAspectRatio="none" role="presentation">
           <path class="arm on" vector-effect="non-scaling-stroke"/>
@@ -149,7 +2301,8 @@
           <path class="arm" vector-effect="non-scaling-stroke"/>
         </svg>
       </div>
-      <div>
+
+      <div class="fan-output">
         <div class="fan-row published">
           <span class="fan-tag">What most shows publish</span>
           <div class="fan-items">
@@ -159,7 +2312,7 @@
           </div>
         </div>
         <div class="fan-row missing">
-          <span class="fan-tag warm">What never gets made</span>
+          <span class="fan-tag orange">What never gets made</span>
           <div class="fan-items">
             <span class="fan-item"><b>4</b> reels</span>
             <span class="fan-item"><b>2</b> mid-length cuts</span>
@@ -172,121 +2325,184 @@
       </div>
     </div>
 
-    <div class="band" style="grid-template-columns:repeat(3,1fr)">
-      <div><b data-count="3">3</b><span>assets from a typical episode</span></div>
-      <div><b data-count="15">15</b><span>assets from the same recording</span></div>
-      <div><b data-count="80">80</b><span>percent drop in cost per asset</span></div>
+    <div class="waste-stats reveal d1">
+      <div class="wstat"><b data-count="3">3</b><i>assets from a typical episode</i></div>
+      <div class="wstat hl"><b data-count="15">15</b><i>assets from the same recording</i></div>
+      <div class="wstat"><b data-count="80">80</b><i>percent drop in cost per asset</i></div>
     </div>
   </div>
 </section>
 
 <!-- ======================= THE COMPOUND METHOD ======================= -->
-<section class="sec on-light" id="method">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>03</b> / The Compound Method</p>
-      <h2 class="h2">Most podcasts publish. <em>Yours should accumulate.</em></h2>
-      <p class="lede">Four stages, running as a loop. Skip one and it stops compounding. Skip the last and it resets to zero every month, which is what almost every show is doing right now.</p>
+<section class="section" id="method">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ The Compound Method</span>
+      <h2>Most podcasts publish. Yours should accumulate.</h2>
+      <p>Four stages, running as a loop. Skip one and it stops compounding. Skip the last and it resets to zero every month, which is what almost every show is doing right now.</p>
     </div>
 
-    <div class="cells rv">
-      <div class="cell">
-        <span class="cell-n">01</span>
-        <div class="row-o">Direction</div>
-        <p class="row-d">What each episode has to do, who should be on it, and what question the show is answering this quarter.</p>
-        <div class="cell-break"><b>Skip it and</b> post-production is guessing which moments matter.</div>
-      </div>
-      <div class="cell">
-        <span class="cell-n">02</span>
-        <div class="row-o">Post-Production</div>
-        <p class="row-d">One recording becomes the full ladder. Selection first, editing second, because selection is where the leverage is.</p>
-        <div class="cell-break"><b>Skip it and</b> distribution has nothing worth distributing.</div>
-      </div>
-      <div class="cell">
-        <span class="cell-n">03</span>
-        <div class="row-o">Distribution</div>
-        <p class="row-d">Every asset published where it earns attention, formatted per platform, timed, tested and pruned.</p>
-        <div class="cell-break"><b>Skip it and</b> capture has nobody to capture.</div>
-      </div>
-      <div class="cell part">
-        <span class="cell-n">04</span>
-        <div class="row-o">Capture</div>
-        <p class="row-d">The people watching become people you can reach. A list, a guest relationship, a conversation. Something you own.</p>
-        <div class="cell-break"><b>Skip it and</b> every month starts from zero again.</div>
-      </div>
+    <div class="fly reveal">
+      <svg class="fly-svg" viewBox="0 0 960 640" aria-hidden="true">
+        <defs>
+          <marker id="fa" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#6E9CC8"/>
+          </marker>
+          <marker id="fb" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-glow)"/>
+          </marker>
+        </defs>
+        <path class="fly-arc" d="M312,128 H398"/>
+        <path class="fly-arc" d="M562,128 H640" marker-end="url(#fa)"/>
+        <path class="fly-arc" d="M804,262 V302"/>
+        <path class="fly-arc" d="M804,358 V394" marker-end="url(#fa)"/>
+        <path class="fly-arc" d="M648,505 H556"/>
+        <path class="fly-arc" d="M404,505 H320" marker-end="url(#fa)"/>
+        <path class="fly-arc fly-arc-key" d="M156,310 V268" marker-end="url(#fb)"/>
+      </svg>
+
+      <article class="stage fly-stage fs1">
+        <span class="stage-n">01</span>
+        <h3>Direction</h3>
+        <p>What each episode has to do, who should be on it, and what question the show is answering this quarter.</p>
+        <div class="stage-break"><b>Skip it and</b> post-production is guessing which moments matter.</div>
+      </article>
+      <article class="stage fly-stage fs2">
+        <span class="stage-n">02</span>
+        <h3>Post-Production</h3>
+        <p>One recording becomes the full ladder. Selection first, editing second, because selection is where the leverage is.</p>
+        <div class="stage-break"><b>Skip it and</b> distribution has nothing worth distributing.</div>
+      </article>
+      <article class="stage fly-stage fs3">
+        <span class="stage-n">03</span>
+        <h3>Distribution</h3>
+        <p>Every asset published where it earns attention, formatted per platform, timed, tested and pruned.</p>
+        <div class="stage-break"><b>Skip it and</b> capture has nobody to capture.</div>
+      </article>
+      <article class="stage stage-key fly-stage fs4">
+        <span class="stage-n">04</span>
+        <h3>Capture</h3>
+        <p>The people watching become people you can reach. A list, a guest relationship, a conversation. Something you own.</p>
+        <div class="stage-break"><b>Skip it and</b> every month starts from zero again.</div>
+      </article>
+
+      <div class="fly-hub"><span>Every cycle starts warmer than the last.</span></div>
+      <span class="fly-lab fl-top">You record once</span>
+      <span class="fly-lab fl-right">12 to 17 assets out</span>
+      <span class="fly-lab fl-bottom">Attention arrives</span>
+      <span class="fly-lab fl-left">Capture feeds the next episode</span>
     </div>
 
-    <div class="loop rv" aria-label="Every cycle starts warmer than the last.">
-      <span>You record once</span><i>→</i>
-      <span>12 to 17 assets out</span><i>→</i>
-      <span>Attention arrives</span><i>→</i>
-      <span class="key">Capture feeds the next episode</span>
+    <div class="method-line reveal">
+      <span>Output resets. Compounding does not.</span>
     </div>
-    <p class="note center">Every cycle starts warmer than the last.</p>
 
-    <div class="line-note rv"><span>Output resets. Compounding does not.</span></div>
-
-    <div class="more-c"><a class="btn btn-m chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">See what this looks like on your show</a></div>
+    <div class="mid-cta reveal">
+      <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">See what this looks like on your show <span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
-<!-- ======================= PROCESS ======================= -->
-<section class="sec block on-dark" id="process">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>04</b> / How it actually runs</p>
-      <h2 class="h2">Your column is <em>three boxes long.</em></h2>
-      <p class="lede">The question everyone asks on the call: what do I have to do? Here is the honest answer, in colour.</p>
+<!-- ======================= PROCESS MAP ======================= -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ How it actually runs</span>
+      <h2>Your column is three boxes long.</h2>
+      <p>The question everyone asks on the call: what do I have to do? Here is the honest answer, in colour.</p>
     </div>
 
-    <div class="legend">
+    <div class="legend reveal">
       <span class="lg"><i class="sw sw-you"></i> You</span>
       <span class="lg"><i class="sw sw-us"></i> Us</span>
     </div>
 
-    <ol class="flow rv">
-      <li class="fstep you"><span class="fstep-tag">You</span><h4>Kickoff call</h4><p>Thirty minutes. Your goals, your guests, your voice.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>Access and baseline</h4><p>YouTube access, and we record your baseline before anything changes. That baseline is what the guarantee is measured against.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>Peer Benchmark, week one</h4><p>A teardown of the three to five shows closest to yours. What they publish, what travels, where the category is leaving attention unclaimed.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>The Channel Facelift, week one</h4><p>Your last five thumbnails and titles redone, plus your banner and channel description. The channel looks right before your first new episode goes live.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>Guest brief before you record</h4><p>Research on your guest, question direction, and a view on who should be on the show next.</p></li>
-      <li class="fstep you"><span class="fstep-tag">You</span><h4>You record</h4><p>That is the whole job. No producer on the call, no setup, nothing to manage.</p></li>
-      <li class="fstep you"><span class="fstep-tag">You</span><h4>Send the footage</h4><p>One upload. The six-business-day clock starts here, not when you record.</p></li>
-      <li class="fstep us wide"><span class="fstep-tag">Us</span><h4>The extraction</h4><p>One recording becomes the full ladder: reels, mid-length cuts, carousels, posts, newsletter, trailer, long-form and audio. Selected, packaged and titled.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>Publishing and distribution</h4><p>Everything live on every platform you have given us. Thumbnails and titles A/B tested. Mid-form tested for 72 hours and pruned.</p></li>
-      <li class="fstep us"><span class="fstep-tag">Us</span><h4>The monthly report</h4><p>One page you can forward without editing it. Subscribers added, watch time and returning viewers against your own baseline, what travelled and why, what changes next month.</p></li>
+    <ol class="flow reveal">
+      <li class="fstep you">
+        <span class="fstep-tag">You</span>
+        <h4>Kickoff call</h4>
+        <p>Thirty minutes. Your goals, your guests, your voice.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>Access and baseline</h4>
+        <p>YouTube access, and we record your baseline before anything changes. That baseline is what the guarantee is measured against.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>Peer Benchmark, week one</h4>
+        <p>A teardown of the three to five shows closest to yours. What they publish, what travels, where the category is leaving attention unclaimed.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>The Channel Facelift, week one</h4>
+        <p>Your last five thumbnails and titles redone, plus your banner and channel description. The channel looks right before your first new episode goes live.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>Guest brief before you record</h4>
+        <p>Research on your guest, question direction, and a view on who should be on the show next.</p>
+      </li>
+      <li class="fstep you">
+        <span class="fstep-tag">You</span>
+        <h4>You record</h4>
+        <p>That is the whole job. No producer on the call, no setup, nothing to manage.</p>
+      </li>
+      <li class="fstep you">
+        <span class="fstep-tag">You</span>
+        <h4>Send the footage</h4>
+        <p>One upload. The six-business-day clock starts here, not when you record.</p>
+      </li>
+      <li class="fstep us fstep-big">
+        <span class="fstep-tag">Us</span>
+        <h4>The extraction</h4>
+        <p>One recording becomes the full ladder: reels, mid-length cuts, carousels, posts, newsletter, trailer, long-form and audio. Selected, packaged and titled.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>Publishing and distribution</h4>
+        <p>Everything live on every platform you have given us. Thumbnails and titles A/B tested. Mid-form tested for 72 hours and pruned.</p>
+      </li>
+      <li class="fstep us">
+        <span class="fstep-tag">Us</span>
+        <h4>The monthly report</h4>
+        <p>One page you can forward without editing it. Subscribers added, watch time and returning viewers against your own baseline, what travelled and why, what changes next month.</p>
+      </li>
     </ol>
+  </div>
 
-    <div class="more-c"><a class="pill pill-d chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a call</a></div>
-    <p class="note center">Thirty minutes. You leave with a 90-day plan either way.</p>
+    <div class="mid-cta reveal">
+      <a class="btn btn-ghost" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a call <span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="cta-note">Thirty minutes. You leave with a 90-day plan either way.</p>
+    </div>
   </div>
 </section>
 
 <!-- ======================= CAPTURE ======================= -->
-<section class="sec on-light" id="capture">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <p class="kicker"><b>05</b> / The part almost nobody does</p>
-        <h2 class="h2">Everyone who watched last month <em>is a stranger again this month.</em></h2>
-        <p class="lede">Views reset. A list does not. So every episode is built to leave something behind: a subscriber, a guest who becomes an advocate, a conversation in your DMs. Something that is still yours if you fire us.</p>
-        <ul class="keeps">
+<section class="section" id="capture">
+  <div class="container">
+    <div class="cap reveal">
+      <div class="cap-copy">
+        <span class="eyebrow">✦ The part almost nobody does</span>
+        <h2>Everyone who watched last month is a stranger again this month.</h2>
+        <p>Views reset. A list does not. So every episode is built to leave something behind: a subscriber, a guest who becomes an advocate, a conversation in your DMs. Something that is still yours if you fire us.</p>
+        <ul class="cap-list">
           <li><b>Newsletter build.</b> Platform, sign-up page, welcome sequence, capture points across the channel and site, first four issues written.</li>
           <li><b>Guest Media Kit.</b> Every guest leaves with their clips, the trailer and a caption in their voice. Instagram reels run as collaborations, so it posts to both accounts at once.</li>
           <li><b>Comment-to-DM capture.</b> A keyword CTA that turns a scroll into a contact. Not offered to regulated financial clients.</li>
           <li><b>The 60-day follow-up.</b> We ask every guest what came of it, so you find out when one turns into a client instead of hearing about it by accident.</li>
         </ul>
       </div>
-      <div class="panel">
-        <div class="bars" aria-hidden="true">
-          <div class="bar"><span style="--h:22%"></span><span class="own" style="--h:8%"></span><i>M1</i></div>
-          <div class="bar"><span style="--h:30%"></span><span class="own" style="--h:20%"></span><i>M2</i></div>
-          <div class="bar"><span style="--h:26%"></span><span class="own" style="--h:34%"></span><i>M3</i></div>
-          <div class="bar"><span style="--h:34%"></span><span class="own" style="--h:50%"></span><i>M4</i></div>
-          <div class="bar"><span style="--h:28%"></span><span class="own" style="--h:68%"></span><i>M5</i></div>
-          <div class="bar"><span style="--h:36%"></span><span class="own" style="--h:88%"></span><i>M6</i></div>
+      <div class="cap-viz" aria-hidden="true">
+        <div class="cap-months">
+          <div class="cm"><span class="cm-bar" style="--h:22%"></span><span class="cm-bar own" style="--h:8%"></span><i>M1</i></div>
+          <div class="cm"><span class="cm-bar" style="--h:30%"></span><span class="cm-bar own" style="--h:20%"></span><i>M2</i></div>
+          <div class="cm"><span class="cm-bar" style="--h:26%"></span><span class="cm-bar own" style="--h:34%"></span><i>M3</i></div>
+          <div class="cm"><span class="cm-bar" style="--h:34%"></span><span class="cm-bar own" style="--h:50%"></span><i>M4</i></div>
+          <div class="cm"><span class="cm-bar" style="--h:28%"></span><span class="cm-bar own" style="--h:68%"></span><i>M5</i></div>
+          <div class="cm"><span class="cm-bar" style="--h:36%"></span><span class="cm-bar own" style="--h:88%"></span><i>M6</i></div>
         </div>
-        <div class="bars-key">
+        <div class="cap-key">
           <span><i class="sw sw-views"></i> Monthly views</span>
           <span><i class="sw sw-own"></i> People you own</span>
         </div>
@@ -296,224 +2512,603 @@
 </section>
 
 <!-- ======================= TESTIMONIALS ======================= -->
-<section class="sec on-light" id="testimonials">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>06</b> / Client love</p>
-      <h2 class="h2">The people behind <em>the shows we run.</em></h2>
+<section class="section section-light" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow eyebrow-dark">&#10022; Client love</span>
+      <h2>The people behind the shows we run.</h2>
     </div>
 
-    <div class="tsms">
-      <figure class="tsm rv">
-        <div class="tsm-badges"><span class="tsm-pill">Apple Top 100</span><span class="tsm-pill">200 episodes</span></div>
+    <div class="tsm-grid">
+      <figure class="tsm reveal">
+        <div class="tsm-badges" aria-hidden="true">
+          <span class="tsm-pill">Apple Top 100</span>
+          <span class="tsm-pill">200 episodes</span>
+        </div>
         <blockquote>&ldquo;We&rsquo;re back in Apple&rsquo;s Top 100 podcasts. And to the team who work tirelessly behind the scenes, thank you for continuing to raise the bar. Next week we release our 200th episode. I can&rsquo;t quite believe how far we&rsquo;ve come.&rdquo;</blockquote>
         <figcaption>
-          <span class="tsm-avatar" aria-hidden="true">JH</span>
-          <span class="tsm-who"><strong>Joanna Howes</strong><span>Host, Courageous Leaders Podcast</span></span>
+          <div><strong>Joanna Howes</strong><span>Host, Courageous Leaders Podcast</span></div>
         </figcaption>
       </figure>
-      <figure class="tsm rv">
-        <div class="tsm-badges"><span class="tsm-pill">14 months</span><span class="tsm-pill">Still running</span></div>
+
+      <figure class="tsm reveal d1">
+        <div class="tsm-badges" aria-hidden="true">
+          <span class="tsm-pill">14 months</span>
+          <span class="tsm-pill">Still running</span>
+        </div>
         <blockquote>&ldquo;He&rsquo;s sharp, he&rsquo;s smart, he understands the world of YouTube, podcasting, editing, hooks, reels, socials and scaling a business. He works hard. He&rsquo;s organised and he&rsquo;s tenacious.&rdquo;</blockquote>
         <figcaption>
-          <span class="tsm-avatar" aria-hidden="true">EC</span>
-          <span class="tsm-who"><strong>Elissa Corrigan</strong><span>Founder, Elle Sera</span></span>
+          <div><strong>Elissa Corrigan</strong><span>Founder, Elle Sera</span></div>
         </figcaption>
       </figure>
     </div>
 
-    <div class="band-l">
-      <div><b>14</b><span>months, longest running retainer</span></div>
-      <div><b>135</b><span>episodes shipped for client shows</span></div>
-      <div><b>1,500,000+</b><span>YouTube views generated for client shows</span></div>
-      <div><b>Top 100</b><span>Apple Podcasts, Courageous Leaders</span></div>
+    <div class="proof-stats reveal d2">
+      <div class="pstat"><b>14</b><i>months, longest running retainer</i></div>
+      <div class="pstat"><b>135</b><i>episodes shipped for client shows</i></div>
+          <div class="pstat"><b class="pnum-long">1,500,000+</b><i>YouTube views generated for client shows</i></div>
+      <div class="pstat"><b>Top 100</b><i>Apple Podcasts, Courageous Leaders</i></div>
     </div>
   </div>
 </section>
 
 <!-- ======================= PRICING ======================= -->
-<section class="sec on-light" id="pricing" style="padding-top:0">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>07</b> / Pricing</p>
-      <h2 class="h2">Two ways <em>to work together.</em></h2>
-      <p class="lede">One runs the whole show. One handles the short-form layer only. Both are monthly retainers, scoped on the call.</p>
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ Pricing</span>
+      <h2>Two ways to work together.</h2>
+      <p>One runs the whole show. One handles the short-form layer only. Both are monthly retainers, scoped on the call.</p>
     </div>
 
-    <div class="plans">
-      <article class="plan plan-hero rv">
-        <span class="plan-when">Start here if nobody owns what happens after you publish</span>
-        <div class="plan-name">The Growth Engine <span class="tag">Everything after record</span></div>
-        <p class="plan-desc">For business podcasts already publishing and getting almost nothing back. Two or four episodes a month, six-month term, thirty-day exit.</p>
-        <a class="btn btn-m chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call</a>
+    <div class="pricing-grid pricing-two">
 
-        <details class="ladder">
-          <summary>What 12 to 17 actually means</summary>
-          <div class="lad-wrap"><table class="lad">
-            <thead><tr><th>Episode length</th><th>Reels</th><th>Mid-length</th><th>Carousels</th><th>LinkedIn</th><th>Newsletter</th><th>Total</th></tr></thead>
-            <tbody>
-              <tr><td>Under 30 min</td><td>4</td><td>1</td><td>1</td><td>2</td><td>1</td><td><b>12</b></td></tr>
-              <tr class="on"><td>30 to 60 min</td><td>5</td><td>2</td><td>2</td><td>2</td><td>1</td><td><b>15</b></td></tr>
-              <tr><td>Over 60 min</td><td>6</td><td>3</td><td>2</td><td>2</td><td>1</td><td><b>17</b></td></tr>
-            </tbody>
-          </table></div>
-          <p class="lad-foot">Plus the trailer, the long-form edit and the audio episode on every tier. A 20-minute episode does not contain what a 70-minute one does, so we do not pretend it does.</p>
-        </details>
-
-        <p class="feats-label">What it includes:</p>
-        <ul class="feats">
-          <li>12 to 17 published assets from every episode, scaled to its length</li>
-          <li>Direction before you record, so the episode has a job</li>
-          <li>Full YouTube management with thumbnail and title testing on every publish</li>
-          <li>Distribution across every platform you give us access to</li>
-          <li>A capture system, so each episode leaves behind people you can reach</li>
-          <li>The Guest Media Kit sent to every guest, plus a 60-day follow-up</li>
-          <li>Peer Benchmark in week one, before your first new episode goes live</li>
-          <li>The Channel Facelift in week one: your last five thumbnails and titles redone, plus your banner and channel description, free</li>
-          <li>Monthly strategy call and a report you can forward without editing</li>
-          <li>Paid amplification run for you, with no management fee</li>
-          <li>Six business days per episode, from the day footage lands</li>
-        </ul>
+      <article class="plan plan-hero reveal">
+        <div class="plan-top">
+          <span class="plan-when">Start here if nobody owns what happens after you publish</span>
+          <div class="plan-name">The Growth Engine <span class="tag">Everything after record</span></div>
+          <p class="plan-desc">For business podcasts already publishing and getting almost nothing back. Two or four episodes a month, six-month term, thirty-day exit.</p>
+          <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="plan-feats">
+          <details class="ladder-inline">
+            <summary>What 12 to 17 actually means</summary>
+            <div class="lad-wrap"><table class="lad-table">
+              <thead><tr><th>Episode length</th><th>Reels</th><th>Mid-length</th><th>Carousels</th><th>LinkedIn</th><th>Newsletter</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td>Under 30 min</td><td>4</td><td>1</td><td>1</td><td>2</td><td>1</td><td><b>12</b></td></tr>
+                <tr class="lad-on"><td>30 to 60 min</td><td>5</td><td>2</td><td>2</td><td>2</td><td>1</td><td><b>15</b></td></tr>
+                <tr><td>Over 60 min</td><td>6</td><td>3</td><td>2</td><td>2</td><td>1</td><td><b>17</b></td></tr>
+              </tbody>
+            </table></div>
+            <p class="lad-foot">Plus the trailer, the long-form edit and the audio episode on every tier. A 20-minute episode does not contain what a 70-minute one does, so we do not pretend it does.</p>
+          </details>
+          <p class="feats-label">What it includes:</p>
+          <ul>
+            <li>12 to 17 published assets from every episode, scaled to its length</li>
+            <li>Direction before you record, so the episode has a job</li>
+            <li>Full YouTube management with thumbnail and title testing on every publish</li>
+            <li>Distribution across every platform you give us access to</li>
+            <li>A capture system, so each episode leaves behind people you can reach</li>
+            <li>The Guest Media Kit sent to every guest, plus a 60-day follow-up</li>
+            <li>Peer Benchmark in week one, before your first new episode goes live</li>
+            <li>The Channel Facelift in week one: your last five thumbnails and titles redone, plus your banner and channel description, free</li>
+            <li>Monthly strategy call and a report you can forward without editing</li>
+            <li>Paid amplification run for you, with no management fee</li>
+            <li>Six business days per episode, from the day footage lands</li>
+          </ul>
+        </div>
       </article>
 
-      <article class="plan rv">
-        <span class="plan-when">Start here if production is handled and only the clips need fixing</span>
-        <div class="plan-name">The Amplifier</div>
-        <p class="plan-desc">Short-form and trailers only. For shows that have production handled and need the clips to actually travel.</p>
-        <a class="pill chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Talk to us</a>
-        <p class="feats-label">What it includes:</p>
-        <ul class="feats">
-          <li>Reels selected for what will travel, not clipped by transcript keyword</li>
-          <li>Cinematic trailers built to be the thing people send each other</li>
-          <li>A/B variations to find what your audience actually stops on</li>
-          <li>Captions, formatting and delivery ready to publish</li>
-        </ul>
+      <article class="plan plan-alt reveal d1">
+        <div class="plan-top">
+          <span class="plan-when">Start here if production is handled and only the clips need fixing</span>
+          <div class="plan-name">The Amplifier</div>
+          <p class="plan-desc">Short-form and trailers only. For shows that have production handled and need the clips to actually travel.</p>
+          <a class="btn btn-ghost-line" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Talk to us <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="plan-feats">
+          <p class="feats-label">What it includes:</p>
+          <ul>
+            <li>Reels selected for what will travel, not clipped by transcript keyword</li>
+            <li>Cinematic trailers built to be the thing people send each other</li>
+            <li>A/B variations to find what your audience actually stops on</li>
+            <li>Captions, formatting and delivery ready to publish</li>
+          </ul>
+        </div>
       </article>
+
     </div>
 
-    <p class="note center" style="max-width:720px;margin-inline:auto">Plans are monthly retainers on a six-month term. Where you land depends on how often you publish and what needs building, and you will know your exact number before the call ends. We are not the cheapest option and we are not built to be.</p>
+    <p class="pricing-note reveal">Plans are monthly retainers on a six-month term. Where you land depends on how often you publish and what needs building, and you will know your exact number before the call ends. We are not the cheapest option and we are not built to be.</p>
   </div>
 </section>
 
 <!-- ======================= GUARANTEES ======================= -->
-<section class="sec block on-dark" id="guarantees">
-  <div class="wrap">
-    <div class="center">
-      <p class="kicker"><b>08</b> / Zero Risk</p>
-      <h2 class="h2">Two Guarantees. <em>Zero Gamble.</em></h2>
-      <p class="lede">Hiring an agency should not feel like a bet. So we took the risk onto our side of the table.</p>
+<section class="section" id="guarantees">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ Zero Risk</span>
+      <h2>Two Guarantees. Zero Gamble.</h2>
+      <p>Hiring an agency should not feel like a bet. So we took the risk onto our side of the table.</p>
     </div>
 
-    <div class="gs">
-      <article class="g rv">
-        <div class="g-top"><span class="g-n">From day one</span><span class="g-i">01</span></div>
-        <h3 class="g-t">The Delivery Guarantee</h3>
-        <p class="g-d">Every deliverable live on the agreed date, or that month is free. The reason most people have a bad experience with an agency is not quality, it is chasing. You will not chase us.</p>
+    <div class="gnt-grid">
+      <article class="gnt reveal">
+        <div class="gnt-icon" aria-hidden="true">⚡</div>
+        <span class="gnt-when">From day one</span>
+        <h3>The Delivery Guarantee</h3>
+        <p>Every deliverable live on the agreed date, or that month is free. The reason most people have a bad experience with an agency is not quality, it is chasing. You will not chase us.</p>
       </article>
-      <article class="g rv">
-        <div class="g-top"><span class="g-n">Measured at day 90</span><span class="g-i">02</span></div>
-        <h3 class="g-t">The Baseline Guarantee</h3>
-        <p class="g-d">Within ninety days your total watch time and your returning viewers will both beat your own previous ninety days, measured in your Studio, organic only. If they do not, we keep working free until they do.</p>
+
+      <article class="gnt gnt-ice reveal d1">
+        <div class="gnt-icon" aria-hidden="true">📈</div>
+        <span class="gnt-when">Measured at day 90</span>
+        <h3>The Baseline Guarantee</h3>
+        <p>Within ninety days your total watch time and your returning viewers will both beat your own previous ninety days, measured in your Studio, organic only. If they do not, we keep working free until they do.</p>
       </article>
     </div>
 
-    <div class="terms"><b>What we need from you for the second one to hold:</b> record the episodes your tier covers, send footage within the agreed window, and approve packaging within two business days. We cannot beat your baseline with an empty queue, and we would not ask you to believe we could.</div>
-    <p class="g-foot">We can only put this in writing because the system is built to hit it. That is the point.</p>
+    <div class="gnt-terms reveal">
+      <b>What we need from you for the second one to hold:</b> record the episodes your tier covers, send footage within the agreed window, and approve packaging within two business days. We cannot beat your baseline with an empty queue, and we would not ask you to believe we could.
+    </div>
 
-    <div class="more-c"><a class="btn btn-m chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a call</a></div>
+    <p class="gnt-why">We can only put this in writing because the system is built to hit it. That is the point.</p>
+  </div>
+
+    <div class="mid-cta reveal">
+      <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a call <span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
 <!-- ======================= FAQ ======================= -->
-<section class="sec on-light" id="faq">
-  <div class="wrap">
-    <div class="fit">
-      <p class="kicker"><b>09</b> / FAQ</p>
-      <h2 class="h2">Got Questions?</h2>
-      <p>The things people actually ask on the call, in the order they ask them.</p>
-      <a class="pill chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener" style="margin-top:22px">Book a Call</a>
-    </div>
+<section class="section" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-intro reveal">
+        <span class="eyebrow">✦ FAQ</span>
+        <h2>Got Questions?</h2>
+        <p>The things people actually ask on the call, in the order they ask them.</p>
+        <a class="btn btn-ghost" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call <span class="btn-arrow" aria-hidden="true">→</span></a>
+      </div>
 
-    <div class="faq">
-      <div class="fi open"><button class="fq" onclick="faq(this)" aria-expanded="true"><span>How much does it cost?</span><i>+</i></button><div class="fa">Every show is scoped to what it needs, so we quote on the call rather than publish a rate card. Plans are monthly retainers on a six-month term, and you will know your exact number and exactly what it buys before the call ends. We are not the cheapest option and we are not built to be.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>That is more than we spend now.</span><i>+</i></button><div class="fa">Right now you pay full production cost for a recording that produces three assets. We do not change what you spend on recording. We change what it produces. Your cost per published asset drops by roughly 80 percent, and every asset is built to travel rather than to exist.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>What do I actually have to do?</span><i>+</i></button><div class="fa">Record, send the footage, and take one thirty-minute call a month. That is the list. No producer on your recording, no setup, no scheduling on our side. Everything after the footage lands is ours.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>How long does it take to deliver an episode?</span><i>+</i></button><div class="fa">Six business days from when we receive your footage, not from when you record. Every deliverable is live on the agreed date or that month is free.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>What if the work is not what we want?</span><i>+</i></button><div class="fa">Six-month agreement, and the first thirty days is your exit. If it is not right you tell us on day thirty, you owe nothing further, and you keep everything we made. After that, if we miss delivery dates twice in any three months you can leave with thirty days notice and owe nothing.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>Can you guarantee views?</span><i>+</i></button><div class="fa">No, and we would not want to. Your audience is a few thousand people who matter, not a few million who do not. If we optimised for views we would make content that travels to the wrong people, and you would end up with a bigger channel and a worse business. We guarantee total watch time and returning viewers, measured against your own previous ninety days.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>What happens in month two?</span><i>+</i></button><div class="fa">Month one usually looks strong, because The Channel Facelift is fixing packaging on a catalogue that has never had any. Month two often looks flat, sometimes slightly down, because the easy wins are spent and the algorithm is still re-learning who your new packaging is for. That is the rebuild. We tell you in week one so you hear it from us before it happens rather than after.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>We already have an editor. Where do you fit?</span><i>+</i></button><div class="fa">Keep them. They handle production. We are the layer above it: which moments get selected, how they are packaged, where they go, and what happens after publishing. Most shows do not have a production problem, they have a nothing-happens-after-publishing problem. If your editor is good, we make their work reach further.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>We were going to hire someone in-house.</span><i>+</i></button><div class="fa">Reasonable. Two things worth knowing. A £45,000 salary lands closer to £58,000 to £70,000 in true first-year cost once employment costs, equipment, software and recruitment are counted. And that one person has to be an editor, a short-form strategist, a thumbnail designer, a writer and a distribution manager. Those are five different skills and nobody is strong at all five.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>Do you need access to our accounts?</span><i>+</i></button><div class="fa">YouTube, yes, and it is not really a preference. The guarantee is measured in your Studio and the thumbnail and title testing happens there. Without access we cannot record your baseline, cannot test and cannot report, which means we cannot guarantee anything. Instagram and LinkedIn are genuinely optional. Without them you get the same assets and the same copy, plus a posting schedule for your team.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>We are in a regulated industry. Does that work?</span><i>+</i></button><div class="fa">Yes, and we design for it from day one. Pre-approval on everything before it publishes, an archive of every published asset, no automated DMs, no performance claims and no client references in content. Compliance is a workflow constraint, not a blocker. It is also the reason most shows in your category are so bad, which is your opening.</div></div>
-      <div class="fi"><button class="fq" onclick="faq(this)" aria-expanded="false"><span>Who is this not for?</span><i>+</i></button><div class="fa">Shows where the podcast is the business and sponsorship is the revenue. Shows with nothing to sell, where views are the only number available. And anyone who has not published in the last sixty days, because that is restarting a show rather than growing one.</div></div>
+      <div class="faq-list reveal d1">
+
+        <details class="faq-item" open>
+          <summary>How much does it cost?</summary>
+          <div class="faq-a"><p>Every show is scoped to what it needs, so we quote on the call rather than publish a rate card. Plans are monthly retainers on a six-month term, and you will know your exact number and exactly what it buys before the call ends. We are not the cheapest option and we are not built to be.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>That is more than we spend now.</summary>
+          <div class="faq-a"><p>Right now you pay full production cost for a recording that produces three assets. We do not change what you spend on recording. We change what it produces. Your cost per published asset drops by roughly 80 percent, and every asset is built to travel rather than to exist.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What do I actually have to do?</summary>
+          <div class="faq-a"><p>Record, send the footage, and take one thirty-minute call a month. That is the list. No producer on your recording, no setup, no scheduling on our side. Everything after the footage lands is ours.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How long does it take to deliver an episode?</summary>
+          <div class="faq-a"><p>Six business days from when we receive your footage, not from when you record. Every deliverable is live on the agreed date or that month is free.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What if the work is not what we want?</summary>
+          <div class="faq-a"><p>Six-month agreement, and the first thirty days is your exit. If it is not right you tell us on day thirty, you owe nothing further, and you keep everything we made. After that, if we miss delivery dates twice in any three months you can leave with thirty days notice and owe nothing.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can you guarantee views?</summary>
+          <div class="faq-a"><p>No, and we would not want to. Your audience is a few thousand people who matter, not a few million who do not. If we optimised for views we would make content that travels to the wrong people, and you would end up with a bigger channel and a worse business. We guarantee total watch time and returning viewers, measured against your own previous ninety days.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens in month two?</summary>
+          <div class="faq-a"><p>Month one usually looks strong, because The Channel Facelift is fixing packaging on a catalogue that has never had any. Month two often looks flat, sometimes slightly down, because the easy wins are spent and the algorithm is still re-learning who your new packaging is for. That is the rebuild. We tell you in week one so you hear it from us before it happens rather than after.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>We already have an editor. Where do you fit?</summary>
+          <div class="faq-a"><p>Keep them. They handle production. We are the layer above it: which moments get selected, how they are packaged, where they go, and what happens after publishing. Most shows do not have a production problem, they have a nothing-happens-after-publishing problem. If your editor is good, we make their work reach further.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>We were going to hire someone in-house.</summary>
+          <div class="faq-a"><p>Reasonable. Two things worth knowing. A £45,000 salary lands closer to £58,000 to £70,000 in true first-year cost once employment costs, equipment, software and recruitment are counted. And that one person has to be an editor, a short-form strategist, a thumbnail designer, a writer and a distribution manager. Those are five different skills and nobody is strong at all five.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you need access to our accounts?</summary>
+          <div class="faq-a"><p>YouTube, yes, and it is not really a preference. The guarantee is measured in your Studio and the thumbnail and title testing happens there. Without access we cannot record your baseline, cannot test and cannot report, which means we cannot guarantee anything. Instagram and LinkedIn are genuinely optional. Without them you get the same assets and the same copy, plus a posting schedule for your team.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>We are in a regulated industry. Does that work?</summary>
+          <div class="faq-a"><p>Yes, and we design for it from day one. Pre-approval on everything before it publishes, an archive of every published asset, no automated DMs, no performance claims and no client references in content. Compliance is a workflow constraint, not a blocker. It is also the reason most shows in your category are so bad, which is your opening.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Who is this not for?</summary>
+          <div class="faq-a"><p>Shows where the podcast is the business and sponsorship is the revenue. Shows with nothing to sell, where views are the only number available. And anyone who has not published in the last sixty days, because that is restarting a show rather than growing one.</p></div>
+        </details>
+
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= CLOSING ======================= -->
-<section class="sec block on-dark" id="book">
-  <div class="wrap center">
-    <div class="stickers" aria-hidden="true">
-      <span>From meh to wow!</span>
-      <span class="key">✦ No Editor? No Problem</span>
-      <span>Watch Time Wins</span>
-      <span>Low Views? Fixed</span>
-      <span class="key">Conversion Boost</span>
+<!-- ======================= CTA ======================= -->
+<section class="section section-tight">
+  <div class="container">
+    <div class="cta reveal">
+      <span class="sticker s1">From meh to wow!</span>
+      <span class="sticker s2 sticker-blue">✦ No Editor? No Problem</span>
+      <span class="sticker s3">Watch Time Wins</span>
+      <span class="sticker s4">Low Views? Fixed</span>
+      <span class="sticker s5 sticker-blue">Conversion Boost</span>
+
+      <h2>Ready to Grow Your Podcast?</h2>
+      <p>Whether it is the full engine or just the short-form layer, we will build a plan that actually moves your show forward.</p>
+      <p class="cta-promise">You leave with a 90-day plan either way.</p>
+      <a class="btn btn-dark btn-lg" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">
+        Book a Call <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="cta-scarcity">We onboard a limited number of new shows each month to protect delivery speed.</p>
     </div>
-    <h2 class="h2">Ready to <em>Grow Your Podcast?</em></h2>
-    <p class="lede">Whether it is the full engine or just the short-form layer, we will build a plan that actually moves your show forward.</p>
-    <p class="fd-note" style="max-width:480px;margin-inline:auto">You leave with a 90-day plan either way.</p>
-    <div class="more-c"><a class="btn btn-l chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call</a></div>
-    <p class="note">We onboard a limited number of new shows each month to protect delivery speed.</p>
   </div>
 </section>
 
 </main>
 
 <!-- ======================= FOOTER ======================= -->
-<footer>
-  <div class="wrap">
-    <div class="ft">
-      <div>
-        <a class="brand" href="#top">Easeus <em>Media</em></a>
-        <p class="ft-tag">You record the podcast. We do everything else. 12 to 17 published assets from every episode, plus a capture system so your audience accumulates.</p>
-      </div>
-      <nav class="ft-nav" aria-label="Company">
-        <p class="ft-h">Company</p>
-        <a href="#top">Home</a>
-        <a href="#method">The Method</a>
-        <a href="projects.html">Work</a>
-        <a href="#testimonials">Reviews</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <div>
-        <p class="ft-h">Socials</p>
-        <div class="ft-socials">
-          <a href="https://linkedin.com/" target="_blank" rel="noopener" class="ft-social" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="https://www.instagram.com/easeus.media/" target="_blank" rel="noopener" class="ft-social" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://www.facebook.com/Easeus.India/" target="_blank" rel="noopener" class="ft-social" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 3.925 23.094 9.05 24v-8.437H6.328v-3.49H9.05V9.72c0-2.704 1.6-4.198 4.043-4.198 1.17 0 2.394.21 2.394.21v2.646h-1.35c-1.33 0-1.744.83-1.744 1.682v2.013h2.969l-.474 3.49h-2.495V24C20.075 23.094 24 18.1 24 12.073z"/></svg></a>
-        </div>
-      </div>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#top">
+        <img src="assets/media/f9352ee67827.webp" alt="" width="17" height="30">
+        <span>Easeus&nbsp;Media</span>
+      </a>
+      <p>You record the podcast. We do everything else. 12 to 17 published assets from every episode, plus a capture system so your audience accumulates.</p>
     </div>
-    <div class="ft-big" aria-hidden="true">Easeus Media</div>
-    <div class="ft-legal">
-      <p>© <span id="year">2026</span> Easeus Media. All rights reserved.</p>
-      <p>You record the podcast. We do everything else.</p>
-    </div>
+
+    <nav class="footer-col" aria-label="Company">
+      <p class="footer-label">Company</p>
+      <a href="#top">Home</a>
+      <a href="#method">The Method</a>
+      <a href="projects.html">Work</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <nav class="footer-col" aria-label="Socials">
+      <p class="footer-label">Socials</p>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/easeus.media/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/Easeus.India/" target="_blank" rel="noopener">Facebook</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year">2026</span> Easeus Media. All rights reserved.</p>
   </div>
 </footer>
 
-<div class="mbar" id="mbar"><a class="btn btn-m chev" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a Call</a></div>
+<!-- sticky mobile CTA -->
+<div class="mobile-cta" aria-hidden="false">
+  <a class="btn" href="https://calendly.com/ashmitshahi/easeus-media" target="_blank" rel="noopener">Book a call <span class="btn-arrow">&#8594;</span></a>
+</div>
 
-<div class="vl-overlay" id="vl-overlay">
-  <div class="vl-wrap vl-horizontal" id="vl-wrap">
-    <button class="vl-close" onclick="closeVideo()" aria-label="Close video">×</button>
-    <iframe id="vl-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen title="Video"></iframe>
+<!-- ======================= VIDEO LIGHTBOX ======================= -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-backdrop" data-close></div>
+  <div class="lightbox-body" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="lightbox-close" data-close aria-label="Close video">✕</button>
+    <div class="lightbox-frame" id="lightbox-frame"></div>
   </div>
 </div>
 
-<script src="main.js" defer></script>
+<script>
+/* Easeus Media — main.js */
+(function () {
+  'use strict';
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Footer year ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- Nav: scrolled state ---------- */
+  var nav = document.querySelector('.nav');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- Nav: mobile menu ---------- */
+  var toggle = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* ---------- Marquee: duplicate chips for seamless loop ---------- */
+  var marqueeTrack = document.querySelector('.marquee-track');
+  if (marqueeTrack && !reducedMotion) {
+    marqueeTrack.appendChild(marqueeTrack.firstElementChild.cloneNode(true));
+  }
+
+  /* ---------- Reels ticker: duplicate group for seamless loop ---------- */
+  var reelsTrack = document.querySelector('.reels-track');
+  if (reelsTrack && !reducedMotion) {
+    reelsTrack.appendChild(reelsTrack.firstElementChild.cloneNode(true));
+  }
+
+  /* ---------- Trailer deck: scale pinned cards as the next one covers them ---------- */
+  var deckCards = Array.prototype.slice.call(document.querySelectorAll('.deck .trailer'));
+  if (deckCards.length > 1 && !reducedMotion) {
+    var deckTicking = false;
+    var vh = window.innerHeight;
+    var arriveAt = (parseFloat(getComputedStyle(deckCards[0]).top) || 100) + 64;
+    function deckMeasure() {
+      vh = window.innerHeight;
+      arriveAt = (parseFloat(getComputedStyle(deckCards[0]).top) || 100) + 64;
+    }
+    function deckUpdate() {
+      deckTicking = false;
+      var tops = [];                        /* read phase */
+      for (var i = 1; i < deckCards.length; i++) tops.push(deckCards[i].getBoundingClientRect().top);
+      for (var j = 0; j < tops.length; j++) {  /* write phase */
+        var p = Math.max(0, Math.min(1, (vh - tops[j]) / (vh - arriveAt)));
+        deckCards[j].style.transform = 'scale(' + (1 - 0.2 * p).toFixed(4) + ')';
+      }
+    }
+    window.addEventListener('scroll', function () {
+      if (!deckTicking) { deckTicking = true; requestAnimationFrame(deckUpdate); }
+    }, { passive: true });
+    window.addEventListener('resize', function(){ deckMeasure(); deckUpdate(); });
+    deckUpdate();
+  }
+
+  /* ---------- Hero waveform ---------- */
+  var wave = document.querySelector('.wave');
+  if (wave) {
+    var BARS = 46;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < BARS; i++) {
+      var bar = document.createElement('i');
+      // smooth pseudo-random heights that read like audio
+      var h = 30 + Math.round(60 * Math.abs(Math.sin(i * 0.55) * Math.cos(i * 0.21)));
+      bar.style.setProperty('--h', h);
+      bar.style.setProperty('--d', (i * 0.045).toFixed(2) + 's');
+      frag.appendChild(bar);
+    }
+    wave.appendChild(frag);
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          ro.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { ro.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- Reels: play all while the ticker is on screen ---------- */
+  var reelsWrap = document.querySelector('.reels');
+  function allReels() { return document.querySelectorAll('.reel'); }
+  if (reducedMotion) {
+    allReels().forEach(function (v) { v.setAttribute('controls', ''); });
+  } else if (reelsWrap && 'IntersectionObserver' in window) {
+    /* watch the strip, not each tile: the tiles slide past constantly,
+       and a pause() landing on a pending play() aborts playback */
+    var vo = new IntersectionObserver(function (entries) {
+      var onScreen = entries[0].isIntersecting;
+      allReels().forEach(function (v) {
+        if (onScreen) { v.play().catch(function () {}); }
+        else if (!v.paused) { v.pause(); }
+      });
+    }, { threshold: 0, rootMargin: '300px 0px' });
+    vo.observe(reelsWrap);
+  }
+
+  /* ---------- FAQ: native <details>, only one open at a time ---------- */
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (!item.open) return;
+      document.querySelectorAll('.faq-item[open]').forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
+  /* ---------- Projects grid: click to play YouTube inline ---------- */
+  document.querySelectorAll('.pcard[data-yt]').forEach(function (card) {
+    var id = (card.getAttribute('data-yt') || '').trim();
+    if (!id) return;
+    var btn = document.createElement('button');
+    btn.className = 'play';
+    btn.setAttribute('aria-label', 'Play video');
+    card.appendChild(btn);
+    card.addEventListener('click', function () {
+      if (card.classList.contains('playing')) return;
+      card.classList.add('playing');
+      card.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?autoplay=1&rel=0&playsinline=1" title="Project video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    });
+  });
+
+  /* ---------- Trailer lightbox ---------- */
+  var lightbox = document.getElementById('lightbox');
+  var frame = document.getElementById('lightbox-frame');
+  if (!lightbox || !frame) { return; }
+
+  function youtubeId(url) {
+    var m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/);
+    return m ? m[1] : null;
+  }
+
+  function openLightbox(src) {
+    var yt = youtubeId(src);
+    if (yt) {
+      frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + yt +
+        '?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    } else {
+      frame.innerHTML = '<video src="' + src + '" controls autoplay playsinline></video>';
+    }
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lightbox.querySelector('.lightbox-close').focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    frame.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.trailer').forEach(function (card) {
+    var src = (card.getAttribute('data-video') || '').trim();
+    if (!src) return;
+    card.classList.add('has-video');
+    var btn = document.createElement('button');
+    btn.className = 'play';
+    btn.setAttribute('aria-label', 'Play trailer');
+    card.appendChild(btn);
+    btn.addEventListener('click', function (ev) { ev.stopPropagation(); openLightbox(src); });
+    card.addEventListener('click', function () { openLightbox(src); });
+  });
+
+  lightbox.addEventListener('click', function (e) {
+    if (e.target.hasAttribute('data-close')) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
+})();
+
+
+
+/* ---- Count-up on the waste stats ---- */
+(function(){
+  var nums = document.querySelectorAll('.wstat b[data-count]');
+  if(!nums.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, to = parseInt(el.getAttribute('data-count'),10), t0 = null;
+      function step(ts){
+        if(!t0) t0 = ts;
+        var k = Math.min((ts-t0)/900,1);
+        el.textContent = Math.round(to * (1 - Math.pow(1-k,3)));
+        if(k<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      io.unobserve(el);
+    });
+  },{threshold:.5});
+  nums.forEach(function(n){ n.textContent='0'; io.observe(n); });
+})();
+
+/* ---- Capture bars grow on scroll ---- */
+(function(){
+  var wrap = document.querySelector('.cap-months');
+  if(!wrap || !('IntersectionObserver' in window)) return;
+  var bars = wrap.querySelectorAll('.cm-bar');
+  bars.forEach(function(b){ b.dataset.h = b.style.height || getComputedStyle(b).height; b.style.height='0'; });
+  new IntersectionObserver(function(entries,obs){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      bars.forEach(function(b,i){
+        setTimeout(function(){
+          b.style.transition = 'height .7s cubic-bezier(.22,1,.36,1)';
+          b.style.height = 'var(--h)';
+        }, i*55);
+      });
+      obs.unobserve(e.target);
+    });
+  },{threshold:.35}).observe(wrap);
+})();
+
+
+/* ---- Scroll progress + nav state + sticky mobile CTA ---- */
+(function(){
+  var sp = document.getElementById('sp');
+  var nav = document.querySelector('.nav');
+  var mcta = document.querySelector('.mobile-cta');
+  var hero = document.querySelector('.hero');
+  var maxScroll = 0, heroCut = 0, ticking = false, stuck = null, shown = null;
+  var cssTimeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+  function measure(){                       /* layout reads happen here, not while scrolling */
+    maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    heroCut = hero ? hero.offsetHeight * 0.7 : 0;
+  }
+  function paint(){
+    ticking = false;
+    var st = window.scrollY || document.documentElement.scrollTop;
+    if (sp && !cssTimeline) sp.style.width = maxScroll > 0 ? ((st / maxScroll) * 100) + '%' : '0%';
+    var isStuck = st > 24;
+    if (nav && isStuck !== stuck) { nav.classList.toggle('stuck', isStuck); stuck = isStuck; }
+    var isShown = st > heroCut;
+    if (mcta && isShown !== shown) { mcta.classList.toggle('show', isShown); shown = isShown; }
+  }
+  function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+  measure(); paint();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){ measure(); onScroll(); });
+  window.addEventListener('load', measure);
+})();
+
+
+/* ---- Fan-out: point every strand at the row it belongs to ---- */
+(function(){
+  var wrap = document.querySelector('.fan-arms');
+  var svg  = wrap && wrap.querySelector('svg');
+  if (!svg) return;
+  var paths = svg.querySelectorAll('path');
+  function draw(){
+    var w = wrap.clientWidth, h = wrap.clientHeight;
+    if (!w || !h) return;
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var base = wrap.getBoundingClientRect();
+    function band(sel){
+      var el = document.querySelector(sel);
+      if (!el) return [h / 2, h / 2, h / 2];
+      var r = el.getBoundingClientRect(), t = r.top - base.top, b = t + r.height;
+      var inset = Math.min(14, r.height / 3);
+      return [t + inset, (t + b) / 2, b - inset];
+    }
+    var start = h / 2;
+    var targets = band('.fan-row.published .fan-items').concat(band('.fan-row.missing .fan-items'));
+    targets.forEach(function(y, i){
+      paths[i].setAttribute('d', 'M0,' + start + ' C' + (w * 0.62) + ',' + start + ' ' + (w * 0.38) + ',' + y + ' ' + w + ',' + y);
+    });
+  }
+  draw();
+  window.addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+</script>
 </body>
 </html>
