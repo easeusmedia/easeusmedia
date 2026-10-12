@@ -2094,6 +2094,23 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   color: var(--light-muted);
 }
 .gnt-ice h3, .fstep.you h4 { color: var(--light-text); }
+
+/* ---- Fan-out diagram: strands land on the rows, panel hugs its content ---- */
+.fan-arms { height: auto !important; align-self: stretch; min-height: 120px; }
+.fan-arms svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.arm { stroke: rgba(255, 107, 53, .34); stroke-width: 1.3; stroke-dasharray: 4 5; }
+.arm.on { stroke: var(--accent-glow); stroke-dasharray: none; stroke-width: 1.7; opacity: .9; }
+.fan-dot { fill: var(--accent-glow); }
+
+/* ---- Fan-out: room for the curves to read as a fan ---- */
+@media (min-width: 921px) {
+  .fanout { grid-template-columns: auto 150px 1fr; padding: 38px 34px; }
+  .fan-row { margin-bottom: 26px; }
+  .fan-input { padding-right: 10px; }
+  .fan-tag { margin-bottom: 11px; }
+  .fan-row.missing .fan-item { padding: 8px 11px; }
+  .fan-items { gap: 7px; }
+}
 </style>
 
   <script type="application/ld+json">
@@ -2264,15 +2281,13 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
       </div>
 
       <div class="fan-arms" aria-hidden="true">
-        <svg viewBox="0 0 120 320" preserveAspectRatio="none" role="presentation">
-          <path d="M0,160 C70,160 50,20 120,20"   class="arm on"/>
-          <path d="M0,160 C70,160 50,60 120,60"   class="arm on"/>
-          <path d="M0,160 C70,160 50,100 120,100" class="arm on"/>
-          <path d="M0,160 C70,160 50,140 120,140" class="arm"/>
-          <path d="M0,160 C70,160 50,180 120,180" class="arm"/>
-          <path d="M0,160 C70,160 50,220 120,220" class="arm"/>
-          <path d="M0,160 C70,160 50,260 120,260" class="arm"/>
-          <path d="M0,160 C70,160 50,300 120,300" class="arm"/>
+        <svg class="fan-svg" preserveAspectRatio="none" role="presentation">
+          <path class="arm on" vector-effect="non-scaling-stroke"/>
+          <path class="arm on" vector-effect="non-scaling-stroke"/>
+          <path class="arm on" vector-effect="non-scaling-stroke"/>
+          <path class="arm" vector-effect="non-scaling-stroke"/>
+          <path class="arm" vector-effect="non-scaling-stroke"/>
+          <path class="arm" vector-effect="non-scaling-stroke"/>
         </svg>
       </div>
 
@@ -3037,6 +3052,35 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   onScroll();
 })();
 
+
+/* ---- Fan-out: point every strand at the row it belongs to ---- */
+(function(){
+  var wrap = document.querySelector('.fan-arms');
+  var svg  = wrap && wrap.querySelector('svg');
+  if (!svg) return;
+  var paths = svg.querySelectorAll('path');
+  function draw(){
+    var w = wrap.clientWidth, h = wrap.clientHeight;
+    if (!w || !h) return;
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var base = wrap.getBoundingClientRect();
+    function band(sel){
+      var el = document.querySelector(sel);
+      if (!el) return [h / 2, h / 2, h / 2];
+      var r = el.getBoundingClientRect(), t = r.top - base.top, b = t + r.height;
+      var inset = Math.min(14, r.height / 3);
+      return [t + inset, (t + b) / 2, b - inset];
+    }
+    var start = h / 2;
+    var targets = band('.fan-row.published .fan-items').concat(band('.fan-row.missing .fan-items'));
+    targets.forEach(function(y, i){
+      paths[i].setAttribute('d', 'M0,' + start + ' C' + (w * 0.62) + ',' + start + ' ' + (w * 0.38) + ',' + y + ' ' + w + ',' + y);
+    });
+  }
+  draw();
+  window.addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
 </script>
 </body>
 </html>
