@@ -1429,10 +1429,7 @@ p,li{text-wrap:pretty}
 
 /* Clickable cards warm up on hover (no transform: the deck script owns that) */
 .trailer, .pcard { transition: border-color .22s ease, box-shadow .28s ease; }
-.trailer:hover, .pcard:hover {
-  border-color: rgba(0,170,255,.42);
-  box-shadow: 0 22px 48px -26px rgba(0,0,0,.75);
-}
+.trailer:hover, .pcard:hover { border-color: rgba(0,170,255,.42); }
 
 /* FAQ answers ease open instead of snapping */
 .faq-item[open] .faq-a { animation: faq-in .22s cubic-bezier(.22,1,.36,1) both; }
@@ -1477,6 +1474,7 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   border-color: rgba(139, 190, 255, .22) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055), 0 22px 46px -30px rgba(0, 6, 16, .95);
 }
+.trailer, .step { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055); }
 .faq-item[open] { background: #0B3E63 !important; border-color: rgba(0, 170, 255, .38) !important; }
 .wstat.hl {
   background: #0A4075 !important; border-color: rgba(0, 170, 255, .5) !important;
@@ -1529,10 +1527,9 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
 }
 .gnt-ice h3, .fstep.you h4 { color: var(--light-text); }
 
-/* ---- Performance: skip offscreen sections ---- */
-@supports (content-visibility: auto) {
-  #trailers, #reels, #cta, .footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
-}
+
+.nav { transform: translateZ(0); will-change: background-color; }
+.trailer { will-change: transform; }
 </style>
 </head>
 <body>

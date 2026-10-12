@@ -2000,10 +2000,7 @@ p,li,blockquote{text-wrap:pretty}
 
 /* Clickable cards warm up on hover (no transform: the deck script owns that) */
 .trailer, .pcard { transition: border-color .22s ease, box-shadow .28s ease; }
-.trailer:hover, .pcard:hover {
-  border-color: rgba(0,170,255,.42);
-  box-shadow: 0 22px 48px -26px rgba(0,0,0,.75);
-}
+.trailer:hover, .pcard:hover { border-color: rgba(0,170,255,.42); }
 
 /* FAQ answers ease open instead of snapping */
 .faq-item[open] .faq-a { animation: faq-in .22s cubic-bezier(.22,1,.36,1) both; }
@@ -2045,6 +2042,8 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   border-color: rgba(139, 190, 255, .22) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055), 0 22px 46px -30px rgba(0, 6, 16, .95);
 }
+/* these two pin and scale as you scroll: a blurred shadow would repaint every frame */
+.trailer, .step { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .055); }
 .faq-item[open] { background: #0B3E63 !important; border-color: rgba(0, 170, 255, .38) !important; }
 .wstat.hl {
   background: #0A4075 !important; border-color: rgba(0, 170, 255, .5) !important;
@@ -2114,15 +2113,15 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   .fan-items { gap: 7px; }
 }
 
-/* ---- Performance: let the browser skip offscreen sections ---- */
-@supports (content-visibility: auto) {
-  #waste, #method, #process, #capture, #testimonials,
-  #pricing, #guarantees, #faq, .footer {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 900px;
-  }
-}
 .strip-vid, .reel { will-change: auto; }
+
+/* ---- Scrolling: keep the blurred nav and the pinned cards on their own layers ---- */
+.nav { transform: translateZ(0); will-change: background-color; }
+.trailer, .step { will-change: transform; }
+@supports (animation-timeline: scroll()) {
+  .scrollbar-progress span { width: 100%; transform-origin: 0 50%; animation: sp-grow linear both; animation-timeline: scroll(root block); }
+  @keyframes sp-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
 </style>
 
   <script type="application/ld+json">
@@ -2862,22 +2861,25 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   var deckCards = Array.prototype.slice.call(document.querySelectorAll('.deck .trailer'));
   if (deckCards.length > 1 && !reducedMotion) {
     var deckTicking = false;
+    var vh = window.innerHeight;
+    var arriveAt = (parseFloat(getComputedStyle(deckCards[0]).top) || 100) + 64;
+    function deckMeasure() {
+      vh = window.innerHeight;
+      arriveAt = (parseFloat(getComputedStyle(deckCards[0]).top) || 100) + 64;
+    }
     function deckUpdate() {
-      var vh = window.innerHeight;
-      var stickyTop = parseFloat(getComputedStyle(deckCards[0]).top) || 100;
-      var arriveAt = stickyTop + 64; /* incoming card's visual resting top (scaled cards sit lower) */
-      for (var i = 0; i < deckCards.length - 1; i++) {
-        var next = deckCards[i + 1].getBoundingClientRect();
-        var p = (vh - next.top) / (vh - arriveAt);
-        p = Math.max(0, Math.min(1, p));
-        deckCards[i].style.transform = 'scale(' + (1 - 0.2 * p).toFixed(4) + ')';
-      }
       deckTicking = false;
+      var tops = [];                        /* read phase */
+      for (var i = 1; i < deckCards.length; i++) tops.push(deckCards[i].getBoundingClientRect().top);
+      for (var j = 0; j < tops.length; j++) {  /* write phase */
+        var p = Math.max(0, Math.min(1, (vh - tops[j]) / (vh - arriveAt)));
+        deckCards[j].style.transform = 'scale(' + (1 - 0.2 * p).toFixed(4) + ')';
+      }
     }
     window.addEventListener('scroll', function () {
       if (!deckTicking) { deckTicking = true; requestAnimationFrame(deckUpdate); }
     }, { passive: true });
-    window.addEventListener('resize', deckUpdate);
+    window.addEventListener('resize', function(){ deckMeasure(); deckUpdate(); });
     deckUpdate();
   }
 
@@ -3056,15 +3058,26 @@ html { scrollbar-color: #0A3760 #001A33; scrollbar-width: thin; }
   var nav = document.querySelector('.nav');
   var mcta = document.querySelector('.mobile-cta');
   var hero = document.querySelector('.hero');
-  function onScroll(){
-    var st = window.scrollY || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    if(sp) sp.style.width = h > 0 ? ((st/h)*100)+'%' : '0%';
-    if(nav) nav.classList.toggle('stuck', st > 24);
-    if(mcta && hero) mcta.classList.toggle('show', st > hero.offsetHeight * 0.7);
+  var maxScroll = 0, heroCut = 0, ticking = false, stuck = null, shown = null;
+  var cssTimeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+  function measure(){                       /* layout reads happen here, not while scrolling */
+    maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    heroCut = hero ? hero.offsetHeight * 0.7 : 0;
   }
+  function paint(){
+    ticking = false;
+    var st = window.scrollY || document.documentElement.scrollTop;
+    if (sp && !cssTimeline) sp.style.width = maxScroll > 0 ? ((st / maxScroll) * 100) + '%' : '0%';
+    var isStuck = st > 24;
+    if (nav && isStuck !== stuck) { nav.classList.toggle('stuck', isStuck); stuck = isStuck; }
+    var isShown = st > heroCut;
+    if (mcta && isShown !== shown) { mcta.classList.toggle('show', isShown); shown = isShown; }
+  }
+  function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+  measure(); paint();
   window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  window.addEventListener('resize', function(){ measure(); onScroll(); });
+  window.addEventListener('load', measure);
 })();
 
 
