@@ -94,7 +94,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* reel strip (unchanged behaviour) */
 .reel-strip-wrap{position:relative;z-index:5;margin-top:-120px;margin-bottom:-120px;pointer-events:none;}
-.reel-strip{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+.reel-strip{overflow:clip visible;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
 .reel-strip-track{display:flex;gap:20px;width:max-content;padding:6px 0;animation:rs 44s linear infinite reverse;pointer-events:auto;}
 .reel-strip-wrap:hover .reel-strip-track{animation-play-state:paused;}
 @keyframes rs{to{transform:translateX(-33.3333%);}}
