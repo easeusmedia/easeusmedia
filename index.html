@@ -2327,19 +2327,6 @@ body{
   transform:none !important;will-change:auto !important;
 }
 
-/* ============================================================
-   Proof band hierarchy, card glow, scroll reveal, scroll cost
-   ============================================================ */
-
-/* ---- Recent work: the label was dust and the note floated loose ---- */
-.proof-top{margin-bottom:12px;align-items:baseline;}
-.proof-label{font-size:11.5px;letter-spacing:.17em;color:#E8ECF2;}
-.proof-link{font-size:13.5px;}
-.proof-note{font-size:15px;line-height:1.62;max-width:56ch;margin-bottom:22px;color:#AEB6C2;}
-.proof-note strong{color:#F2F4F7;font-weight:600;}
-.proof-note-2{margin-top:52px;}
-.proofband{padding-top:26px;}
-
 /* ---- Cards light up under the cursor ---- */
 .glowcard{position:relative;transition:border-color .25s ease,box-shadow .3s ease;}
 .glowcard::after{
@@ -2348,39 +2335,8 @@ body{
   background:radial-gradient(240px circle at var(--gx,50%) var(--gy,0%), rgba(0,170,255,.15), transparent 62%);
 }
 .glowcard:hover::after{opacity:1;}
-.glowcard:hover{
-  border-color:rgba(0,170,255,.4) !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 26px 58px -30px rgba(0,110,220,.55) !important;
-}
-/* the pinned cards keep their flat shadow: a blurred one repaints every frame */
-.trailer.glowcard:hover,.step.glowcard:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.09) !important;}
-
-/* ---- Cards arrive as you reach them ---- */
-.sr{opacity:0;transform:translateY(18px);
-  transition:opacity .62s cubic-bezier(.22,1,.36,1),transform .62s cubic-bezier(.22,1,.36,1);
-  transition-delay:calc(var(--i,0) * 70ms);}
-.sr.in{opacity:1;transform:none;}
-.sr-fade{opacity:0;transition:opacity .6s ease;transition-delay:calc(var(--i,0) * 70ms);}
-.sr-fade.in{opacity:1;}
-
-/* ---- Scroll cost: a fixed background attachment repaints the whole viewport
-       on every frame. Same picture, on its own layer. ---- */
-body{background-image:none !important;background-attachment:scroll !important;}
-body::before{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-color:#0A0A0C;
-  background-image:
-    radial-gradient(1200px 640px at 80% -10%, rgba(0,115,230,.12), transparent 62%),
-    radial-gradient(900px 560px at -10% 108%, rgba(0,115,230,.08), transparent 60%),
-    linear-gradient(180deg,#0A0A0C 0%,#121419 48%,#0A0A0C 100%);
-}
-/* the grain blends over the hero every frame: stop it once the hero is gone */
-.hero-bg.rest .hero-grain{animation-play-state:paused;}
-
-@media (prefers-reduced-motion: reduce){
-  .sr,.sr-fade{opacity:1 !important;transform:none !important;transition:none !important;}
-  .glowcard::after{display:none;}
-}
+.glowcard:hover{border-color:rgba(0,170,255,.4) !important;}
+@media (prefers-reduced-motion: reduce){ .glowcard::after{display:none;} }
 </style>
 
   <script type="application/ld+json">
@@ -2487,7 +2443,7 @@ body::before{
   </div>
 
   <div class="container">
-    <p class="proof-note"><strong>Trailers.</strong> Most shows do not have one, and on the channels that grow fastest it is often the highest-reach asset they own.</p>
+    <p class="proof-note">Trailers. Most shows do not have one, and on the channels that grow fastest it is often the highest-reach asset they own.</p>
   </div>
 
 <div class="deck deck-grid">
@@ -2506,7 +2462,7 @@ body::before{
   </div>
 
   <div class="container">
-    <p class="proof-note proof-note-2"><strong>Short-form.</strong> Five of these come out of every episode, selected for what will travel rather than clipped by keyword.</p>
+    <p class="proof-note proof-note-2">Short-form. Five of these come out of every episode, selected for what will travel rather than clipped by keyword.</p>
   </div>
 
 <div class="reels reveal" aria-label="Reel examples">
@@ -3466,81 +3422,31 @@ body::before{
 })();
 </script>
 <script>
-/* Card glow, staggered reveal, and one less thing repainting on scroll */
+/* Cards light up under the cursor — one pointer handler for all of them */
 (function(){
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var hasIO = 'IntersectionObserver' in window;
-
-  /* ---- glow: one pointer handler for every card ---- */
+  var fine = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var GLOW = '.trailer,.pcard,.wstat,.stage,.cap,.plan,.route,.gnt:not(.gnt-ice),' +
              '.faq-item,.tsm,.step,.fstep.us,.fanout';
   var cards = [].slice.call(document.querySelectorAll(GLOW)).filter(function(el){
     return !el.closest('.section-light,.cta');     /* blue glow on a white card reads wrong */
   });
   cards.forEach(function(el){ el.classList.add('glowcard'); });
+  if (!fine || calm || !cards.length) return;
 
-  var fine = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (fine && !calm && cards.length) {
-    var frame = 0, want = null;
-    document.addEventListener('pointermove', function(e){
-      var c = e.target.closest && e.target.closest('.glowcard');
-      if (!c) return;
-      want = [c, e.clientX, e.clientY];
-      if (!frame) frame = requestAnimationFrame(paint);
-    }, { passive: true });
-    function paint(){
-      frame = 0;
-      if (!want) return;
-      var r = want[0].getBoundingClientRect();
-      want[0].style.setProperty('--gx', (want[1] - r.left) + 'px');
-      want[0].style.setProperty('--gy', (want[2] - r.top) + 'px');
-    }
-  }
-
-  /* ---- reveal: cards arrive one after another, not all at once ---- */
-  /* pinned and sticky cards fade only — a transform would fight their position */
-  var groups = [
-    ['.flow > .fstep',        'sr'],
-    ['.waste-stats > .wstat', 'sr'],
-    ['.gnt-grid > .gnt',      'sr'],
-    ['.faq-list > .faq-item', 'sr'],
-    ['.deck .trailer',        'sr-fade'],
-    ['.deck .pcard',          'sr'],
-    ['.steps .step',          'sr-fade']
-  ];
-  var watch = [];
-  groups.forEach(function(g){
-    var seen = {};
-    [].slice.call(document.querySelectorAll(g[0])).forEach(function(el){
-      if (el.classList.contains('reveal')) return;      /* already animated */
-      var key = el.parentNode;
-      var i = seen.n === key ? ++seen.i : (seen.n = key, seen.i = 0);
-      el.style.setProperty('--i', Math.min(i, 5));
-      el.classList.add(g[1]);
-      watch.push(el);
-    });
-  });
-  if (watch.length) {
-    if (hasIO && !calm) {
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (!e.isIntersecting) return;
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-      watch.forEach(function(el){ io.observe(el); });
-    } else {
-      watch.forEach(function(el){ el.classList.add('in'); });
-    }
-  }
-
-  /* ---- the hero grain blends every frame: let it rest once the hero is gone ---- */
-  var bg = document.getElementById('hero-bg');
-  if (bg && hasIO) {
-    new IntersectionObserver(function(entries){
-      bg.classList.toggle('rest', !entries[0].isIntersecting);
-    }, { threshold: 0 }).observe(document.querySelector('.hero'));
+  var frame = 0, want = null;
+  document.addEventListener('pointermove', function(e){
+    var c = e.target.closest && e.target.closest('.glowcard');
+    if (!c) return;
+    want = [c, e.clientX, e.clientY];
+    if (!frame) frame = requestAnimationFrame(paint);
+  }, { passive: true });
+  function paint(){
+    frame = 0;
+    if (!want) return;
+    var r = want[0].getBoundingClientRect();
+    want[0].style.setProperty('--gx', (want[1] - r.left) + 'px');
+    want[0].style.setProperty('--gy', (want[2] - r.top) + 'px');
   }
 })();
 </script>
