@@ -2271,6 +2271,48 @@ body{
 /* glass belongs to the nav pill only: .nav is a full-width bar, so its blur
    frosted a band right across the page */
 .nav,.nav.stuck,.nav.scrolled{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+
+/* .nav sat on its own compositing layer, which stopped Chrome clipping the
+   pill's blur to its 100px radius — that is the rectangle of glass */
+.nav{transform:none !important;will-change:auto !important;}
+
+/* the hamburger was outlined in accent blue */
+.nav-toggle{border-color:rgba(255,255,255,.16) !important;}
+
+/* phones: content sat almost on the edge, and the nav pill did not line up with it */
+@media (max-width:760px){
+  .container{padding-inline:22px;}
+  .nav{padding-left:22px !important;padding-right:22px !important;}
+  .nav-inner{padding:7px 7px 7px 16px;}
+}
+@media (max-width:374px){
+  .container{padding-inline:18px;}
+  .nav{padding-left:18px !important;padding-right:18px !important;}
+}
+
+/* ---- Cards light up under the cursor (background only: nothing moves) ---- */
+@property --glow{syntax:'<number>';initial-value:0;inherits:false;}
+.wstat,.faq-item,.gnt:not(.gnt-ice),.plan,.route,.stage,.fstep.us,.cap{
+  --glow:0;
+  background-image:radial-gradient(260px circle at var(--gx,50%) var(--gy,50%),
+                   rgba(0,170,255,var(--glow)), transparent 60%) !important;
+  transition:--glow .3s ease, border-color .25s ease;
+}
+.wstat:hover,.faq-item:hover,.gnt:not(.gnt-ice):hover,.plan:hover,.route:hover,
+.stage:hover,.fstep.us:hover,.cap:hover{
+  --glow:.17;
+  border-color:rgba(0,170,255,.38) !important;
+}
+
+/* the hero's dark veil is a flat wash that stopped dead at the section edge —
+   that hard line is it ending, not the video. Fade it out like the video. */
+.hero-veil{
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.6) 70%,rgba(0,0,0,.22) 85%,transparent 96%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.6) 70%,rgba(0,0,0,.22) 85%,transparent 96%);
+}
+
+/* the pill floated 14px below the top, then jumped to 10px on scroll — stay put */
+.nav,.nav.stuck,.nav.scrolled{padding-top:14px !important;}
 </style>
 
   <script type="application/ld+json">
@@ -3293,6 +3335,26 @@ body{
   document.addEventListener('visibilitychange', function(){
     if (!document.hidden && v.paused) v.play().catch(function(){});
   });
+})();
+</script>
+<script>
+/* the glow follows the cursor — it only writes two custom properties */
+(function(){
+  if (window.matchMedia && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var SEL='.wstat,.faq-item,.gnt:not(.gnt-ice),.plan,.route,.stage,.fstep.us,.cap';
+  var frame=0, want=null;
+  document.addEventListener('pointermove', function(e){
+    var c = e.target.closest && e.target.closest(SEL);
+    if (!c) return;
+    want=[c,e.clientX,e.clientY];
+    if(!frame) frame=requestAnimationFrame(paint);
+  }, {passive:true});
+  function paint(){
+    frame=0; if(!want) return;
+    var r=want[0].getBoundingClientRect();
+    want[0].style.setProperty('--gx',(want[1]-r.left)+'px');
+    want[0].style.setProperty('--gy',(want[2]-r.top)+'px');
+  }
 })();
 </script>
 </body>
