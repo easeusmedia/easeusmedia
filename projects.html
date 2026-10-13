@@ -1624,17 +1624,6 @@ body{
     border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 60px -24px rgba(0,0,0,.9);}
 }
 
-
-/* ---- Cards light up under the cursor ---- */
-.glowcard{position:relative;transition:border-color .25s ease,box-shadow .3s ease;}
-.glowcard::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  opacity:0;transition:opacity .3s ease;
-  background:radial-gradient(240px circle at var(--gx,50%) var(--gy,0%), rgba(0,170,255,.15), transparent 62%);
-}
-.glowcard:hover::after{opacity:1;}
-.glowcard:hover{border-color:rgba(0,170,255,.4) !important;}
-@media (prefers-reduced-motion: reduce){ .glowcard::after{display:none;} }
 </style>
 </head>
 <body>
@@ -1992,35 +1981,6 @@ body{
   });
 })();
 
-</script>
-<script>
-/* Cards light up under the cursor — one pointer handler for all of them */
-(function(){
-  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var GLOW = '.trailer,.pcard,.wstat,.stage,.cap,.plan,.route,.gnt:not(.gnt-ice),' +
-             '.faq-item,.tsm,.step,.fstep.us,.fanout';
-  var cards = [].slice.call(document.querySelectorAll(GLOW)).filter(function(el){
-    return !el.closest('.section-light,.cta');     /* blue glow on a white card reads wrong */
-  });
-  cards.forEach(function(el){ el.classList.add('glowcard'); });
-  if (!fine || calm || !cards.length) return;
-
-  var frame = 0, want = null;
-  document.addEventListener('pointermove', function(e){
-    var c = e.target.closest && e.target.closest('.glowcard');
-    if (!c) return;
-    want = [c, e.clientX, e.clientY];
-    if (!frame) frame = requestAnimationFrame(paint);
-  }, { passive: true });
-  function paint(){
-    frame = 0;
-    if (!want) return;
-    var r = want[0].getBoundingClientRect();
-    want[0].style.setProperty('--gx', (want[1] - r.left) + 'px');
-    want[0].style.setProperty('--gy', (want[2] - r.top) + 'px');
-  }
-})();
 </script>
 </body>
 </html>
