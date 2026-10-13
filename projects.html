@@ -1670,6 +1670,46 @@ body{
 
 /* the pill floated 14px below the top, then jumped to 10px on scroll — stay put */
 .nav,.nav.stuck,.nav.scrolled{padding-top:14px !important;}
+
+/* phones: one gutter everywhere. .container, the trailer deck and the nav pill
+   were each using a different inset, and all of them were tight. */
+@media (max-width:760px){
+  .container{padding-inline:26px !important;}
+  .deck-grid{padding-inline:26px !important;}
+  .nav{padding-left:26px !important;padding-right:26px !important;}
+}
+@media (max-width:374px){
+  .container{padding-inline:20px !important;}
+  .deck-grid{padding-inline:20px !important;}
+  .nav{padding-left:20px !important;padding-right:20px !important;}
+}
+
+/* Mobile menu. It was position:fixed inside .nav-inner, whose backdrop-filter
+   makes it the containing block — so left/right/top were measured from the pill,
+   not the viewport, and the panel landed misaligned. Its 86% background plus a
+   blur that the ancestor had already consumed left the hero text readable
+   straight through it. Anchor it to the pill and make it solid. */
+@media (max-width:760px){
+  .nav-links{
+    position:absolute !important;
+    top:calc(100% + 10px) !important; left:0 !important; right:0 !important;
+    width:auto !important;
+    background:#101217 !important;
+    backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+    border:1px solid rgba(255,255,255,.12) !important;
+    border-radius:20px !important;
+    padding:10px !important;
+    box-shadow:0 30px 60px -22px rgba(0,0,0,.92) !important;
+  }
+  .nav-links > a:not(.btn){
+    padding:13px 14px !important;border-radius:12px !important;
+    font-size:15.5px !important;color:rgba(255,255,255,.82) !important;
+  }
+  .nav-links > a:not(.btn):active{background:rgba(255,255,255,.08) !important;}
+  .nav-links > .btn-nav{
+    margin:8px 0 0 !important;width:100% !important;justify-content:center !important;
+  }
+}
 </style>
 </head>
 <body>
