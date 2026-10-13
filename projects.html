@@ -1710,6 +1710,20 @@ body{
     margin:8px 0 0 !important;width:100% !important;justify-content:center !important;
   }
 }
+
+/* no box around the hamburger at all */
+.nav-toggle{border:0 !important;background:transparent !important;}
+/* breathing room inside the pill: the logo sat on its left edge and the
+   hamburger on its right */
+.nav-inner{padding:9px 16px 9px 22px !important;}
+@media (max-width:760px){ .nav-inner{padding:9px 14px 9px 20px !important;} }
+
+/* the open state was losing to a later opacity rule, so the panel stayed at 0 */
+@media (max-width:760px){
+  .nav-links{opacity:0;transform:none !important;pointer-events:none;
+             transition:opacity .22s ease !important;}
+  .nav-links.open{opacity:1 !important;pointer-events:auto !important;}
+}
 </style>
 </head>
 <body>
