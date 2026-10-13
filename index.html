@@ -2367,6 +2367,29 @@ body{
              transition:opacity .22s ease !important;}
   .nav-links.open{opacity:1 !important;pointer-events:auto !important;}
 }
+
+/* ---- glow, softer: a wash that follows the cursor, not a visible disc ---- */
+.wstat,.faq-item,.gnt:not(.gnt-ice),.plan,.route,.stage,.fstep.us,.cap{
+  background-image:radial-gradient(520px circle at var(--gx,50%) var(--gy,50%),
+    rgba(0,170,255,calc(var(--glow) * 1)),
+    rgba(0,170,255,calc(var(--glow) * .45)) 26%,
+    rgba(0,170,255,calc(var(--glow) * .14)) 48%,
+    transparent 72%) !important;
+}
+.wstat:hover,.faq-item:hover,.gnt:not(.gnt-ice):hover,.plan:hover,.route:hover,
+.stage:hover,.fstep.us:hover,.cap:hover{ --glow:.20; }
+
+/* image cards (trailers and the work page): the photo fills them, so the glow
+   goes over the top. Both are already positioned, so nothing shifts. */
+.trailer::after,.pcard::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  opacity:0;transition:opacity .32s ease;mix-blend-mode:screen;
+  background:radial-gradient(460px circle at var(--gx,50%) var(--gy,50%),
+    rgba(0,170,255,.34), rgba(0,170,255,.14) 28%, rgba(0,170,255,.04) 50%, transparent 70%);
+}
+.trailer:hover::after,.pcard:hover::after{opacity:1;}
+.trailer,.pcard{transition:border-color .25s ease;}
+.trailer:hover,.pcard:hover{border-color:rgba(0,170,255,.45) !important;}
 </style>
 
   <script type="application/ld+json">
@@ -3395,7 +3418,7 @@ body{
 /* the glow follows the cursor — it only writes two custom properties */
 (function(){
   if (window.matchMedia && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  var SEL='.wstat,.faq-item,.gnt:not(.gnt-ice),.plan,.route,.stage,.fstep.us,.cap';
+  var SEL='.wstat,.faq-item,.gnt:not(.gnt-ice),.plan,.route,.stage,.fstep.us,.cap,.trailer,.pcard';
   var frame=0, want=null;
   document.addEventListener('pointermove', function(e){
     var c = e.target.closest && e.target.closest(SEL);
