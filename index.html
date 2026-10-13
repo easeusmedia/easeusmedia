@@ -2267,6 +2267,10 @@ body{
   -webkit-mask-composite:source-in;mask-composite:intersect;
 }
 /* no solid band at the hero edge: the video's own mask carries the fade */
+
+/* glass belongs to the nav pill only: .nav is a full-width bar, so its blur
+   frosted a band right across the page */
+.nav,.nav.stuck,.nav.scrolled{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
 </style>
 
   <script type="application/ld+json">
